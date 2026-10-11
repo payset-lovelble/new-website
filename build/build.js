@@ -56,6 +56,28 @@ const Chat = () => h('div', { className: 'ps-chat', role: 'img', 'aria-label': '
   h('div', { className: 'ps-bubble ps-bubble--me' }, 'Thank you. Also, we’re opening a subsidiary in Dubai next month.'),
   h('div', { className: 'ps-bubble' }, 'Congratulations. I’ll prepare AED accounts under your group and send the document list today.'));
 
+// Trustpilot: set the business unit ID from Trustpilot Business to show the live TrustBox.
+// Until then the hero shows a plain link to the review page, so no rating is ever hard-coded.
+const TRUSTPILOT = { businessUnitId: '', templateId: '5419b732fbfb950b10de65e5', reviewUrl: 'https://www.trustpilot.com/review/payset.io' };
+const Trustpilot = () => TRUSTPILOT.businessUnitId
+  ? h(React.Fragment, null,
+      h('div', { className: 'trustpilot-widget ps-trustpilot', 'data-locale': 'en-GB', 'data-template-id': TRUSTPILOT.templateId, 'data-businessunit-id': TRUSTPILOT.businessUnitId, 'data-style-height': '24px', 'data-style-width': '100%', 'data-theme': 'light' },
+        h('a', { href: TRUSTPILOT.reviewUrl, target: '_blank', rel: 'noopener' }, 'Trustpilot')),
+      h('script', { async: true, src: 'https://widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js' }))
+  : h('a', { className: 'ps-trustpilot ps-trustpilot--link', href: TRUSTPILOT.reviewUrl, target: '_blank', rel: 'noopener' }, 'Read our reviews on Trustpilot');
+
+// Home hero: centred H1, H2 underneath, CTAs, Trustpilot, then the 1M object below.
+const HomeHero = () => h('section', { className: 'pw-root pw-hero pw-hero--center ps-home-hero' },
+  h('div', { className: 'pw-container ps-home-hero__inner' },
+    h(W.Pill, { tone: 'neutral', dot: true }, 'By invitation'),
+    h('h1', { className: 'pw-title pw-title--display' }, 'Financial services, personal service, by invitation.'),
+    h('h2', { className: 'ps-home-hero__sub' }, 'Accounts in your company’s name and FX priced on your volume, for a select few businesses operating across jurisdictions. Each with a dedicated account manager, reachable by message, call or in person.'),
+    h('div', { className: 'pw-btn-row ps-home-hero__ctas' },
+      h(W.Button, { size: 'lg', href: INVITE.href, arrow: true }, INVITE.label),
+      h(W.Button, { variant: 'secondary', size: 'lg', href: TALK.href }, TALK.label)),
+    h(Trustpilot),
+    h('div', { className: 'ps-home-hero__media' }, Img('obj-1m.webp', ''))));
+
 function Page(title, desc, body) {
   const html = renderToStaticMarkup(h(React.Fragment, null,
     h(W.NavBar, { links: NAV, ctaLabel: 'Request an invitation', ctaHref: '/invite', signInLabel: 'Sign in', signInHref: 'https://app.payset.io', homeHref: '/' }),
@@ -98,13 +120,7 @@ const pages = {};
 pages['index.html'] = Page('Payset Private | Financial services, personal service, by invitation',
   'Accounts, FX and cross-border payments for businesses operating across jurisdictions, with a dedicated account manager.',
   h(React.Fragment, null,
-    h(W.Hero, {
-      eyebrow: 'By invitation', size: 'display',
-      title: 'Financial services, personal service, by invitation.',
-      lead: 'Accounts in your company’s name and FX priced on your volume, for a select few businesses operating across jurisdictions. Each with a dedicated account manager, reachable by message, call or in person.',
-      primaryCta: INVITE, secondaryCta: TALK,
-      image: A('obj-1m.webp'), imageAlt: '',
-    }),
+    h(HomeHero),
     h(Section, { tone: 'subtle' },
       Facts([['34', 'currencies held, sent and received'], ['180+', 'countries reached'], ['38', 'FX pairs, around the clock'], ['FCA', 'authorised Electronic Money Institution']]),
       h('p', { className: 'ps-small', style: { marginTop: '24px' } }, 'Typical clients move 250 000 EUR or more each month.')),
