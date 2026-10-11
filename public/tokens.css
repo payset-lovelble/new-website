@@ -1,0 +1,183 @@
+/* Payset Website — generated from tokens.json */
+:root, [data-theme="light"] {
+  --brand-money: #256c4a; /* Payset money green, the logo colour. Primary button fill on light grounds, brand slabs, links on light grounds. */
+  --brand-money-variant: #205e41; /* Hover and pressed state of money green. */
+  --brand-accent: #00f572; /* Neon accent. Only on dark grounds (charcoal, money green, stone): CTA fill, highlights. Always charcoal text on it, never white. */
+  --brand-accent-hover: #31ff91; /* Hover state of the neon accent. */
+  --brand-charcoal: #121314; /* Deep ink. Dark theme ground, inverse bands, text on the accent. */
+  --brand-charcoal-variant: #292c2e; /* Raised surface in the dark theme. */
+  --brand-rolice-variant: #404447; /* Hairlines and quiet fills on charcoal. */
+  --rice-00: #f5f2ef; /* Warm cream page ground (light theme). Text colour on charcoal. */
+  --rice-01: #ebe5e0; /* Subtle section ground, alternating bands on rice-00. */
+  --rice-02: #dbd7d3; /* Hairline on cream, image placeholder fill. */
+  --rice-03: #cfc8c1; /* Muted text on charcoal (11:1). */
+  --rice-v-00: #fffcf9; /* Warm white for raised cards on rice-00. */
+  --stone: #706e67; /* Warm grey ground the product UI renders sit on. Use behind Product UI assets so the image edge disappears. White text reads at 5:1. */
+  --grey-120: #1a1a1a; /* Primary text on rice-00, rice-01 and white. */
+  --grey-80: #646464; /* Secondary text on rice-00 and white (5.3:1 on rice-00). */
+  --white: #ffffff; /* Text on money green and stone; card fill. */
+  --black: #000000; /* Ground of the card-mask renders only. */
+  --surface: var(--rice-00); /* Page ground. */
+  --surface-subtle: var(--rice-01); /* Alternating section band on surface. */
+  --surface-raised: var(--rice-v-00); /* Cards, nav bar when scrolled, testimonial panels. */
+  --surface-inverse: var(--brand-charcoal); /* Dark band in both themes: CTA band, footer, hero variant. Pair with ink-inverse and the accent button. */
+  --surface-brand: var(--brand-money); /* Money-green band or slab. Pair with white text and the accent button. */
+  --surface-showcase: var(--stone); /* Ground for Product UI renders (ProductShowcase). */
+  --ink: var(--grey-120); /* Headlines and body on surface, surface-subtle, surface-raised. */
+  --ink-muted: var(--grey-80); /* Lead paragraphs under headlines, captions, meta on surface and surface-raised. */
+  --ink-inverse: var(--rice-00); /* Text on surface-inverse, surface-brand and surface-showcase. */
+  --ink-inverse-muted: rgba(245,242,239,0.72); /* Secondary text on surface-inverse only (9:1). On surface-brand it drops to 3.8:1: use ink-inverse there. */
+  --ink-brand: var(--brand-money); /* Eyebrows, inline links and emphasised figures on surface (5.7:1 light, 12.7:1 dark). */
+  --primary: var(--brand-money); /* Primary button fill on surface. */
+  --primary-hover: var(--brand-money-variant); /* Primary button hover. */
+  --on-primary: var(--white); /* Label on primary. */
+  --on-accent: var(--brand-charcoal); /* Label on brand-accent, in both themes. */
+  --border: rgba(26,26,26,0.12); /* Hairlines between sections, card outlines on surface. */
+  --border-strong: rgba(26,26,26,0.56); /* Secondary button outline and input borders (3:1 or more). */
+  --border-inverse: rgba(245,242,239,0.16); /* Hairlines on surface-inverse and surface-brand. */
+  --focus-ring: var(--brand-money); /* 2px solid focus outline, 2px offset, on every interactive element. */
+  --shadow-card: 0 0 2px 0 rgba(50,50,50,0.10), 0 12px 24px -4px rgba(50,50,50,0.06); /* Raised cards on surface (same as the Backoffice card). */
+  --shadow-float: 0 24px 48px -12px rgba(18,19,20,0.18); /* Nav bar once the page scrolls; floating UI fragments over photos. */
+}
+[data-theme="dark"] {
+  --surface: var(--brand-charcoal);
+  --surface-subtle: #1b1c1e;
+  --surface-raised: var(--brand-charcoal-variant);
+  --surface-inverse: var(--brand-charcoal-variant);
+  --surface-brand: var(--brand-money);
+  --surface-showcase: var(--stone);
+  --ink: var(--rice-00);
+  --ink-muted: var(--rice-03);
+  --ink-inverse: var(--rice-00);
+  --ink-brand: var(--brand-accent);
+  --primary: var(--brand-accent);
+  --primary-hover: var(--brand-accent-hover);
+  --on-primary: var(--brand-charcoal);
+  --on-accent: var(--brand-charcoal);
+  --border: rgba(245,242,239,0.12);
+  --border-strong: rgba(245,242,239,0.56);
+  --focus-ring: var(--brand-accent);
+}
+:root {
+  --space-4: 4px; /* Icon to label gap. */
+  --space-8: 8px; /* Tight stacks: eyebrow to title gap. */
+  --space-12: 12px; /* Button groups, pill padding. */
+  --space-16: 16px; /* Title to paragraph, mobile page gutter. */
+  --space-24: 24px; /* Card padding (mobile), grid gap, desktop page gutter. */
+  --space-32: 32px; /* Card padding (desktop), paragraph to CTA row. */
+  --space-48: 48px; /* Gap between text column and media. */
+  --space-64: 64px; /* Section title block to section content. */
+  --space-96: 96px; /* Hero vertical padding (desktop). */
+  --space-128: 128px; /* Section vertical padding (desktop); 72px under 768px. */
+  --container-max: 1280px; /* Max content width; centre it with the gutter as side padding. */
+  --radius-sm: 8px; /* Inputs, small chips inside cards. */
+  --radius-md: 16px; /* Cards, product UI panels. */
+  --radius-lg: 24px; /* Media frames: photos, portraits, showcase grounds. */
+  --radius-xl: 32px; /* Full-width bands inset from the page edge (CTA band). */
+  --radius-pill: 999px; /* Buttons, pills, toggles. */
+  --font-sans: "Rebond Grotesque", "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --text-display: 600 88px/84px var(--font-sans); /* Home hero H1 only. 48px / 48px under 768px. */
+  --text-h1: 600 64px/68px var(--font-sans); /* Inner-page hero titles. 40px / 44px under 768px. */
+  --text-h2: 600 48px/54px var(--font-sans); /* Section titles. 32px / 38px under 768px. */
+  --text-h3: 600 32px/40px var(--font-sans); /* Feature and showcase titles. */
+  --text-h4: 600 24px/32px var(--font-sans); /* Card titles, testimonial names. */
+  --text-figure: 600 40px/44px var(--font-sans); /* Large money figures. Tabular numerals, space as thousands separator, ISO code after. */
+  --text-lead: 400 20px/30px var(--font-sans); /* Paragraph under a hero or section title, in ink-muted. Max 56ch. */
+  --text-body: 400 16px/26px var(--font-sans); /* Running copy. Max 64ch. */
+  --text-body-strong: 600 16px/26px var(--font-sans); /* Inline emphasis, list item titles. */
+  --text-button: 600 16px/24px var(--font-sans); /* Button and nav CTA labels. 14px in size sm. */
+  --text-small: 400 14px/22px var(--font-sans); /* Nav links, card meta, footer copy. */
+  --text-caption: 500 12px/18px var(--font-sans); /* Image captions, legal footnotes. */
+  --text-overline: 600 12px/16px var(--font-sans); /* Eyebrow above titles, uppercase via text-transform, in ink-brand. */
+}
+.display {
+  font-family: var(--font-sans);
+  font-size: 88px;
+  line-height: 84px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+.h1 {
+  font-family: var(--font-sans);
+  font-size: 64px;
+  line-height: 68px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+.h2 {
+  font-family: var(--font-sans);
+  font-size: 48px;
+  line-height: 54px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+.h3 {
+  font-family: var(--font-sans);
+  font-size: 32px;
+  line-height: 40px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.h4 {
+  font-family: var(--font-sans);
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+.figure {
+  font-family: var(--font-sans);
+  font-size: 40px;
+  line-height: 44px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.lead {
+  font-family: var(--font-sans);
+  font-size: 20px;
+  line-height: 30px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.body {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 26px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.body-strong {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 26px;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+.button {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+.small {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.caption {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+.overline {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+}
