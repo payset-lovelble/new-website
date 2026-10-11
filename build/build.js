@@ -61,7 +61,7 @@ function Page(title, desc, body) {
     h(W.NavBar, { links: NAV, ctaLabel: 'Request an invitation', ctaHref: '/invite', signInLabel: 'Sign in', signInHref: 'https://app.payset.io', homeHref: '/' }),
     h('main', { id: 'main' }, body),
     h(W.Footer, {
-      tagline: 'A private financial institution, by invitation.',
+      tagline: 'Financial services, personal service, by invitation.',
       columns: [
         { title: 'Payset Private', links: NAV.slice(0, 4) },
         { title: 'Company', links: [{ label: 'About', href: '/about' }, { label: 'Introductions', href: '/invite' }, { label: 'Careers', href: '#' }, { label: 'Contact', href: '/about#contact' }] },
@@ -95,12 +95,12 @@ ${html}
 const pages = {};
 
 /* ---------- Home ---------- */
-pages['index.html'] = Page('Payset Private | A private financial institution, by invitation',
+pages['index.html'] = Page('Payset Private | Financial services, personal service, by invitation',
   'Accounts, FX and cross-border payments for businesses operating across jurisdictions, with a dedicated account manager.',
   h(React.Fragment, null,
     h(W.Hero, {
       eyebrow: 'By invitation', size: 'display',
-      title: 'A private financial institution, by invitation.',
+      title: 'Financial services, personal service, by invitation.',
       lead: 'Accounts in your company’s name and FX priced on your volume, for a select few businesses operating across jurisdictions. Each with a dedicated account manager, reachable by message, call or in person.',
       primaryCta: INVITE, secondaryCta: TALK,
       image: A('obj-1m.webp'), imageAlt: '',
