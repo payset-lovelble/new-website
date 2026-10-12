@@ -18,7 +18,7 @@ const NAV = [
   { label: 'Pricing', href: '/pricing' },
   { label: 'About', href: '/about' },
 ];
-const APPLY_URL = 'https://www.payset.io/apply';
+const APPLY_URL = 'https://apply.payset.io/';
 const INVITE = { label: 'Apply now', href: APPLY_URL };
 const TALK = { label: 'Talk to us', href: '/about#contact' };
 
