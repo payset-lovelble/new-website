@@ -20,7 +20,7 @@ const NAV = [
 ];
 const APPLY_URL = 'https://apply.payset.io/';
 const INVITE = { label: 'Apply now', href: APPLY_URL };
-const TALK = { label: 'Talk to us', href: '/about#contact' };
+const TALK = { label: 'Talk to us', href: APPLY_URL };
 
 const Container = (p) => h('div', { className: 'pw-container' }, p.children);
 const Section = (p) => h('section', { id: p.id, className: 'pw-root ps-section' + (p.tone ? ' ps-section--' + p.tone : '') }, h(Container, null, p.children));
@@ -47,7 +47,7 @@ const CTA = (props) => h('section', { className: 'pw-root ps-section ps-section-
     eyebrow: 'By invitation',
     title: 'Not for everyone. Possibly for you.',
     body: 'If your business moves money across borders and expects someone to pick up, apply. We review every application personally.',
-    ctaLabel: 'Apply now', ctaHref: APPLY_URL, secondaryLabel: 'Talk to us', secondaryHref: '/about#contact',
+    ctaLabel: 'Apply now', ctaHref: APPLY_URL, secondaryLabel: 'Talk to us', secondaryHref: APPLY_URL,
   }, props))));
 
 const Chat = () => h('div', { className: 'ps-chat', role: 'img', 'aria-label': 'Example conversation with a relationship manager' },
