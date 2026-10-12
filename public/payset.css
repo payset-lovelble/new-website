@@ -140,7 +140,7 @@ body { background: var(--pz-ground); color: var(--pz-ink); font-family: var(--pz
 .pz-tile__text { position: relative; z-index: 1; max-width: 300px; display: flex; flex-direction: column; gap: 12px; }
 .pz-tile__text h3 { margin: 0; font-size: 24px; line-height: 28px; }
 .pz-tile__text p { margin: 0; font-size: 15px; line-height: 24px; }
-.pz-tile__img { position: absolute; right: -32px; bottom: -32px; width: 82%; max-width: 560px; height: auto; z-index: 0; }
+.pz-tile__img { position: absolute; right: -24px; bottom: -24px; height: 82%; width: auto; max-width: 72%; object-fit: contain; object-position: right bottom; z-index: 0; }
 .pz-tile__img--ui { position: relative; right: auto; bottom: auto; width: 100%; max-width: 560px; flex: 1 1 auto; min-height: 0; max-height: 560px; margin: 24px auto; object-fit: contain; border-radius: 16px; }
 .pz-tile--tall .pz-tile__img--ui { max-height: 720px; }
 .pz-tile__foot { position: relative; z-index: 1; }
@@ -197,4 +197,16 @@ body { background: var(--pz-ground); color: var(--pz-ink); font-family: var(--pz
 .pz-bento .pz-bento__col .pz-tile { min-height: 520px; }
 .pz-bento .pz-bento__col .pz-tile__img--ui { max-height: 360px; margin: 16px auto; }
 #cards .pw-showcase__media img { object-fit: contain; padding: 48px; }
-@media (max-width: 767px) { .pz-tile__img--cards { max-height: 460px; } .pz-tile__img { width: 78%; } .pz-bento .pz-bento__col .pz-tile__img--ui { max-height: 300px; } }
+@media (max-width: 767px) {
+  /* Phones: the object sits in the flow, large, bleeding off the right edge, so the tile has no empty middle */
+  .pz-tile, .pz-bento--even .pz-tile, .pz-bento .pz-bento__col .pz-tile, .pz-tile--tall { min-height: 0; justify-content: flex-start; gap: 16px; }
+  .pz-tile__img:not(.pz-tile__img--ui):not(.pz-tile__img--cards) { position: relative; right: auto; bottom: auto; align-self: flex-end; height: auto; width: 88%; max-width: 360px; margin: 8px -24px 0 0; }
+  .pz-tile__foot { position: absolute; left: 24px; bottom: 24px; }
+  .pz-tile__img--cards { max-height: 460px; }
+  .pz-bento .pz-bento__col .pz-tile__img--ui, .pz-tile__img--ui { max-height: 340px; margin: 8px auto 72px; }
+}
+@media (max-width: 767px) {
+  .pz-support-media .ps-photo { background: transparent; overflow: visible; }
+  .pz-support-media .ps-photo > img { border-radius: var(--pz-radius); }
+  .pz-support-media .ps-chat { position: relative; right: auto; bottom: auto; width: auto; margin: -40px 12px 0; }
+}
