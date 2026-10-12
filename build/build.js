@@ -151,7 +151,7 @@ pages['index.html'] = Page('Payset Private | Financial services, personal servic
       h('div', { className: 'pz-bento' },
         h('div', { className: 'pz-bento__col' },
           h(Tile, { bg: '#CFC8C1', title: 'FX priced on your volume', body: '38 FX pairs, around the clock. No public rate card: pricing is agreed in advance around how much you move.', img: 'obj-swap.webp', tag: 'Currency exchange', href: '/service#fx' }),
-          h(Tile, { bg: '#9B9C9D', dark: true, title: 'Accounts in your company’s name', body: 'Hold, send and receive 34 currencies for your group and every entity in it.', img: 'obj-globe.webp', tag: 'Multi-currency accounts', href: '/service#accounts', tagKind: 'black' })),
+          h(Tile, { bg: '#9B9C9D', title: 'Accounts in your company’s name', body: 'Hold, send and receive 34 currencies for your group and every entity in it.', img: 'obj-globe.webp', tag: 'Multi-currency accounts', href: '/service#accounts', tagKind: 'black' })),
         h(Tile, { tall: true, dark: true, bg: '#706E67', title: 'Every rail your business needs', body: 'SEPA, SEPA Instant, SWIFT and Faster Payments, with status from signature to arrival.', img: 'ui-transaction-status.webp', ui: true, alt: 'Transaction status panel showing a payment signed and sent', tag: 'Payments', href: '/service#payments', tagKind: 'neon' })),
 
       h('section', { className: 'pz-card pz-card--stone pz-center' },
