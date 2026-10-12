@@ -210,3 +210,22 @@ body { background: var(--pz-ground); color: var(--pz-ink); font-family: var(--pz
   .pz-support-media .ps-photo > img { border-radius: var(--pz-radius); }
   .pz-support-media .ps-chat { position: relative; right: auto; bottom: auto; width: auto; margin: -40px 12px 0; }
 }
+
+/* Photo card on phones: the photo shows, short copy on top, two slim payment rows above the tag */
+@media (max-width: 767px) {
+  .pz-photo-card { min-height: 600px; padding: 24px; gap: 16px; justify-content: flex-start; }
+  .pz-photo-card > img { object-position: 72% center; }
+  .pz-photo-card::after { background: linear-gradient(180deg, rgba(0,0,0,.62) 0%, rgba(0,0,0,.18) 42%, rgba(0,0,0,0) 58%, rgba(0,0,0,.45) 100%); }
+  .pz-photo-card__text { gap: 10px; }
+  .pz-photo-card__text h2 { font-size: 28px; line-height: 30px; }
+  .pz-photo-card__text p { font-size: 15px; line-height: 22px; max-width: 30ch; }
+  .pz-hide-m { display: none; }
+  .pz-glass { margin-top: auto; gap: 6px; }
+  .pz-glass li { padding: 10px 14px; border-radius: 12px; gap: 12px; }
+  .pz-glass li:nth-child(3) { display: none; }
+  .pz-glass span { min-width: 0; }
+  .pz-glass b { font-size: 14px; line-height: 18px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .pz-glass small { font-size: 11px; line-height: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .pz-glass strong { font-size: 14px; }
+  .pz-photo-card__foot, .pz-photo-card > div:last-child { margin-top: 4px; }
+}

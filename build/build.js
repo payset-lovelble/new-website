@@ -143,7 +143,7 @@ pages['index.html'] = Page('Payset Private | Private financial services',
         Img('photo-woman-at-work.webp', ''),
         h('div', { className: 'pz-photo-card__text' },
           h('h2', null, 'Every payment followed through to arrival.'),
-          h('p', null, 'Hold, send and receive 34 currencies across 180+ countries. Large and time-critical payments are tracked by your account manager until they land.')),
+          h('p', null, 'Large and time-critical payments are tracked by your account manager until they land.', h('span', { className: 'pz-hide-m' }, ' Hold, send and receive 34 currencies across 180+ countries.'))),
         h('ul', { className: 'pz-glass', 'aria-label': 'Example payments' },
           [['Supplier payment, Shenzhen', 'Tracked by your account manager', '1 800 000 USD'], ['Client receipt, Cyprus entity', 'Received', '250 000 EUR'], ['Payroll, UK entity', 'Sent', '84 500 GBP']].map(([n, s, v]) =>
             h('li', { key: n }, h('span', null, h('b', null, n), h('small', null, s)), h('strong', null, v)))),
