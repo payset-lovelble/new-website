@@ -56,27 +56,14 @@ const Chat = () => h('div', { className: 'ps-chat', role: 'img', 'aria-label': '
   h('div', { className: 'ps-bubble ps-bubble--me' }, 'Thank you. Also, we’re opening a subsidiary in Dubai next month.'),
   h('div', { className: 'ps-bubble' }, 'Congratulations. I’ll prepare AED accounts under your group and send the document list today.'));
 
-// Trustpilot: set the business unit ID from Trustpilot Business to show the live TrustBox.
-// Until then the hero shows a plain link to the review page, so no rating is ever hard-coded.
-const TRUSTPILOT = { businessUnitId: '', templateId: '5419b732fbfb950b10de65e5', reviewUrl: 'https://www.trustpilot.com/review/payset.io' };
-const Trustpilot = () => TRUSTPILOT.businessUnitId
-  ? h(React.Fragment, null,
-      h('div', { className: 'trustpilot-widget ps-trustpilot', 'data-locale': 'en-GB', 'data-template-id': TRUSTPILOT.templateId, 'data-businessunit-id': TRUSTPILOT.businessUnitId, 'data-style-height': '24px', 'data-style-width': '100%', 'data-theme': 'light' },
-        h('a', { href: TRUSTPILOT.reviewUrl, target: '_blank', rel: 'noopener' }, 'Trustpilot')),
-      h('script', { async: true, src: 'https://widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js' }))
-  : h('a', { className: 'ps-trustpilot ps-trustpilot--link', href: TRUSTPILOT.reviewUrl, target: '_blank', rel: 'noopener' }, 'Read our reviews on Trustpilot');
-
-// Home hero: centred H1, H2 underneath, CTAs, Trustpilot, then the 1M object below.
-const HomeHero = () => h('section', { className: 'pw-root pw-hero pw-hero--center ps-home-hero' },
-  h('div', { className: 'pw-container ps-home-hero__inner' },
-    h(W.Pill, { tone: 'neutral', dot: true }, 'By invitation'),
-    h('h1', { className: 'pw-title pw-title--display' }, 'Financial services, personal service, by invitation.'),
-    h('h2', { className: 'ps-home-hero__sub' }, 'Accounts in your company’s name and FX priced on your volume, for a select few businesses operating across jurisdictions. Each with a dedicated account manager, reachable by message, call or in person.'),
-    h('div', { className: 'pw-btn-row ps-home-hero__ctas' },
-      h(W.Button, { size: 'lg', href: INVITE.href, arrow: true }, INVITE.label),
-      h(W.Button, { variant: 'secondary', size: 'lg', href: TALK.href }, TALK.label)),
-    h(Trustpilot),
-    h('div', { className: 'ps-home-hero__media' }, Img('obj-1m.webp', ''))));
+// Trustpilot TrustBoxes, as on payset.io: Micro Star on light grounds, Micro Combo on dark. The rating is loaded live.
+const TRUSTPILOT = { businessUnitId: '61dd51c9957c497122f360e5', reviewUrl: 'https://www.trustpilot.com/review/payset.io' };
+const Trustpilot = ({ dark }) => h('div', {
+    className: 'trustpilot-widget pz-trustpilot', 'data-locale': 'en-US',
+    'data-template-id': dark ? '5419b637fa0340045cd0c936' : '5419b732fbfb950b10de65e5',
+    'data-businessunit-id': TRUSTPILOT.businessUnitId, 'data-style-height': dark ? '20px' : '24px', 'data-style-width': '100%',
+    'data-theme': dark ? 'dark' : 'light' },
+  h('a', { href: TRUSTPILOT.reviewUrl, target: '_blank', rel: 'noopener' }, 'Trustpilot'));
 
 function Page(title, desc, body) {
   const html = renderToStaticMarkup(h(React.Fragment, null,
@@ -90,7 +77,7 @@ function Page(title, desc, body) {
         { title: 'Legal', links: [{ label: 'Safeguarding', href: '/about#safeguarding' }, { label: 'Terms', href: '#' }, { label: 'Privacy', href: '#' }, { label: 'Cookies', href: '#' }] },
       ],
       legal: LEGAL,
-    })));
+    }))).replace(/(<footer[\s\S]*?)logo-white\.svg/, '$1logo-green.svg'); // light footer, as on payset.io
   return `<!doctype html>
 <html lang="en">
 <head>
@@ -105,7 +92,10 @@ function Page(title, desc, body) {
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="/tokens.css">
 <link rel="stylesheet" href="/bundle.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="/site.css">
+<link rel="stylesheet" href="/payset.css">
+<script async src="https://widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js"></script>
 </head>
 <body>
 ${html}
@@ -117,38 +107,89 @@ ${html}
 const pages = {};
 
 /* ---------- Home ---------- */
+// Layout follows the current payset.io home: centred hero, then rounded cards in one column.
+const Btn = (label, href, kind) => h('a', { className: 'pz-btn pz-btn--' + kind, href }, label);
+const Ctas = () => h('div', { className: 'pz-ctas' }, Btn(TALK.label, TALK.href, 'neon'), Btn(INVITE.label, INVITE.href, 'black'));
+const Tag = (label, href, kind) => h('a', { className: 'pz-tag pz-tag--' + (kind || 'light'), href }, label);
+const Tile = (p) => h('article', { className: 'pz-tile' + (p.dark ? ' pz-tile--dark' : '') + (p.tall ? ' pz-tile--tall' : ''), style: { background: p.bg } },
+  h('div', { className: 'pz-tile__text' }, h('h3', null, p.title), h('p', null, p.body)),
+  p.img && h('img', { className: 'pz-tile__img' + (p.ui ? ' pz-tile__img--ui' : ''), src: A(p.img), alt: p.alt || '' }),
+  h('div', { className: 'pz-tile__foot' }, Tag(p.tag, p.href, p.tagKind)));
+// Small 2px-stroke glyphs in circles, as on payset.io.
+const ICONS = {
+  headset: ['M4 14v-2a8 8 0 0 1 16 0v2', 'M4 14h3v5H5a1 1 0 0 1-1-1z', 'M20 14h-3v5h2a1 1 0 0 0 1-1z', 'M17 19c0 1.5-2 2-5 2'],
+  bell: ['M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15z', 'M10 20a2 2 0 0 0 4 0'],
+  layers: ['M12 3l9 5-9 5-9-5z', 'M3 13l9 5 9-5'],
+  badge: ['M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z', 'M9 12l2 2 4-4'],
+  vault: ['M4 5h16v14H4z', 'M12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6z', 'M12 12h0', 'M7 19v2', 'M17 19v2'],
+  key: ['M14 4a6 6 0 1 0 0 12 6 6 0 0 0 0-12z', 'M9.5 14.5L3 21', 'M5 19l2 2', 'M14 8v4'],
+};
+const Icon = (name) => h('svg', { viewBox: '0 0 24 24', width: 28, height: 28, fill: 'none', stroke: 'currentColor', strokeWidth: 2, strokeLinecap: 'round', strokeLinejoin: 'round', 'aria-hidden': 'true' },
+  ICONS[name].map((d, i) => h('path', { key: i, d })));
+const Point = (icon, title, body) => h('div', { className: 'pz-point' },
+  h('span', { className: 'pz-point__icon' }, Icon(icon)), h('h3', null, title), h('p', null, body));
+
 pages['index.html'] = Page('Payset Private | Financial services, personal service, by invitation',
   'Accounts, FX and cross-border payments for businesses operating across jurisdictions, with a dedicated account manager.',
-  h(React.Fragment, null,
-    h(HomeHero),
-    h(Section, { tone: 'subtle' },
-      Facts([['34', 'currencies held, sent and received'], ['180+', 'countries reached'], ['38', 'FX pairs, around the clock'], ['FCA', 'authorised Electronic Money Institution']]),
-      h('p', { className: 'ps-small', style: { marginTop: '24px' } }, 'Typical clients move 250 000 EUR or more each month.')),
-    h(Section, null,
-      Head('Why we’re selective', 'Fewer clients. Undivided attention.',
-        'Every client has an account manager who knows their business, their suppliers and their deadlines. That only works if we limit how many companies each manager serves. So we don’t open accounts for everyone.',
-        h(W.Button, { variant: 'secondary', href: '/service', arrow: true }, 'Explore the service')),
-      h('div', { className: 'ps-grid-3' },
-        h(W.FeatureCard, { image: A('obj-user-pics.webp'), title: 'An account manager who picks up', body: 'One named person who knows your business. Reachable by message, call or in person.' }),
-        h(W.FeatureCard, { tone: 'brand', image: A('obj-globe.webp'), title: 'Accounts in your company’s name', body: 'Hold, send and receive 34 currencies, for your group and every entity in it.' }),
-        h(W.FeatureCard, { image: A('obj-swap.webp'), title: 'FX priced on your volume', body: 'No public rate card. Pricing set around how much you move, agreed in advance.' }))),
-    h(Section, { tone: 'subtle' },
-      h('div', { className: 'ps-split' },
-        h('div', { className: 'ps-split__text' }, Over('Your account manager'), H2('One person who knows your business. And acts first.'),
-          Lead('A held payment, a missing document, a new entity. You hear it from your account manager before you have to ask.'),
-          h('div', { className: 'pw-btn-row', style: { marginTop: '8px' } }, h(W.Button, { href: '/service', arrow: true }, 'How the service works'))),
-        h('div', { className: 'ps-photo' }, Img('photo-headset.webp', 'An account manager on a call at her desk'), h(Chat)))),
-    h(Section, null,
-      h('div', { className: 'ps-stack' },
-        h(W.ProductShowcase, { image: A('ui-transaction-status.webp'), imageAlt: 'Transaction status panel showing a payment signed and sent', eyebrow: 'Payments', title: 'Every payment followed through to arrival.', body: 'Send to 180+ countries over SEPA, SWIFT and Faster Payments. Large and time-critical payments are tracked by your account manager until they land.', points: ['Status from signature to arrival', 'Held payments chased for you', 'Bulk and recurring payouts'] }),
-        h(W.ProductShowcase, { reverse: true, image: A('ui-members.webp'), imageAlt: 'Team members panel with permissions', eyebrow: 'Controls', title: 'Personal service. Institutional controls.', body: 'Decide who can create, approve and release payments, by person, entity and amount.', points: ['Multi-signature approvals', 'Permissions per member and entity', 'Two-factor sign-in'] }))),
-    h(Section, { tone: 'subtle' },
-      Head('Who we work with', 'Businesses that banks find complicated. We don’t.', 'International companies that move 250 000 EUR or more each month, often through several entities and jurisdictions.',
-        h(W.Button, { variant: 'secondary', href: '/clients', arrow: true }, 'See who we serve')),
-      h('div', { className: 'ps-links' },
-        ['Licensed iGaming', 'Performance marketing', 'Digital assets', 'Software and digital services', 'Consulting', 'Holding structures'].map((t, i) =>
-          h('a', { key: t, className: 'ps-chip', href: '/clients#' + ['igaming', 'marketing', 'digital-assets', 'software', 'consulting', 'holdings'][i] }, t)))),
-    h(CTA)));
+  h('div', { className: 'pz' },
+    h('section', { className: 'pz-hero' },
+      h('h1', { className: 'pz-hero__title' }, 'Financial services, personal service, by invitation.'),
+      h('h2', { className: 'pz-hero__sub' }, 'Accounts in your company’s name, FX priced on your volume and a dedicated account manager, for businesses operating across jurisdictions.'),
+      h(Ctas), h(Trustpilot)),
+
+    h('div', { className: 'pz-cards' },
+      h('section', { className: 'pz-photo-card' },
+        Img('photo-woman-at-work.webp', ''),
+        h('div', { className: 'pz-photo-card__text' },
+          h('h2', null, 'Every payment followed through to arrival.'),
+          h('p', null, 'Hold, send and receive 34 currencies across 180+ countries. Large and time-critical payments are tracked by your account manager until they land.')),
+        h('ul', { className: 'pz-glass', 'aria-label': 'Example payments' },
+          [['Supplier payment, Shenzhen', 'Tracked by your account manager', '1 800 000 USD'], ['Client receipt, Cyprus entity', 'Received', '250 000 EUR'], ['Payroll, UK entity', 'Sent', '84 500 GBP']].map(([n, s, v]) =>
+            h('li', { key: n }, h('span', null, h('b', null, n), h('small', null, s)), h('strong', null, v)))),
+        h('div', { className: 'pz-photo-card__foot' }, Tag('The service', '/service', 'neon'))),
+
+      h('div', { className: 'pz-bento' },
+        h('div', { className: 'pz-bento__col' },
+          h(Tile, { bg: '#CFC8C1', title: 'FX priced on your volume', body: '38 FX pairs, around the clock. No public rate card: pricing is agreed in advance around how much you move.', img: 'obj-swap.webp', tag: 'Currency exchange', href: '/service#fx' }),
+          h(Tile, { bg: '#9B9C9D', dark: true, title: 'Accounts in your company’s name', body: 'Hold, send and receive 34 currencies for your group and every entity in it.', img: 'obj-globe.webp', tag: 'Multi-currency accounts', href: '/service#accounts', tagKind: 'black' })),
+        h(Tile, { tall: true, dark: true, bg: '#706E67', title: 'Every rail your business needs', body: 'SEPA, SEPA Instant, SWIFT and Faster Payments, with status from signature to arrival.', img: 'ui-transaction-status.webp', ui: true, alt: 'Transaction status panel showing a payment signed and sent', tag: 'Payments', href: '/service#payments', tagKind: 'neon' })),
+
+      h('section', { className: 'pz-card pz-card--stone pz-center' },
+        h('h2', { className: 'pz-giant' }, 'Personal service'),
+        h('p', { className: 'pz-lead' }, 'One named account manager who knows your business, your suppliers and your deadlines. Reachable by message, call or in person, and usually the first to spot a problem.'),
+        h('div', { className: 'pz-support-media' }, h('div', { className: 'ps-photo' }, Img('photo-headset.webp', 'An account manager on a call at her desk'), h(Chat))),
+        h('div', { className: 'pz-points' },
+          Point('headset', 'Someone who picks up', 'One named person, not a ticket queue. Reachable by message, call or in person.'),
+          Point('bell', 'Acts first', 'A held payment or a missing document: you hear it from us before you have to ask.'),
+          Point('layers', 'Knows your group', 'Every entity, corridor and approver, so new accounts and payments move quickly.')),
+        h(Ctas)),
+
+      h('div', { className: 'pz-bento pz-bento--even' },
+        h(Tile, { bg: '#706E67', dark: true, title: 'Personal service. Institutional controls.', body: 'Decide who can create, approve and release payments, by person, entity and amount. Multi-signature approvals and two-factor sign-in.', img: 'ui-members.webp', ui: true, alt: 'Team members panel with permissions', tag: 'Controls', href: '/service#controls', tagKind: 'black' }),
+        h(Tile, { bg: '#2B2728', dark: true, title: 'Statements for every entity', body: 'Statements and transaction detail per account and entity, ready for your finance team and auditors.', img: 'ui-statement.webp', ui: true, alt: 'Account statement panel', tag: 'Reporting', href: '/service#reporting', tagKind: 'neon' })),
+
+      h('section', { className: 'pz-card pz-card--dark pz-center' },
+        h('h2', { className: 'pz-giant' }, 'Businesses that banks find complicated'),
+        h('p', { className: 'pz-lead' }, 'International companies moving 250 000 EUR or more each month, often through several entities and jurisdictions. We understand them, and we stay with them.'),
+        h('div', { className: 'pz-chips' },
+          ['Licensed iGaming', 'Performance marketing', 'Digital assets', 'Software and digital services', 'Consulting', 'Holding structures'].map((t, i) =>
+            h('a', { key: t, className: 'pz-chip', href: '/clients#' + ['igaming', 'marketing', 'digital-assets', 'software', 'consulting', 'holdings'][i] }, t))),
+        h('div', { className: 'pz-center-row' }, Tag('Who we work with', '/clients', 'outline')),
+        h(Trustpilot, { dark: true })),
+
+      h('section', { className: 'pz-card pz-card--green pz-center' },
+        h('h2', { className: 'pz-giant' }, 'Your money, safeguarded'),
+        h('p', { className: 'pz-lead' }, 'Payset is authorised by the FCA as an Electronic Money Institution. Client funds are safeguarded, and every payment sits behind the approvals you set.'),
+        h('div', { className: 'pz-hero-object' }, Img('obj-lock.webp', '')),
+        h('div', { className: 'pz-points' },
+          Point('badge', 'FCA authorised', 'Authorised under the Electronic Money Regulations 2011, FRN 900920.'),
+          Point('vault', 'Safeguarded funds', 'Client funds are held separately from Payset’s own money.'),
+          Point('key', 'Approvals and 2FA', 'Multi-signature approvals, permissions and two-factor sign-in.'))),
+
+      h('section', { className: 'pz-card pz-card--stone pz-center' },
+        h('h2', { className: 'pz-giant' }, 'Not for everyone. Possibly for you.'),
+        h('p', { className: 'pz-lead' }, 'If your business moves money across borders and expects someone to pick up, request an invitation. We review every request personally.'),
+        h(Ctas), h(Trustpilot)))));
 
 /* ---------- The service ---------- */
 pages['service.html'] = Page('The service | Payset Private', 'Accounts, FX and payments run by a dedicated account manager.',
