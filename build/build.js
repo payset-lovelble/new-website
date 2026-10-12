@@ -18,7 +18,8 @@ const NAV = [
   { label: 'Pricing', href: '/pricing' },
   { label: 'About', href: '/about' },
 ];
-const INVITE = { label: 'Request an invitation', href: '/invite' };
+const APPLY_URL = 'https://www.payset.io/apply';
+const INVITE = { label: 'Apply now', href: APPLY_URL };
 const TALK = { label: 'Talk to us', href: '/about#contact' };
 
 const Container = (p) => h('div', { className: 'pw-container' }, p.children);
@@ -45,8 +46,8 @@ const CTA = (props) => h('section', { className: 'pw-root ps-section ps-section-
   h(W.CTABand, Object.assign({
     eyebrow: 'By invitation',
     title: 'Not for everyone. Possibly for you.',
-    body: 'If your business moves money across borders and expects someone to pick up, request an invitation. We review every request personally.',
-    ctaLabel: 'Request an invitation', ctaHref: '/invite', secondaryLabel: 'Talk to us', secondaryHref: '/about#contact',
+    body: 'If your business moves money across borders and expects someone to pick up, apply. We review every application personally.',
+    ctaLabel: 'Apply now', ctaHref: APPLY_URL, secondaryLabel: 'Talk to us', secondaryHref: '/about#contact',
   }, props))));
 
 const Chat = () => h('div', { className: 'ps-chat', role: 'img', 'aria-label': 'Example conversation with a relationship manager' },
@@ -67,13 +68,13 @@ const Trustpilot = ({ dark }) => h('div', {
 
 function Page(title, desc, body) {
   const html = renderToStaticMarkup(h(React.Fragment, null,
-    h(W.NavBar, { links: NAV, ctaLabel: 'Request an invitation', ctaHref: '/invite', signInLabel: 'Sign in', signInHref: 'https://app.payset.io', homeHref: '/' }),
+    h(W.NavBar, { links: NAV, ctaLabel: 'Apply now', ctaHref: APPLY_URL, signInLabel: 'Sign in', signInHref: 'https://app.payset.io', homeHref: '/' }),
     h('main', { id: 'main' }, body),
     h(W.Footer, {
       tagline: 'Financial services, personal service, by invitation.',
       columns: [
         { title: 'Payset Private', links: NAV.slice(0, 4) },
-        { title: 'Company', links: [{ label: 'About', href: '/about' }, { label: 'Introductions', href: '/invite' }, { label: 'Careers', href: '#' }, { label: 'Contact', href: '/about#contact' }] },
+        { title: 'Company', links: [{ label: 'About', href: '/about' }, { label: 'Introductions', href: '#' }, { label: 'Careers', href: '#' }, { label: 'Contact', href: '/about#contact' }] },
         { title: 'Legal', links: [{ label: 'Safeguarding', href: '/about#safeguarding' }, { label: 'Terms', href: '#' }, { label: 'Privacy', href: '#' }, { label: 'Cookies', href: '#' }] },
       ],
       legal: LEGAL,
@@ -190,7 +191,7 @@ pages['index.html'] = Page('Payset Private | Private financial services',
 
       h('section', { className: 'pz-card pz-card--stone pz-center' },
         h('h2', { className: 'pz-giant' }, 'Not for everyone. Possibly for you.'),
-        h('p', { className: 'pz-lead' }, 'If your business moves money across borders and expects someone to pick up, request an invitation. We review every request personally.'),
+        h('p', { className: 'pz-lead' }, 'If your business moves money across borders and expects someone to pick up, apply. We review every application personally.'),
         h(Ctas), h(Trustpilot)))));
 
 /* ---------- The service ---------- */
@@ -231,7 +232,7 @@ pages['service.html'] = Page('The service | Payset Private', 'Accounts, FX and p
         h('div', { className: 'ps-split' },
           h('div', { className: 'ps-split__text' }, Over('Digital assets'), H2('Fiat rails for digital asset businesses.'),
             Lead('Banks hesitate. We don’t. Operating accounts and fiat on- and off-ramp for digital asset businesses, alongside our MiCA-licensed group company.'),
-            h('div', { className: 'pw-btn-row', style: { marginTop: '8px' } }, h(W.Button, { variant: 'accent', href: '/invite', arrow: true }, 'Request an invitation'))),
+            h('div', { className: 'pw-btn-row', style: { marginTop: '8px' } }, h(W.Button, { variant: 'accent', href: APPLY_URL, arrow: true }, 'Apply now'))),
           h('div', null, Img('obj-lock.webp', ''))))),
     h(Section, { id: 'control', tone: 'subtle' },
       h(W.ProductShowcase, { image: A('ui-spending-rules.webp'), imageAlt: 'Spending rules panel', eyebrow: 'Control and security', title: 'Two signatures on every payment over 10 000 EUR.', body: 'Set the rules once. Every payment follows them, for every entity and every member.', points: ['Multi-signature approvals and spending rules', 'Permissions by person, entity and limit', 'Two-factor sign-in and transaction monitoring', 'Client funds safeguarded and never lent out'] })),
@@ -239,7 +240,7 @@ pages['service.html'] = Page('The service | Payset Private', 'Accounts, FX and p
       h('div', { className: 'ps-split', style: { alignItems: 'start' } },
         h('div', { className: 'ps-split__text' }, H2('What you won’t find here.')),
         Rules(['Ticket numbers and chatbots.', 'A different person every time you call.', 'Accounts closed without a conversation.', 'A free tier, because the service isn’t automated.'], true))),
-    h(CTA, { title: 'Meet your account manager.', body: 'Typical clients move 250 000 EUR or more each month. Request an invitation and a senior member of our team will call you within one business day.' })));
+    h(CTA, { title: 'Meet your account manager.', body: 'Typical clients move 250 000 EUR or more each month. Apply and a senior member of our team will call you within one business day.' })));
 
 /* ---------- Who we work with ---------- */
 const SEG = [
@@ -268,18 +269,18 @@ pages['clients.html'] = Page('Who we work with | Payset Private', 'The businesse
       h('div', { className: 'ps-split', style: { alignItems: 'start' } },
         h('div', { className: 'ps-split__text' }, H2('Who we’re not for.'), Lead('We say so on the first call, and point you somewhere better suited.')),
         Rules(['Businesses moving less than 100 000 EUR a month.', 'Domestic, single-currency payments.', 'One-off transfers.', 'Anyone looking for a free account.'], true))),
-    h(Section, null, h(W.CTABand, { eyebrow: 'By invitation', title: 'Sound like your business?', body: 'Tell us how you move money. A senior member of our team will call you within one business day.', ctaLabel: 'Request an invitation', ctaHref: '/invite', tone: 'brand' }))));
+    h(Section, null, h(W.CTABand, { eyebrow: 'By invitation', title: 'Sound like your business?', body: 'Tell us how you move money. A senior member of our team will call you within one business day.', ctaLabel: 'Apply now', ctaHref: APPLY_URL, tone: 'brand' }))));
 
 /* ---------- How it works ---------- */
 const STEPS = [
-  ['Request an invitation', '5 minutes', 'Tell us about your company, your monthly volume, your currencies and where you pay and get paid. If a client introduced you, say who.'],
+  ['Apply', '5 minutes', 'Tell us about your company, your monthly volume, your currencies and where you pay and get paid. If a client introduced you, say who.'],
   ['A conversation', 'Within one business day', 'A senior member of our team calls you. We want to understand how your business moves money, and you should know exactly what we can and can’t do.'],
   ['Your proposal', 'After the call', 'A plan built around your volume and corridors: monthly fee, FX pricing and service level, in writing.'],
   ['Onboarding, led by people', '[ONBOARDING TIME]', 'Your account manager collects what compliance needs once, explains every request and keeps it moving. Then your accounts open.'],
 ];
-pages['how-it-works.html'] = Page('How it works | Payset Private', 'How an invitation to Payset Private works.',
+pages['how-it-works.html'] = Page('How it works | Payset Private', 'How joining Payset Private works.',
   h(React.Fragment, null,
-    h(W.Hero, { eyebrow: 'How it works', size: 'h1', align: 'left', title: 'From request to your first payment.', lead: 'Joining Payset Private is a conversation, not a form. Here is what happens after you request an invitation.', primaryCta: INVITE, image: A('obj-toggle.webp') }),
+    h(W.Hero, { eyebrow: 'How it works', size: 'h1', align: 'left', title: 'From application to your first payment.', lead: 'Joining Payset Private is a conversation, not a form. Here is what happens after you apply.', primaryCta: INVITE, image: A('obj-toggle.webp') }),
     h(Section, null,
       h('ol', { className: 'ps-steps' }, STEPS.map((s, i) => h('li', { key: s[0], className: 'ps-step' },
         h('div', { className: 'ps-step__meta' }, h('span', { className: 'ps-step__n' }, String(i + 1).padStart(2, '0')), h('span', { className: 'ps-small' }, s[1])),
@@ -296,7 +297,7 @@ pages['how-it-works.html'] = Page('How it works | Payset Private', 'How an invit
         h('div', { className: 'ps-split__text' }, H2('Questions.')),
         h('div', { className: 'ps-faq' },
           [['Can I open an account online?', 'No. Every client starts with a conversation, so we can confirm we’re the right fit before you share documents.'],
-           ['What if we move less than 250 000 EUR a month?', 'Request an invitation anyway if you’re growing quickly. If we’re not the right fit, we’ll tell you on the call.'],
+           ['What if we move less than 250 000 EUR a month?', 'Apply anyway if you’re growing quickly. If we’re not the right fit, we’ll tell you on the call.'],
            ['Do you work with groups with many entities?', 'Yes. Each entity gets its own accounts, all under one account manager.'],
            ['Is Payset a bank?', 'No. Payset is an Electronic Money Institution authorised by the FCA. Client funds are safeguarded, held separately from our own and never lent out.']]
             .map(([q, a]) => h('details', { key: q }, h('summary', null, q), Body(a)))))),
@@ -352,41 +353,6 @@ pages['about.html'] = Page('About | Payset Private', 'Payset is an FCA-authorise
         h('div', { className: 'ps-split__text' }, H2('Where we are.'), Lead('Existing clients: speak to your account manager directly.')),
         Rules([['London', '9th Floor, 9 Appold Street, London EC2A 2AP. Headquarters.'], ['Portugal', '[CITY]'], ['Israel', '[CITY]'], ['Romania', '[CITY]']]))),
     h(CTA)));
-
-/* ---------- Invite ---------- */
-const Field = (id, label, input) => h('div', { className: 'ps-field' }, h('label', { htmlFor: id }, label), input);
-const inp = (id, name, extra) => h('input', Object.assign({ id, name }, extra || {}));
-pages['invite.html'] = Page('Request an invitation | Payset Private', 'Request an invitation to Payset Private.',
-  h(React.Fragment, null,
-    h(W.Hero, { eyebrow: 'Request an invitation', size: 'h1', title: 'Tell us about your business.', lead: 'A senior member of our team reviews every request personally and will contact you within one business day.' }),
-    h(Section, { tone: 'subtle' },
-      h('div', { className: 'ps-form-grid' },
-        h('div', null,
-          h('form', { className: 'ps-form', id: 'invite-form' },
-            h('p', { className: 'ps-note' }, 'Design preview. This form does not send any data.'),
-            h('fieldset', { className: 'ps-fieldset' }, h('legend', null, 'Your company'),
-              Field('co', 'Company name', inp('co', 'company', { autoComplete: 'organization' })),
-              h('div', { className: 'ps-grid-2' }, Field('web', 'Website', inp('web', 'website', { type: 'url', placeholder: 'https://' })), Field('country', 'Country of incorporation', inp('country', 'country'))),
-              Field('ind', 'Industry', h('select', { id: 'ind', name: 'industry', defaultValue: '' }, ['Select', 'Licensed iGaming', 'Performance and online marketing', 'Digital assets', 'Software and digital services', 'Consulting and professional services', 'Holding company or group', 'Other'].map((o, i) => h('option', { key: o, value: i ? o : '' }, o))))),
-            h('fieldset', { className: 'ps-fieldset' }, h('legend', null, 'Monthly payment volume'),
-              h('p', { className: 'ps-small', style: { marginTop: '-12px' } }, 'Incoming and outgoing combined, in EUR.'),
-              h('div', { className: 'ps-tiles', role: 'radiogroup', 'aria-label': 'Monthly payment volume' },
-                ['Under 100 000', '100 000 – 250 000', '250 000 – 1 000 000', '1 000 000 – 5 000 000', '5 000 000+'].map((v, i) =>
-                  h('label', { className: 'ps-tile', key: v }, h('input', { type: 'radio', name: 'volume', value: String(i) }), h('span', null, v)))),
-              h('div', { className: 'ps-grid-2' }, Field('ccy', 'Main currencies', inp('ccy', 'currencies', { placeholder: 'EUR, USD, GBP' })),
-                Field('ent', 'Number of entities', h('select', { id: 'ent', name: 'entities' }, ['1', '2–5', '6–15', '16+'].map((o) => h('option', { key: o }, o))))),
-              Field('where', 'Where you pay and get paid from', h('textarea', { id: 'where', name: 'corridors', placeholder: 'Countries or regions' }))),
-            h('fieldset', { className: 'ps-fieldset' }, h('legend', null, 'You'),
-              h('div', { className: 'ps-grid-2' },
-                Field('nm', 'Full name', inp('nm', 'name', { autoComplete: 'name' })), Field('role', 'Role', inp('role', 'role', { autoComplete: 'organization-title' })),
-                Field('em', 'Work email', inp('em', 'email', { type: 'email', autoComplete: 'email' })), Field('ph', 'Phone', inp('ph', 'phone', { type: 'tel', autoComplete: 'tel', placeholder: '+44' }))),
-              Field('ref', 'Introduced by (optional)', inp('ref', 'referrer'))),
-            h('div', { className: 'pw-btn-row' }, h(W.Button, { type: 'submit', size: 'lg' }, 'Request an invitation'), h('span', { className: 'ps-small' }, 'By submitting, you agree to our privacy policy.'))),
-          h('div', { id: 'sent', hidden: true, className: 'ps-plan' }, Over('Received'), H3('Thank you.'), Body('A senior member of our team will review your request and contact you within one business day.'))),
-        h('aside', { className: 'ps-aside' },
-          h(W.FeatureCard, { image: A('obj-user-pics.webp'), title: 'Who we work with', body: 'Businesses moving 250 000 EUR or more each month, often across several entities: iGaming, performance marketing, digital assets, software, consulting and holding structures.' }),
-          h('p', { className: 'ps-small' }, 'Introduced by a client? Mention them and we’ll prioritise your request.')))),
-    h('script', { dangerouslySetInnerHTML: { __html: "document.getElementById('invite-form').addEventListener('submit',function(e){e.preventDefault();this.hidden=true;document.getElementById('sent').hidden=false;});" } })));
 
 for (const [f, html] of Object.entries(pages)) fs.writeFileSync(path.join(OUT, f), html);
 console.log('built', Object.keys(pages).join(', '));
