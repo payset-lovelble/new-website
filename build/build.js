@@ -113,7 +113,7 @@ const Ctas = () => h('div', { className: 'pz-ctas' }, Btn(TALK.label, TALK.href,
 const Tag = (label, href, kind) => h('a', { className: 'pz-tag pz-tag--' + (kind || 'light'), href }, label);
 const Tile = (p) => h('article', { className: 'pz-tile' + (p.dark ? ' pz-tile--dark' : '') + (p.tall ? ' pz-tile--tall' : ''), style: { background: p.bg } },
   h('div', { className: 'pz-tile__text' }, h('h3', null, p.title), h('p', null, p.body)),
-  p.img && h('img', { className: 'pz-tile__img' + (p.ui ? ' pz-tile__img--ui' : ''), src: A(p.img), alt: p.alt || '' }),
+  p.img && h('img', { className: 'pz-tile__img' + (p.ui ? ' pz-tile__img--ui' : '') + (p.cards ? ' pz-tile__img--cards' : ''), src: A(p.img), alt: p.alt || '' }),
   h('div', { className: 'pz-tile__foot' }, Tag(p.tag, p.href, p.tagKind)));
 // Small 2px-stroke glyphs in circles, as on payset.io.
 const ICONS = {
@@ -129,11 +129,11 @@ const Icon = (name) => h('svg', { viewBox: '0 0 24 24', width: 28, height: 28, f
 const Point = (icon, title, body) => h('div', { className: 'pz-point' },
   h('span', { className: 'pz-point__icon' }, Icon(icon)), h('h3', null, title), h('p', null, body));
 
-pages['index.html'] = Page('Payset Private | Financial services, personal service, by invitation',
+pages['index.html'] = Page('Payset Private | Private financial services',
   'Accounts, FX and cross-border payments for businesses operating across jurisdictions, with a dedicated account manager.',
   h('div', { className: 'pz' },
     h('section', { className: 'pz-hero' },
-      h('h1', { className: 'pz-hero__title' }, 'Financial services, personal service, by invitation.'),
+      h('h1', { className: 'pz-hero__title' }, 'Private financial services'),
       h('h2', { className: 'pz-hero__sub' }, 'Accounts in your company’s name, FX priced on your volume and a dedicated account manager, for businesses operating across jurisdictions.'),
       h(Ctas), h(Trustpilot)),
 
@@ -164,9 +164,11 @@ pages['index.html'] = Page('Payset Private | Financial services, personal servic
           Point('layers', 'Knows your group', 'Every entity, corridor and approver, so new accounts and payments move quickly.')),
         h(Ctas)),
 
-      h('div', { className: 'pz-bento pz-bento--even' },
-        h(Tile, { bg: '#706E67', dark: true, title: 'Personal service. Institutional controls.', body: 'Decide who can create, approve and release payments, by person, entity and amount. Multi-signature approvals and two-factor sign-in.', img: 'ui-members.webp', ui: true, alt: 'Team members panel with permissions', tag: 'Controls', href: '/service#controls', tagKind: 'black' }),
-        h(Tile, { bg: '#2B2728', dark: true, title: 'Statements for every entity', body: 'Statements and transaction detail per account and entity, ready for your finance team and auditors.', img: 'ui-statement.webp', ui: true, alt: 'Account statement panel', tag: 'Reporting', href: '/service#reporting', tagKind: 'neon' })),
+      h('div', { className: 'pz-bento' },
+        h(Tile, { tall: true, bg: '#CFC8C1', title: 'Debit cards for your team', body: 'Payset debit cards for the people who spend on your company’s behalf, each with its own limits and spending rules.', img: 'obj-debit-cards.webp', cards: true, tag: 'Cards', href: '/service#cards', tagKind: 'black' }),
+        h('div', { className: 'pz-bento__col' },
+          h(Tile, { bg: '#706E67', dark: true, title: 'Personal service. Institutional controls.', body: 'Decide who can create, approve and release payments, by person, entity and amount.', img: 'ui-members.webp', ui: true, alt: 'Team members panel with permissions', tag: 'Controls', href: '/service#control', tagKind: 'black' }),
+          h(Tile, { bg: '#2B2728', dark: true, title: 'Statements for every entity', body: 'Statements and transaction detail per account and entity, ready for your finance team.', img: 'ui-statement.webp', ui: true, alt: 'Account statement panel', tag: 'Reporting', href: '/service#payments', tagKind: 'neon' }))),
 
       h('section', { className: 'pz-card pz-card--dark pz-center' },
         h('h2', { className: 'pz-giant' }, 'Businesses that banks find complicated'),
@@ -222,6 +224,8 @@ pages['service.html'] = Page('The service | Payset Private', 'Accounts, FX and p
       h('div', { className: 'ps-stack' },
         h(W.ProductShowcase, { image: A('ui-transaction-status.webp'), imageAlt: 'Transaction status panel', eyebrow: 'Payments', title: 'Every payment followed through to arrival.', body: 'Send to 180+ countries over SEPA, SEPA Instant, SWIFT and Faster Payments. Your account manager tracks large and time-critical payments and chases them before you have to ask.', points: ['Bulk and recurring payments', 'Payouts at volume', 'Urgent same-day where the rail allows'] }),
         h(W.ProductShowcase, { reverse: true, image: A('ui-statement.webp'), imageAlt: 'Statements panel', eyebrow: 'Documents', title: 'Statements and letters, prepared for you.', body: 'Standard and accounting statements on demand. Reference letters and audit confirmations prepared by your account manager.' }))),
+    h(Section, { id: 'cards' },
+      h(W.ProductShowcase, { image: A('obj-debit-cards.webp'), imageAlt: 'Three money-green Payset debit cards', eyebrow: 'Cards', title: 'Debit cards for the people who spend for you.', body: 'Payset debit cards for your team, drawn on your company’s accounts. Your account manager sets them up with you, card by card.', points: ['A card for each person who spends', 'Limits and spending rules per card', 'Every card payment in your statements'] })),
     h(Section, { id: 'digital-assets' },
       h('div', { className: 'ps-band ps-band--brand' },
         h('div', { className: 'ps-split' },
