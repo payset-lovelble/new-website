@@ -174,10 +174,10 @@ pages['index.html'] = Page('Payset Private | Boutique financial services',
 
       h('section', { className: 'pz-card pz-card--dark pz-center' },
         h('h2', { className: 'pz-giant' }, 'Businesses that banks find complicated'),
-        h('p', { className: 'pz-lead' }, 'International companies moving 250 000 EUR or more each month, often through several entities and jurisdictions. We understand them, and we stay with them.'),
+        h('p', { className: 'pz-lead' }, 'International companies moving 100 000 EUR or more each month, often through several entities and jurisdictions. If that sounds like you, we should talk.'),
         h('div', { className: 'pz-chips' },
-          ['Licensed iGaming', 'Performance marketing', 'Digital assets', 'Software and digital services', 'Consulting', 'Holding structures'].map((t, i) =>
-            h('a', { key: t, className: 'pz-chip', href: '/clients#' + ['igaming', 'marketing', 'digital-assets', 'software', 'consulting', 'holdings'][i] }, t))),
+          ['Moving 100 000 EUR or more a month', 'Several entities and jurisdictions', 'Paying and getting paid in many countries', 'Holding several currencies', 'Slowed down or turned away by banks'].map((t) =>
+            h('span', { key: t, className: 'pz-chip' }, t))),
         h('div', { className: 'pz-center-row' }, Tag('Who we work with', '/clients', 'outline')),
         h(Trustpilot, { dark: true })),
 
@@ -241,11 +241,10 @@ pages['service.html'] = Page('The service | Payset Private', 'Accounts, FX and p
       h('div', { className: 'ps-split', style: { alignItems: 'start' } },
         h('div', { className: 'ps-split__text' }, H2('What you won’t find here.')),
         Rules(['Ticket numbers and chatbots.', 'A different person every time you call.', 'Accounts closed without a conversation.', 'A free tier, because the service isn’t automated.'], true))),
-    h(CTA, { title: 'Meet your account manager.', body: 'Typical clients move 250 000 EUR or more each month. Apply and a senior member of our team will call you within one business day.' })));
+    h(CTA, { title: 'Meet your account manager.', body: 'We work with businesses moving 100 000 EUR or more each month. Apply and a senior member of our team will call you within one business day.' })));
 
 /* ---------- Who we work with ---------- */
 const SEG = [
-  ['igaming', 'Licensed iGaming operators and affiliates', 'obj-chart.webp', 'Operating accounts and partner payouts for licensed operators and the affiliates that work with them, onboarded by people who understand gaming licences.', ['Operating and settlement accounts by entity', 'Affiliate and partner payouts at volume', 'Licences we work with: [LICENCE LIST]']],
   ['marketing', 'Performance and online marketing', 'obj-magnifier.webp', 'Media buyers, SEO agencies and affiliate networks paying publishers, platforms and partners in many countries every week.', ['Mass payouts in EUR, USD and GBP', 'Client receipts in several currencies', 'Payments released on time, every cycle']],
   ['digital-assets', 'Digital asset businesses', 'obj-lock.webp', 'Fiat operating accounts and on- and off-ramp for exchanges, brokers and Web3 companies, alongside our MiCA-licensed group company.', ['Fiat accounts for operating flows', 'Specialist onboarding for licensed models', 'Settlement in major fiat currencies']],
   ['software', 'Software and digital services', 'obj-toggle.webp', 'Product companies and studios paying international teams and contractors, and collecting from clients worldwide.', ['Contractor payments in local currency', 'Collections in USD, EUR and GBP', 'FX on payroll runs, priced on your volume']],
@@ -255,7 +254,7 @@ const SEG = [
 pages['clients.html'] = Page('Who we work with | Payset Private', 'The businesses Payset Private serves.',
   h(React.Fragment, null,
     h(W.Hero, { eyebrow: 'Who we work with', size: 'h1', align: 'left', title: 'Businesses that banks find complicated. We don’t.',
-      lead: 'International businesses that move 250 000 EUR or more each month, often through several entities and jurisdictions. Banks see complexity. We see a client worth knowing properly.',
+      lead: 'International businesses that move 100 000 EUR or more each month, often through several entities and jurisdictions. Banks see complexity. We see a client worth knowing properly.',
       primaryCta: INVITE, image: A('obj-uk-lock.webp') }),
     h(Section, { tone: 'subtle' },
       h('div', { className: 'ps-links' }, SEG.map((s) => h('a', { key: s[0], className: 'ps-chip', href: '#' + s[0] }, s[1])))),
@@ -298,7 +297,7 @@ pages['how-it-works.html'] = Page('How it works | Payset Private', 'How joining 
         h('div', { className: 'ps-split__text' }, H2('Questions.')),
         h('div', { className: 'ps-faq' },
           [['Can I open an account online?', 'No. Every client starts with a conversation, so we can confirm we’re the right fit before you share documents.'],
-           ['What if we move less than 250 000 EUR a month?', 'Apply anyway if you’re growing quickly. If we’re not the right fit, we’ll tell you on the call.'],
+           ['What if we move less than 100 000 EUR a month?', 'Apply anyway if you’re growing quickly. If we’re not the right fit, we’ll tell you on the call.'],
            ['Do you work with groups with many entities?', 'Yes. Each entity gets its own accounts, all under one account manager.'],
            ['Is Payset a bank?', 'No. Payset is an Electronic Money Institution authorised by the FCA. Client funds are safeguarded, held separately from our own and never lent out.']]
             .map(([q, a]) => h('details', { key: q }, h('summary', null, q), Body(a)))))),
