@@ -356,8 +356,8 @@ const Term = (figure, label) => h('div', { className: 'pz-term' }, h('span', { c
 pages['introductions.html'] = Page('Introductions | Payset Private', 'The Payset introducer programme for advisors, FX consultants and formation agents: published terms, recurring commission and a named partner manager.',
   h('div', { className: 'pz' },
     h('section', { className: 'pz-hero' },
-      h('h1', { className: 'pz-hero__title pz-hero__title--sm' }, 'Your name is on the introduction. Ours is on everything after.'),
-      h('h2', { className: 'pz-hero__sub' }, 'The Payset introducer programme, for advisors, FX consultants and formation agents who introduce businesses they know. Published terms, recurring commission and a named partner manager.'),
+      h('h1', { className: 'pz-hero__title' }, 'Introduce with confidence'),
+      h('h2', { className: 'pz-hero__sub' }, 'Your name is on the introduction. Ours is on everything after. Published terms, recurring commission and a named partner manager, for advisors, FX consultants and formation agents.'),
       h('div', { className: 'pz-ctas' }, Btn('See the terms', '#terms', 'neon'), Btn('Become an introducer', '#join', 'black'))),
 
     h('div', { className: 'pz-cards' },
