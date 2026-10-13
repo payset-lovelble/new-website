@@ -190,7 +190,8 @@ pages['index.html'] = Page('Payset Private | Boutique financial services',
         h('div', { className: 'pz-chips' },
           ['Moving six figures or more a month', 'Several entities and jurisdictions', 'Paying and getting paid in many countries', 'Holding several currencies', 'Slowed down or turned away by banks'].map((t) =>
             h('span', { key: t, className: 'pz-chip' }, t))),
-        h('div', { className: 'pz-center-row' }, Tag('Who we work with', '/clients', 'outline')),
+        h('p', { className: 'pz-not' }, 'Not for domestic, single-currency payments, one-off transfers or anyone after a free account. We say so on the first call.'),
+        h('div', { className: 'pz-center-row' }, Tag('Who we work with', '/clients#not-for', 'outline')),
         h(Trustpilot, { dark: true })),
 
       h('section', { className: 'pz-card pz-card--green pz-center' },
@@ -277,11 +278,16 @@ pages['clients.html'] = Page('Who we work with | Payset Private', 'The businesse
             h('ul', { className: 'ps-ticks', style: { borderTop: 0, paddingTop: '8px' } }, s[4].map((p) => h('li', { key: p }, p)))),
           h('div', { style: { background: 'var(--surface-subtle)', borderRadius: 'var(--radius-lg)', padding: '32px', display: 'flex', justifyContent: 'center' } },
             h('img', { src: A(s[2]), alt: '', style: { maxHeight: '360px', width: 'auto', maxWidth: '100%' } })))))),
-    h(Section, { tone: 'subtle' },
+    h(Section, { id: 'not-for', tone: 'subtle' },
       h('div', { className: 'ps-split', style: { alignItems: 'start' } },
         h('div', { className: 'ps-split__text' }, H2('Who we’re not for.'), Lead('We say so on the first call, and point you somewhere better suited.'),
           h(Chat, { label: 'Example conversation with a business that is not yet a fit', msgs: [{ me: true, t: '14:10', text: 'We move about 60 000 a month. Is that enough?' }, { t: '14:16', text: 'Not yet, and I’d rather tell you now. I can suggest a provider that suits you better today.' }, { t: '14:16', text: 'Come back as you grow. We’d be glad to talk again.' }] })),
-        Rules(['Businesses moving less than six figures a month.', 'Domestic, single-currency payments.', 'One-off transfers.', 'Anyone looking for a free account.'], true))),
+        h('div', null,
+          Rules([['Businesses moving less than six figures a month', 'The service is priced for volume. Below that it doesn’t pay for itself, for you or for us. Growing quickly? Apply anyway and say so.'],
+            ['Domestic, single-currency payments', 'Your high-street bank does this well and cheaply. We would be an expensive way to do a simple thing.'],
+            ['One-off transfers', 'We build a relationship, not a transaction. For a single payment, a currency broker is the better call.'],
+            ['Anyone looking for a free account', 'Someone picks up when you call. That costs money, and we charge for it.']]),
+          h('p', { className: 'ps-small', style: { marginTop: '24px' } }, 'If that’s you today, we’ll say so on the first call and suggest who to try instead. Come back as you grow.')))),
     h(Section, null, h(W.CTABand, { eyebrow: 'By invitation', title: 'Sound like your business?', body: 'Tell us how you move money. A senior member of our team will call you within one business day.', ctaLabel: 'Apply now', ctaHref: APPLY_URL, tone: 'brand' }))));
 
 /* ---------- How it works ---------- */
