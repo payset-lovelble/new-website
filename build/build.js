@@ -130,11 +130,11 @@ const Icon = (name) => h('svg', { viewBox: '0 0 24 24', width: 28, height: 28, f
 const Point = (icon, title, body) => h('div', { className: 'pz-point' },
   h('span', { className: 'pz-point__icon' }, Icon(icon)), h('h3', null, title), h('p', null, body));
 
-pages['index.html'] = Page('Payset Private | Private financial services',
+pages['index.html'] = Page('Payset Private | Boutique financial services',
   'Accounts, FX and cross-border payments for businesses operating across jurisdictions, with a dedicated account manager.',
   h('div', { className: 'pz' },
     h('section', { className: 'pz-hero' },
-      h('h1', { className: 'pz-hero__title' }, 'Private financial services'),
+      h('h1', { className: 'pz-hero__title' }, 'Boutique financial services'),
       h('h2', { className: 'pz-hero__sub' }, 'Accounts in your company’s name, FX priced on your volume and a dedicated account manager, for businesses operating across jurisdictions.'),
       h(Ctas), h(Trustpilot)),
 
