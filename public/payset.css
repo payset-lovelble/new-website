@@ -237,3 +237,36 @@ body { background: var(--pz-ground); color: var(--pz-ink); font-family: var(--pz
   .pz-photo-card > img.pz-photo-card__d { display: none; }
   .pz-photo-card > img.pz-photo-card__m { display: block; object-position: center 30%; }
 }
+
+/* Chat: a messaging-app card with the account manager */
+.ps-chat { font-family: var(--pz-text); text-align: left; background: #fff; border-radius: 20px; box-shadow: 0 24px 48px -16px rgba(18,19,20,.28), 0 0 0 1px rgba(18,19,20,.04); padding: 0; width: min(360px, calc(100% - 48px)); display: block; overflow: hidden; color: #1a1a1a; }
+.ps-chat__who { display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-bottom: 1px solid rgba(26,26,26,.08); background: #fbf9f7; }
+.ps-chat__avatar { width: 34px; height: 34px; border-radius: 50%; flex: none; display: block; background: none; }
+.ps-chat__name { font-size: 14px; line-height: 18px; font-weight: 600; }
+.ps-chat__status { font-size: 12px; line-height: 16px; color: #646464; display: flex; align-items: center; gap: 6px; }
+.ps-chat__status::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: #1fbf6a; }
+.ps-chat__body { display: flex; flex-direction: column; gap: 3px; padding: 14px 12px 12px; background: #fff; }
+.ps-msg { display: flex; flex-direction: column; align-items: flex-start; max-width: 84%; }
+.ps-msg--me { align-self: flex-end; align-items: flex-end; }
+.ps-msg--last { margin-bottom: 8px; }
+.ps-msg--last:last-child { margin-bottom: 0; }
+.ps-msg__bubble { font-size: 14px; line-height: 20px; padding: 8px 12px; border-radius: 18px; background: #f0ece8; color: #1a1a1a; text-align: left; }
+.ps-msg--last .ps-msg__bubble { border-bottom-left-radius: 6px; }
+.ps-msg--me .ps-msg__bubble { background: #256c4a; color: #fff; }
+.ps-msg--me.ps-msg--last .ps-msg__bubble { border-bottom-left-radius: 18px; border-bottom-right-radius: 6px; }
+.ps-msg__time { font-size: 11px; line-height: 14px; color: #8a8a8a; margin: 3px 6px 0; }
+/* Over a photo: bottom right of the frame */
+.ps-photo .ps-chat { position: absolute; right: 24px; bottom: 24px; }
+/* Beside text: sits in the column */
+.ps-split__text .ps-chat { position: static; margin-top: 16px; width: 100%; max-width: 400px; }
+/* Mini: two bubbles inside a tile, no header */
+.ps-chat--mini { width: 300px; box-shadow: 0 16px 32px -12px rgba(18,19,20,.25); }
+.pz-tile__chat { position: absolute; left: 24px; bottom: 96px; z-index: 2; }
+@media (max-width: 767px) {
+  .ps-photo .ps-chat { position: relative; right: auto; bottom: auto; width: auto; margin: -40px 12px 0; }
+  .pz-tile__chat { position: relative; left: auto; bottom: auto; margin: 0 0 72px; }
+  .ps-chat--mini { width: 100%; }
+}
+.pz-tile__chat .ps-chat, .ps-split__text .ps-chat { position: relative; right: auto; bottom: auto; margin-left: 0; margin-right: 0; }
+.pz-tile__chat .ps-chat { margin: 0; }
+.pz-since { margin: -16px 0 0; font-size: 13px; line-height: 18px; color: var(--pz-muted); }

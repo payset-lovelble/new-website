@@ -50,12 +50,23 @@ const CTA = (props) => h('section', { className: 'pw-root ps-section ps-section-
     ctaLabel: 'Apply now', ctaHref: APPLY_URL, secondaryLabel: 'Talk to us', secondaryHref: APPLY_URL,
   }, props))));
 
-const Chat = () => h('div', { className: 'ps-chat', role: 'img', 'aria-label': 'Example conversation with a relationship manager' },
-  h('div', { className: 'ps-chat__who' }, h('span', { className: 'ps-chat__avatar', 'aria-hidden': 'true' }, 'RM'),
-    h('div', null, h('div', { className: 'ps-chat__name' }, '[Name], your account manager'), h('div', { className: 'ps-chat__status' }, 'Available now · London'))),
-  h('div', { className: 'ps-bubble' }, 'Your 1 800 000 USD payment to Shenzhen is held by the receiving bank for a document check. I’ve sent them the invoice and will confirm when it lands.'),
-  h('div', { className: 'ps-bubble ps-bubble--me' }, 'Thank you. Also, we’re opening a subsidiary in Dubai next month.'),
-  h('div', { className: 'ps-bubble' }, 'Congratulations. I’ll prepare AED accounts under your group and send the document list today.'));
+// Example conversations with an account manager, styled like a messaging app. Illustrations, not real clients.
+const CHAT_HOME = [
+  { t: '09:12', text: 'Your 1 800 000 USD payment to Shenzhen is held by the receiving bank for a document check. I’ve sent them the invoice.' },
+  { t: '09:12', text: 'I’ll confirm the moment it lands.' },
+  { me: true, t: '09:20', text: 'Thank you. Also, we’re opening a subsidiary in Dubai next month.' },
+  { t: '09:24', text: 'Congratulations. I’ll prepare AED accounts under your group and send the document list today.' },
+];
+const Chat = ({ msgs, label, mini }) => h('div', { className: 'ps-chat' + (mini ? ' ps-chat--mini' : ''), role: 'img', 'aria-label': label || 'Example conversation with an account manager' },
+  !mini && h('div', { className: 'ps-chat__who' },
+    h('img', { className: 'ps-chat__avatar', src: A('favicon.svg'), alt: '' }),
+    h('div', null, h('div', { className: 'ps-chat__name' }, 'Your account manager'), h('div', { className: 'ps-chat__status' }, 'Online · London'))),
+  h('div', { className: 'ps-chat__body' }, (msgs || CHAT_HOME).map((m, i, all) => {
+    const last = !all[i + 1] || !!all[i + 1].me !== !!m.me;
+    return h('div', { key: i, className: 'ps-msg' + (m.me ? ' ps-msg--me' : '') + (last ? ' ps-msg--last' : '') },
+      h('div', { className: 'ps-msg__bubble' }, m.text),
+      last && h('div', { className: 'ps-msg__time' }, m.t + (m.me ? ' · Read' : '')));
+  })));
 
 // Trustpilot TrustBoxes, as on payset.io: Micro Star on light grounds, Micro Combo on dark. The rating is loaded live.
 const TRUSTPILOT = { businessUnitId: '61dd51c9957c497122f360e5', reviewUrl: 'https://www.trustpilot.com/review/payset.io' };
@@ -114,6 +125,7 @@ const Ctas = () => h('div', { className: 'pz-ctas' }, Btn(TALK.label, TALK.href,
 const Tag = (label, href, kind) => h('a', { className: 'pz-tag pz-tag--' + (kind || 'light'), href }, label);
 const Tile = (p) => h('article', { className: 'pz-tile' + (p.dark ? ' pz-tile--dark' : '') + (p.tall ? ' pz-tile--tall' : ''), style: { background: p.bg } },
   h('div', { className: 'pz-tile__text' }, h('h3', null, p.title), h('p', null, p.body)),
+  p.chat && h('div', { className: 'pz-tile__chat' }, h(Chat, { msgs: p.chat, mini: true, label: 'Example request for a team card' })),
   p.img && h('img', { className: 'pz-tile__img' + (p.ui ? ' pz-tile__img--ui' : '') + (p.cards ? ' pz-tile__img--cards' : ''), src: A(p.img), alt: p.alt || '' }),
   h('div', { className: 'pz-tile__foot' }, Tag(p.tag, p.href, p.tagKind)));
 // Small 2px-stroke glyphs in circles, as on payset.io.
@@ -136,7 +148,7 @@ pages['index.html'] = Page('Payset Private | Boutique financial services',
     h('section', { className: 'pz-hero' },
       h('h1', { className: 'pz-hero__title' }, 'Boutique financial services'),
       h('h2', { className: 'pz-hero__sub' }, 'Accounts in your company’s name, FX priced on your volume and a dedicated account manager, for businesses operating across jurisdictions.'),
-      h(Ctas), h(Trustpilot)),
+      h(Ctas), h(Trustpilot), h('p', { className: 'pz-since' }, 'FCA-authorised · Serving businesses since 2021')),
 
     h('div', { className: 'pz-cards' },
       h('section', { className: 'pz-photo-card' },
@@ -167,16 +179,16 @@ pages['index.html'] = Page('Payset Private | Boutique financial services',
         h(Ctas)),
 
       h('div', { className: 'pz-bento' },
-        h(Tile, { tall: true, bg: '#CFC8C1', title: 'Debit cards for your team', body: 'Payset debit cards for the people who spend on your company’s behalf, each with its own limits and spending rules.', img: 'obj-debit-cards.webp', cards: true, tag: 'Cards', href: '/service#cards', tagKind: 'black' }),
+        h(Tile, { tall: true, bg: '#CFC8C1', title: 'Debit cards for your team', body: 'Payset debit cards for the people who spend on your company’s behalf, each with its own limits and spending rules.', img: 'obj-debit-cards.webp', cards: true, tag: 'Cards', href: '/service#cards', tagKind: 'black', chat: [{ me: true, t: '11:02', text: 'Can we get a card for our new finance director? 20 000 GBP a month.' }, { t: '11:05', text: 'Ordered, with the 20 000 GBP monthly limit already set.' }] }),
         h('div', { className: 'pz-bento__col' },
           h(Tile, { bg: '#706E67', dark: true, title: 'Personal service. Institutional controls.', body: 'Decide who can create, approve and release payments, by person, entity and amount.', img: 'ui-members-crop.webp', ui: true, alt: 'Team members panel with permissions', tag: 'Controls', href: '/service#control', tagKind: 'black' }),
           h(Tile, { bg: '#2B2728', dark: true, title: 'Statements for every entity', body: 'Statements and transaction detail per account and entity, ready for your finance team.', img: 'ui-statement-crop.webp', ui: true, alt: 'Account statement panel', tag: 'Reporting', href: '/service#payments', tagKind: 'neon' }))),
 
       h('section', { className: 'pz-card pz-card--dark pz-center' },
         h('h2', { className: 'pz-giant' }, 'Businesses that banks find complicated'),
-        h('p', { className: 'pz-lead' }, 'International companies moving 100 000 EUR or more each month, often through several entities and jurisdictions. If that sounds like you, we should talk.'),
+        h('p', { className: 'pz-lead' }, 'International companies moving six figures or more each month, often through several entities and jurisdictions. If that sounds like you, we should talk.'),
         h('div', { className: 'pz-chips' },
-          ['Moving 100 000 EUR or more a month', 'Several entities and jurisdictions', 'Paying and getting paid in many countries', 'Holding several currencies', 'Slowed down or turned away by banks'].map((t) =>
+          ['Moving six figures or more a month', 'Several entities and jurisdictions', 'Paying and getting paid in many countries', 'Holding several currencies', 'Slowed down or turned away by banks'].map((t) =>
             h('span', { key: t, className: 'pz-chip' }, t))),
         h('div', { className: 'pz-center-row' }, Tag('Who we work with', '/clients', 'outline')),
         h(Trustpilot, { dark: true })),
@@ -203,7 +215,7 @@ pages['service.html'] = Page('The service | Payset Private', 'Accounts, FX and p
       primaryCta: INVITE, secondaryCta: TALK, image: A('obj-coin-holder.webp') }),
     h(Section, { id: 'manager', tone: 'subtle' },
       h('div', { className: 'ps-split' },
-        h('div', { className: 'ps-photo' }, Img('photo-hotel-call.webp', 'A client on a call while travelling')),
+        h('div', { className: 'ps-photo' }, Img('photo-hotel-call.webp', 'A client on a call while travelling'), h(Chat, { label: 'Example conversation about an FX rate', msgs: [{ me: true, t: '16:40', text: 'We pay a 600 000 USD invoice on Friday. Can we fix the EUR rate now?' }, { t: '16:44', text: 'Yes. I’ve agreed a rate with you on the call and booked it for Friday.' }, { t: '16:44', text: 'Confirmation is in the app.' }] })),
         h('div', { className: 'ps-split__text' }, Over('Account manager'), H2('One person who knows your business. And picks up.'),
           Lead('Everything starts with your account manager. They learn how your business moves money, who you pay and when it matters, then make sure it happens.'),
           Rules([['Reachable by message, call or in person', 'On the app you already use. Typical reply in [REPLY TIME] during business hours.'],
@@ -241,7 +253,7 @@ pages['service.html'] = Page('The service | Payset Private', 'Accounts, FX and p
       h('div', { className: 'ps-split', style: { alignItems: 'start' } },
         h('div', { className: 'ps-split__text' }, H2('What you won’t find here.')),
         Rules(['Ticket numbers and chatbots.', 'A different person every time you call.', 'Accounts closed without a conversation.', 'A free tier, because the service isn’t automated.'], true))),
-    h(CTA, { title: 'Meet your account manager.', body: 'We work with businesses moving 100 000 EUR or more each month. Apply and a senior member of our team will call you within one business day.' })));
+    h(CTA, { title: 'Meet your account manager.', body: 'We work with businesses moving six figures or more each month. Apply and a senior member of our team will call you within one business day.' })));
 
 /* ---------- Who we work with ---------- */
 const SEG = [
@@ -254,7 +266,7 @@ const SEG = [
 pages['clients.html'] = Page('Who we work with | Payset Private', 'The businesses Payset Private serves.',
   h(React.Fragment, null,
     h(W.Hero, { eyebrow: 'Who we work with', size: 'h1', align: 'left', title: 'Businesses that banks find complicated. We don’t.',
-      lead: 'International businesses that move 100 000 EUR or more each month, often through several entities and jurisdictions. Banks see complexity. We see a client worth knowing properly.',
+      lead: 'International businesses that move six figures or more each month, often through several entities and jurisdictions. Banks see complexity. We see a client worth knowing properly.',
       primaryCta: INVITE, image: A('obj-uk-lock.webp') }),
     h(Section, { tone: 'subtle' },
       h('div', { className: 'ps-links' }, SEG.map((s) => h('a', { key: s[0], className: 'ps-chip', href: '#' + s[0] }, s[1])))),
@@ -267,8 +279,9 @@ pages['clients.html'] = Page('Who we work with | Payset Private', 'The businesse
             h('img', { src: A(s[2]), alt: '', style: { maxHeight: '360px', width: 'auto', maxWidth: '100%' } })))))),
     h(Section, { tone: 'subtle' },
       h('div', { className: 'ps-split', style: { alignItems: 'start' } },
-        h('div', { className: 'ps-split__text' }, H2('Who we’re not for.'), Lead('We say so on the first call, and point you somewhere better suited.')),
-        Rules(['Businesses moving less than 100 000 EUR a month.', 'Domestic, single-currency payments.', 'One-off transfers.', 'Anyone looking for a free account.'], true))),
+        h('div', { className: 'ps-split__text' }, H2('Who we’re not for.'), Lead('We say so on the first call, and point you somewhere better suited.'),
+          h(Chat, { label: 'Example conversation with a business that is not yet a fit', msgs: [{ me: true, t: '14:10', text: 'We move about 60 000 a month. Is that enough?' }, { t: '14:16', text: 'Not yet, and I’d rather tell you now. I can suggest a provider that suits you better today.' }, { t: '14:16', text: 'Come back as you grow. We’d be glad to talk again.' }] })),
+        Rules(['Businesses moving less than six figures a month.', 'Domestic, single-currency payments.', 'One-off transfers.', 'Anyone looking for a free account.'], true))),
     h(Section, null, h(W.CTABand, { eyebrow: 'By invitation', title: 'Sound like your business?', body: 'Tell us how you move money. A senior member of our team will call you within one business day.', ctaLabel: 'Apply now', ctaHref: APPLY_URL, tone: 'brand' }))));
 
 /* ---------- How it works ---------- */
@@ -287,7 +300,8 @@ pages['how-it-works.html'] = Page('How it works | Payset Private', 'How joining 
         h('div', { className: 'ps-split__text' }, H3(s[0]), Lead(s[2])))))),
     h(Section, { tone: 'subtle' },
       h('div', { className: 'ps-split', style: { alignItems: 'start' } },
-        h('div', { className: 'ps-split__text' }, H2('What to have ready.'), Lead('We confirm the exact list on the call. Most companies need:')),
+        h('div', { className: 'ps-split__text' }, H2('What to have ready.'), Lead('We confirm the exact list on the call. Most companies need:'),
+          h(Chat, { label: 'Example onboarding conversation', msgs: [{ t: '10:05', text: 'I’ve been through your documents. One thing is missing: the shareholder register for the UK entity.' }, { me: true, t: '10:31', text: 'Sent it to you just now.' }, { t: '10:33', text: 'Got it, thank you. That’s everything. I’ll update you as soon as compliance signs off.' }] })),
         Rules([['Company documents', 'Certificate of incorporation, articles, register of directors and shareholders.'],
           ['Ownership and control', 'ID and proof of address for directors and beneficial owners.'],
           ['How you make money', 'A short description of your business, main clients and suppliers, and licences where relevant.'],
@@ -297,7 +311,7 @@ pages['how-it-works.html'] = Page('How it works | Payset Private', 'How joining 
         h('div', { className: 'ps-split__text' }, H2('Questions.')),
         h('div', { className: 'ps-faq' },
           [['Can I open an account online?', 'No. Every client starts with a conversation, so we can confirm we’re the right fit before you share documents.'],
-           ['What if we move less than 100 000 EUR a month?', 'Apply anyway if you’re growing quickly. If we’re not the right fit, we’ll tell you on the call.'],
+           ['What if we move less than six figures a month?', 'Apply anyway if you’re growing quickly. If we’re not the right fit, we’ll tell you on the call.'],
            ['Do you work with groups with many entities?', 'Yes. Each entity gets its own accounts, all under one account manager.'],
            ['Is Payset a bank?', 'No. Payset is an Electronic Money Institution authorised by the FCA. Client funds are safeguarded, held separately from our own and never lent out.']]
             .map(([q, a]) => h('details', { key: q }, h('summary', null, q), Body(a)))))),
