@@ -229,3 +229,11 @@ body { background: var(--pz-ground); color: var(--pz-ink); font-family: var(--pz
   .pz-glass strong { font-size: 14px; }
   .pz-photo-card__foot, .pz-photo-card > div:last-child { margin-top: 4px; }
 }
+
+/* Photo card: desktop and phone crops of the same photo */
+.pz-photo-card > img.pz-photo-card__d { object-position: center 4%; }
+.pz-photo-card > img.pz-photo-card__m { display: none; }
+@media (max-width: 767px) {
+  .pz-photo-card > img.pz-photo-card__d { display: none; }
+  .pz-photo-card > img.pz-photo-card__m { display: block; object-position: center 30%; }
+}
