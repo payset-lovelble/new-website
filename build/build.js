@@ -403,7 +403,7 @@ pages['introductions.html'] = Page('Introductions | Payset Private', 'The Payset
         h('h2', { className: 'pz-giant' }, 'How it works'),
         h('ol', { className: 'pz-steps' },
           [['Fit check', 'A short call to confirm your clients match what we do well today.'],
-           ['First introduction', 'We onboard your first client with you. A 90-day window gives the first one a bonus boost.'],
+           ['First introduction', 'We onboard your first client with you, step by step.'],
            ['Ongoing support', 'Your account manager keeps you posted on every client, at every step.'],
            ['Grow your book', 'Every active client moves you up the ladder, and your commission with it.']].map(([t, b], i) =>
             h('li', { key: t }, h('span', { className: 'pz-steps__n' }, String(i + 1).padStart(2, '0')), h('h3', null, t), h('p', null, b))))),
