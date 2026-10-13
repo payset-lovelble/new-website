@@ -313,3 +313,38 @@ body { background: var(--pz-ground); color: var(--pz-ink); font-family: var(--pz
   .pz-route { padding: 24px; }
 }
 .pz-routes--one { grid-template-columns: minmax(0, 1fr); max-width: 620px; }
+
+/* Trust strip under the home hero */
+.pz-trust { list-style: none; margin: 0 auto; padding: 24px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; max-width: var(--pz-max); width: calc(100% - 32px); box-sizing: border-box; border-top: 1px solid rgba(26,26,26,.1); border-bottom: 1px solid rgba(26,26,26,.1); }
+.pz-trust li { display: flex; align-items: center; gap: 14px; font-size: 14px; line-height: 20px; color: #333; }
+.pz-trust__icon { flex: none; width: 44px; height: 44px; border-radius: 12px; background: var(--pz-card-stone); display: inline-flex; align-items: center; justify-content: center; color: #1a1a1a; }
+.pz-trust__icon svg { width: 20px; height: 20px; }
+@media (max-width: 1023px) { .pz-trust { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 767px) { .pz-trust { grid-template-columns: minmax(0, 1fr); gap: 14px; padding: 20px 8px; width: calc(100% - 32px); } }
+
+/* Self-check: which of these describe your business? */
+.pz-match { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 48px; align-items: center; width: 100%; max-width: 1020px; text-align: left; background: rgba(0,0,0,.18); border-radius: 24px; padding: 40px; box-sizing: border-box; }
+.pz-match__ring { position: relative; width: 220px; height: 220px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.pz-match__ring svg { position: absolute; inset: 0; width: 100%; height: 100%; transform: rotate(-90deg); }
+.pz-match__track { fill: none; stroke: rgba(255,255,255,.1); stroke-width: 6; }
+.pz-match__bar { fill: none; stroke: var(--pz-neon); stroke-width: 6; stroke-linecap: round; transition: stroke-dashoffset 300ms ease; }
+.pz-match__pct { font-family: var(--pz-display); font-weight: 700; font-size: 64px; line-height: 64px; color: #fafafa; }
+.pz-match__pct b { font-weight: 700; }
+.pz-match__ring small { font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--pz-neon); margin-top: 4px; }
+.pz-match__body { display: flex; flex-direction: column; gap: 18px; }
+.pz-match__q { margin: 0; font-family: var(--pz-display); font-weight: 700; font-size: 24px; line-height: 28px; color: #fafafa; }
+.pz-chips--left { justify-content: flex-start; max-width: none; }
+.pz-chip--toggle { font: inherit; font-size: 15px; border: 1px solid rgba(255,255,255,.14); cursor: pointer; display: inline-flex; align-items: center; gap: 8px; }
+.pz-chip--toggle::before { content: "+"; font-size: 16px; line-height: 1; opacity: .7; }
+.pz-chip--toggle[aria-pressed="true"] { background: rgba(0,245,114,.12); border-color: var(--pz-neon); color: #fff; }
+.pz-chip--toggle[aria-pressed="true"]::before { content: "✓"; color: var(--pz-neon); opacity: 1; }
+.pz-chip--toggle:focus-visible { outline: 2px solid var(--pz-neon); outline-offset: 2px; }
+.pz-match__result { margin: 0; font-size: 16px; line-height: 24px; color: rgba(250,250,250,.86); min-height: 24px; }
+.pz-match__cta[hidden] { display: none; }
+@media (max-width: 899px) { .pz-match { grid-template-columns: minmax(0, 1fr); justify-items: center; padding: 28px 20px; gap: 24px; } .pz-match__ring { width: 180px; height: 180px; } .pz-match__pct { font-size: 52px; line-height: 52px; } }
+@media (prefers-reduced-motion: reduce) { .pz-match__bar { transition: none; } }
+
+/* Timing chips on How it works */
+.ps-time { display: inline-flex; align-items: center; gap: 8px; align-self: flex-start; padding: 6px 12px; border-radius: 32px; background: var(--pz-card-stone); font-size: 13px; line-height: 18px; font-weight: 500; color: #1a1a1a; white-space: nowrap; }
+.ps-time__dot { width: 8px; height: 8px; border-radius: 50%; background: var(--pz-card-green); }
+.pz-chip--toggle { text-align: left; }

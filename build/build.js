@@ -130,6 +130,7 @@ const Tile = (p) => h('article', { className: 'pz-tile' + (p.dark ? ' pz-tile--d
   h('div', { className: 'pz-tile__foot' }, Tag(p.tag, p.href, p.tagKind)));
 // Small 2px-stroke glyphs in circles, as on payset.io.
 const ICONS = {
+  calendar: ['M4 6h16v14H4z', 'M4 10h16', 'M8 3v4', 'M16 3v4'],
   headset: ['M4 14v-2a8 8 0 0 1 16 0v2', 'M4 14h3v5H5a1 1 0 0 1-1-1z', 'M20 14h-3v5h2a1 1 0 0 0 1-1z', 'M17 19c0 1.5-2 2-5 2'],
   bell: ['M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15z', 'M10 20a2 2 0 0 0 4 0'],
   layers: ['M12 3l9 5-9 5-9-5z', 'M3 13l9 5 9-5'],
@@ -142,13 +143,24 @@ const Icon = (name) => h('svg', { viewBox: '0 0 24 24', width: 28, height: 28, f
 const Point = (icon, title, body) => h('div', { className: 'pz-point' },
   h('span', { className: 'pz-point__icon' }, Icon(icon)), h('h3', null, title), h('p', null, body));
 
+// Self-check on the home page: visitors tick the traits that describe them and see how well they match.
+// Runs in the browser only; nothing is stored or sent.
+const QUALIFIERS = ['Operate in several countries', 'Move six figures or more a month', 'Several legal entities', 'Hold several currencies', 'Pay suppliers and partners abroad', 'Need FX at scale', 'Slowed down or turned away by banks', 'Want one person who knows the business'];
+const MATCH_JS = "(function(){var root=document.getElementById('match');if(!root)return;var chips=root.querySelectorAll('.pz-chip--toggle'),pct=document.getElementById('match-pct'),bar=document.getElementById('match-bar'),res=document.getElementById('match-result'),cta=document.getElementById('match-cta'),btn=cta.querySelector('a'),C=2*Math.PI*52;bar.style.strokeDasharray=C;bar.style.strokeDashoffset=C;function update(){var n=0;chips.forEach(function(c){if(c.getAttribute('aria-pressed')==='true')n++});var p=Math.round(n/chips.length*100);pct.textContent=p;bar.style.strokeDashoffset=C*(1-p/100);if(n===0){res.textContent='Select everything that applies.';cta.hidden=true}else if(p<40){res.textContent='We may not be the right fit yet. Talk to us anyway and we will tell you honestly.';btn.textContent='Talk to us';cta.hidden=false}else if(p<75){res.textContent='This looks like a good fit. Apply and a senior member of our team will call you.';btn.textContent='Apply now';cta.hidden=false}else{res.textContent='This is exactly who we work with.';btn.textContent='Apply now';cta.hidden=false}}chips.forEach(function(c){c.addEventListener('click',function(){c.setAttribute('aria-pressed',c.getAttribute('aria-pressed')==='true'?'false':'true');update()})});update()})();";
+
 pages['index.html'] = Page('Payset Private | Boutique financial services',
   'Accounts, FX and cross-border payments for businesses operating across jurisdictions, with a dedicated account manager.',
   h('div', { className: 'pz' },
     h('section', { className: 'pz-hero' },
       h('h1', { className: 'pz-hero__title' }, 'Boutique financial services'),
       h('h2', { className: 'pz-hero__sub' }, 'Accounts in your company’s name, FX priced on your volume and a dedicated account manager, for businesses operating across jurisdictions.'),
-      h(Ctas), h(Trustpilot), h('p', { className: 'pz-since' }, 'FCA-authorised · Serving businesses since 2021')),
+      h(Ctas), h(Trustpilot)),
+    h('ul', { className: 'pz-trust', 'aria-label': 'Regulation and security' },
+      [['badge', 'Authorised by the FCA as an Electronic Money Institution, FRN 900920'],
+       ['vault', 'Client funds safeguarded, held separately from our own'],
+       ['key', 'Multi-signature approvals, permissions and two-factor sign-in'],
+       ['calendar', 'Serving international businesses since 2021']].map(([i, t]) =>
+        h('li', { key: t }, h('span', { className: 'pz-trust__icon' }, Icon(i)), h('span', null, t)))),
 
     h('div', { className: 'pz-cards' },
       h('section', { className: 'pz-photo-card' },
@@ -187,9 +199,17 @@ pages['index.html'] = Page('Payset Private | Boutique financial services',
       h('section', { className: 'pz-card pz-card--dark pz-center' },
         h('h2', { className: 'pz-giant' }, 'Businesses that banks find complicated'),
         h('p', { className: 'pz-lead' }, 'International companies moving six figures or more each month, often through several entities and jurisdictions. If that sounds like you, we should talk.'),
-        h('div', { className: 'pz-chips' },
-          ['Moving six figures or more a month', 'Several entities and jurisdictions', 'Paying and getting paid in many countries', 'Holding several currencies', 'Slowed down or turned away by banks'].map((t) =>
-            h('span', { key: t, className: 'pz-chip' }, t))),
+        h('div', { className: 'pz-match', id: 'match' },
+          h('div', { className: 'pz-match__ring', 'aria-hidden': 'true' },
+            h('svg', { viewBox: '0 0 120 120' }, h('circle', { cx: 60, cy: 60, r: 52, className: 'pz-match__track' }), h('circle', { cx: 60, cy: 60, r: 52, className: 'pz-match__bar', id: 'match-bar' })),
+            h('span', { className: 'pz-match__pct' }, h('b', { id: 'match-pct' }, '0'), '%'), h('small', null, 'Match')),
+          h('div', { className: 'pz-match__body' },
+            h('p', { className: 'pz-match__q' }, 'Which of these describe your business?'),
+            h('div', { className: 'pz-chips pz-chips--left', role: 'group', 'aria-label': 'Business traits' },
+              QUALIFIERS.map((t) => h('button', { key: t, type: 'button', className: 'pz-chip pz-chip--toggle', 'aria-pressed': 'false' }, t))),
+            h('p', { className: 'pz-match__result', id: 'match-result', 'aria-live': 'polite' }, 'Select everything that applies.'),
+            h('div', { className: 'pz-match__cta', id: 'match-cta', hidden: true }, Btn(INVITE.label, INVITE.href, 'neon')))),
+        h('script', { dangerouslySetInnerHTML: { __html: MATCH_JS } }),
         h('p', { className: 'pz-not' }, 'Not for domestic, single-currency payments, one-off transfers or anyone after a free account. We say so on the first call.'),
         h('div', { className: 'pz-center-row' }, Tag('Who we work with', '/clients#not-for', 'outline')),
         h(Trustpilot, { dark: true })),
@@ -302,7 +322,7 @@ pages['how-it-works.html'] = Page('How it works | Payset Private', 'How joining 
     h(W.Hero, { eyebrow: 'How it works', size: 'h1', align: 'left', title: 'From application to your first payment.', lead: 'Joining Payset Private is a conversation, not a form. Here is what happens after you apply.', primaryCta: INVITE, image: A('obj-toggle.webp') }),
     h(Section, null,
       h('ol', { className: 'ps-steps' }, STEPS.map((s, i) => h('li', { key: s[0], className: 'ps-step' },
-        h('div', { className: 'ps-step__meta' }, h('span', { className: 'ps-step__n' }, String(i + 1).padStart(2, '0')), h('span', { className: 'ps-small' }, s[1])),
+        h('div', { className: 'ps-step__meta' }, h('span', { className: 'ps-step__n' }, String(i + 1).padStart(2, '0')), h('span', { className: 'ps-time' }, h('span', { className: 'ps-time__dot', 'aria-hidden': 'true' }), s[1])),
         h('div', { className: 'ps-split__text' }, H3(s[0]), Lead(s[2])))))),
     h(Section, { tone: 'subtle' },
       h('div', { className: 'ps-split', style: { alignItems: 'start' } },
