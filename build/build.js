@@ -353,11 +353,11 @@ pages['pricing.html'] = Page('Pricing | Payset Private', 'Plans priced on your v
 // public framing the strategy allows (10% base, up to 20%, a bonus, the standards, the self-serve fee).
 const PARTNER_CONTACT = { label: 'Talk to our partnerships team', href: '/about#contact' };
 const Term = (figure, label) => h('div', { className: 'pz-term' }, h('span', { className: 'pz-term__figure' }, figure), h('p', null, label));
-pages['introductions.html'] = Page('Introductions | Payset Private', 'The Payset introducer programme for advisors, FX consultants and formation agents: published terms, recurring commission and a named partner manager.',
+pages['introductions.html'] = Page('Introductions | Payset Private', 'The Payset introducer programme for advisors, FX consultants and formation agents: published terms, recurring commission and your own account manager.',
   h('div', { className: 'pz' },
     h('section', { className: 'pz-hero' },
       h('h1', { className: 'pz-hero__title' }, 'Introduce with confidence'),
-      h('h2', { className: 'pz-hero__sub' }, 'Your name is on the introduction. Ours is on everything after. Published terms, recurring commission and a named partner manager, for advisors, FX consultants and formation agents.'),
+      h('h2', { className: 'pz-hero__sub' }, 'Your name is on the introduction. Ours is on everything after. Published terms, recurring commission and your own account manager, for advisors, FX consultants and formation agents.'),
       h('div', { className: 'pz-ctas' }, Btn('See the terms', '#terms', 'neon'), Btn('Become an introducer', '#join', 'black'))),
 
     h('div', { className: 'pz-cards' },
@@ -388,20 +388,23 @@ pages['introductions.html'] = Page('Introductions | Payset Private', 'The Payset
         h(Tile, { tall: true, bg: '#2B2728', dark: true, title: 'Who we partner with', body: 'Trusted professionals making warm, named introductions of clients they know. Not anonymous links, not passive traffic.', img: 'obj-user-pics-crop.webp', tag: 'Professional advisors: pilot', href: '#join', tagKind: 'neon' })),
 
       h('section', { className: 'pz-card pz-card--stone pz-center' },
-        h('h2', { className: 'pz-giant' }, 'Two ways to work with us'),
-        h('p', { className: 'pz-lead' }, 'Every partner sits on one of two routes, and moves between them by rule, not by discretion.'),
-        h('div', { className: 'pz-routes' },
-          h('article', { className: 'pz-route pz-route--dark' }, h('p', { className: 'pz-route__tag' }, 'Managed introducer'), h('h3', null, 'A named partner manager'),
-            h('ul', null, h('li', null, '10% base, up to 20% as your book grows'), h('li', null, 'An onboarding bonus for each active client'), h('li', null, 'Pre-checks before a client applies'), h('li', null, 'A real-time dashboard of your introduced clients'))),
-          h('article', { className: 'pz-route' }, h('p', { className: 'pz-route__tag' }, 'Self-serve referrer'), h('h3', null, 'Fully automated'),
-            h('ul', null, h('li', null, 'A one-time fee for each onboarded client'), h('li', null, '10% revenue share'), h('li', null, 'No manager, no paperwork'), h('li', null, 'Onboard three clients and you move to the managed route automatically'))))),
+        h('h2', { className: 'pz-giant' }, 'Your own account manager'),
+        h('p', { className: 'pz-lead' }, 'There is one way to work with us. Every introducer gets a named account manager from the first call. No self-serve tier, no ticket queue.'),
+        h('div', { className: 'pz-routes pz-routes--one' },
+          h('article', { className: 'pz-route pz-route--dark' }, h('p', { className: 'pz-route__tag' }, 'Every introducer'), h('h3', null, 'What you get'),
+            h('ul', null,
+              h('li', null, 'A named account manager who knows you and your clients'),
+              h('li', null, '10% base commission, up to 20% as your book grows'),
+              h('li', null, 'An onboarding bonus for each active client'),
+              h('li', null, 'Pre-checks before a client applies'),
+              h('li', null, 'A real-time dashboard of your introduced clients'))))),
 
       h('section', { className: 'pz-card pz-card--green pz-center' },
         h('h2', { className: 'pz-giant' }, 'How it works'),
         h('ol', { className: 'pz-steps' },
           [['Fit check', 'A short call to confirm your clients match what we do well today.'],
            ['First introduction', 'We onboard your first client with you. A 90-day window gives the first one a bonus boost.'],
-           ['Ongoing support', 'A named partner manager on the managed route; automated updates on self-serve.'],
+           ['Ongoing support', 'Your account manager keeps you posted on every client, at every step.'],
            ['Grow your book', 'Every active client moves you up the ladder, and your commission with it.']].map(([t, b], i) =>
             h('li', { key: t }, h('span', { className: 'pz-steps__n' }, String(i + 1).padStart(2, '0')), h('h3', null, t), h('p', null, b))))),
 
@@ -411,8 +414,8 @@ pages['introductions.html'] = Page('Introductions | Payset Private', 'The Payset
           h('p', { className: 'pz-lead' }, 'Published up front, so you know what we expect before you sign anything.'),
           Rules([['Warm, named introductions', 'People you know and can vouch for. No lists, no paid traffic.'],
             ['Clients that fit', 'International businesses moving six figures or more each month, often through several entities.'],
-            ['Introductions that activate', 'Most of the clients you introduce go on to transact. If activation drops too low, the partnership moves to the self-serve route, after a written warning.']])),
-        h(Chat, { who: 'Your partner manager', label: 'Example conversation between an introducer and their partner manager', msgs: [
+            ['Introductions that activate', 'Most of the clients you introduce go on to transact. We review it with you, so any problem surfaces early.']])),
+        h(Chat, { label: 'Example conversation between an introducer and their account manager', msgs: [
           { me: true, t: '15:02', text: 'A client of mine is opening a UK company for their Cyprus group. Good fit?' },
           { t: '15:06', text: 'Yes, sounds like one. Send them over and I’ll call them tomorrow morning.' },
           { t: '15:06', text: 'I’ll keep you posted at each step.' }] })),

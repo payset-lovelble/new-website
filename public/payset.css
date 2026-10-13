@@ -312,3 +312,4 @@ body { background: var(--pz-ground); color: var(--pz-ink); font-family: var(--pz
   .pz-giant--sm { font-size: 36px; line-height: 36px; }
   .pz-route { padding: 24px; }
 }
+.pz-routes--one { grid-template-columns: minmax(0, 1fr); max-width: 620px; }
