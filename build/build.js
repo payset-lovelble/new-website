@@ -427,6 +427,16 @@ pages['pricing.html'] = Page('Pricing | Payset Private', 'Three plans priced on 
             h('dl', null, rows.map(([k, v]) => h(React.Fragment, { key: k }, h('dt', null, k), h('dd', null, v)))))),
           h('p', { className: 'ps-small', style: { marginTop: '16px' } }, '*Pass-through: where an intermediary or beneficiary bank charges an additional fee, an equal fee applies.'))),
 
+      h('section', { className: 'pz-card pz-card--stone pz-split-card pz-split-card--top' },
+        h('div', { className: 'pz-split-card__text' }, h('h2', { className: 'pz-giant pz-giant--sm' }, 'Questions about pricing')),
+        h('div', { className: 'ps-faq pz-faq' },
+          [['Are there any fees for opening a Payset account?', 'Yes, a one-time application fee: €500 for EU and UK companies and €1,000 for companies outside the EU and UK, plus €500 for complex structures. Contact us for information about your specific circumstances.'],
+           ['What are the fees for currency exchange with Payset?', 'Your plan sets your FX margin: 1.8% on Business, 1% on Scale and 0.5% on Private, with tiered discounts as your 90-day FX volume grows. Before you complete an exchange you see a live quote, including the interbank rate and our margin, so you always know the cost.'],
+           ['Are there fees for receiving money?', 'Receiving a local payment costs €2 on Business and €1 on Scale. Payments from another Payset customer and CHAPS payments are free. Your full pricing is always available in your Payset dashboard.'],
+           ['What are the fees for sending money?', 'It depends on the payment type and your plan: see the rates above. Payments to another Payset customer are free and instant. If something is unclear, contact us.'],
+           ['How can I view my specific pricing plan and fees?', 'Sign in to your Payset account and go to Settings > Billing & Pricing. You will find your monthly fee, transaction costs and any additional charges.']]
+            .map(([q, a]) => h('details', { key: q }, h('summary', null, q), Body(a))))),
+
       h('section', { className: 'pz-card pz-card--stone pz-center' },
         h('h2', { className: 'pz-giant pz-giant--md' }, 'Every plan includes'),
         h('div', { className: 'pz-points' },

@@ -423,3 +423,5 @@ body { background: var(--pz-ground); color: var(--pz-ink); font-family: var(--pz
 .pz-card--plans { padding: 16px; }
 @media (max-width: 767px) { .pz-hero--compact { padding: 24px 20px 8px; } .pz-hero__title--xs { font-size: 36px; line-height: 38px; } .pz-hero__sub--sm { font-size: 16px; line-height: 24px; } .pz-card--plans { padding: 8px; } }
 .pz-rates__sub { display: block; font-size: 12px; line-height: 16px; color: rgba(250,250,250,.56); margin-top: 2px; }
+.pz-faq summary { font-family: var(--pz-display); font-weight: 700; font-size: 20px; line-height: 26px; }
+.pz-faq .pw-body { color: #333; max-width: none; }
