@@ -388,6 +388,15 @@ const FEES = [
   ['Payments', [['GBP Direct Debit mandate (set up, amend, cancel)', '€10'], ['Manual processing: incorrect details', '€100 + pass-through*'], ['Transfer enquiry or investigation (within a year)', '€150 + pass-through*'], ['SWIFT confirmation', '€50'], ['Urgent payment (Business)', '€40'], ['Cancellation before the payment order is sent', '€20'], ['Cancellation after the payment order is sent', '€150 + pass-through*'], ['Return of payment', '€50']]],
   ['Administration', [['Amend company details', '€100 per change'], ['Information request not met within 30 days', '€100 per request'], ['Bank details not provided on termination', '1% a month, minimum €500'], ['Auditor request: current client', '€400'], ['Auditor request: former client', '€550'], ['Statement for a closed account', '€230 or €10 a page, whichever is higher']]],
 ];
+// Historical fee schedules (standard accounts). Source: Pricing - Main file, 'Pricing (old vs new)'.
+// Older schedules are placeholders until the official versions are supplied.
+const HISTORY = [
+  { date: 'June 2026', rows: [['Monthly fee', 'Free'], ['Receive local (EUR, USD, GBP, DKK)', '£2'], ['Receive SWIFT / TARGET2', '£10'], ['Receive CHAPS', 'Free'], ['Send local (SEPA, GBP, DKK)', '0.22% (max £87)'], ['Send US local', '0.22% (max £87)'], ['Send SWIFT / TARGET2', '0.30% (max £248)'], ['Send CHAPS', '£15'], ['To or from another Payset account', 'Free'], ['Currency exchange', 'Tiered'], ['Urgent payment', '£20'], ['Return of payment', '£8'], ['Dedicated account manager', 'From £75 a month']] },
+  { date: 'July 2025', rows: [['Monthly fee', 'Free'], ['Receive local (EUR, USD, GBP, DKK)', '£2'], ['Receive SWIFT / TARGET2', '0.50% (min £18)'], ['Receive CHAPS', '£14'], ['Send local (SEPA, GBP, DKK)', '0.18% (min £2)'], ['Send US local', '0.18% (min £2)'], ['Send SWIFT / TARGET2', '0.50% (min £18)'], ['Send CHAPS', '£14'], ['To or from another Payset account', 'Free'], ['Currency exchange', '1%'], ['Urgent payment', '£20'], ['Return of payment', '£8'], ['Dedicated account manager', 'From £75 a month']] },
+  { date: 'April 2024', rows: null },
+  { date: 'May 2023', rows: null },
+  { date: 'February 2022', rows: null },
+];
 const PlanCard = (p) => h('article', { className: 'pz-plan' + (p.featured ? ' pz-plan--featured' : '') },
   h('div', { className: 'pz-plan__head' }, h('h3', null, p.name), p.tag && h('span', { className: 'pz-plan__tag' }, p.tag)),
   h('p', { className: 'pz-plan__price' }, p.price, p.per && h('span', null, p.per)),
@@ -436,6 +445,16 @@ pages['pricing.html'] = Page('Pricing | Payset Private', 'Three plans priced on 
            ['What are the fees for sending money?', 'It depends on the payment type and your plan: see the rates above. Payments to another Payset customer are free and instant. If something is unclear, contact us.'],
            ['How can I view my specific pricing plan and fees?', 'Sign in to your Payset account and go to Settings > Billing & Pricing. You will find your monthly fee, transaction costs and any additional charges.']]
             .map(([q, a]) => h('details', { key: q }, h('summary', null, q), Body(a))))),
+
+      h('section', { id: 'history', className: 'pz-card pz-card--stone pz-split-card pz-split-card--top' },
+        h('div', { className: 'pz-split-card__text' },
+          h('h2', { className: 'pz-giant pz-giant--sm' }, 'Historical fees'),
+          h('p', { className: 'pz-lead' }, 'The fees that applied to standard accounts on earlier schedules, for reference. Your current fees are in your Payset dashboard.')),
+        h('div', { className: 'pz-fees' },
+          HISTORY.map((hst) => h('details', { key: hst.date, className: 'pz-fees__group' },
+            h('summary', null, 'From ' + hst.date),
+            hst.rows ? h('dl', null, hst.rows.map(([k, v]) => h(React.Fragment, { key: k }, h('dt', null, k), h('dd', null, v))))
+              : h('p', { className: 'ps-small', style: { margin: '0 0 16px' } }, '[Schedule to be added]'))))),
 
       h('section', { className: 'pz-card pz-card--stone pz-center' },
         h('h2', { className: 'pz-giant pz-giant--md' }, 'Every plan includes'),
