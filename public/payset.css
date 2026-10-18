@@ -394,3 +394,23 @@ body { background: var(--pz-ground); color: var(--pz-ink); font-family: var(--pz
   .pz-rates { font-size: 13px; } .pz-rates th, .pz-rates td { padding: 10px 8px; } .pz-rates thead th { font-size: 16px; }
 }
 .pz-fees__group dl { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); }
+
+/* 'Tiered' FX link and popup */
+.pz-tiered { color: var(--pz-neon); text-decoration: underline; text-underline-offset: 3px; font-size: 13px; margin-left: 4px; }
+.pz-dialog { border: 0; border-radius: 28px; padding: 32px; width: min(560px, calc(100% - 32px)); background: #f5f2ef; color: #1a1a1a; box-shadow: 0 32px 64px -16px rgba(0,0,0,.4); font-family: var(--pz-text); }
+.pz-dialog::backdrop { background: rgba(10, 30, 20, .55); }
+.pz-dialog h2 { margin: 0 0 10px; font-family: var(--pz-display); font-weight: 700; font-size: 28px; line-height: 32px; letter-spacing: -0.2px; }
+.pz-dialog h3 { margin: 20px 0 6px; font-family: var(--pz-display); font-weight: 700; font-size: 18px; line-height: 22px; }
+.pz-dialog p { margin: 0; font-size: 15px; line-height: 22px; color: #333; }
+.pz-dialog__close-row { display: flex; justify-content: flex-end; margin: -12px -12px 0 0; }
+.pz-dialog__close { width: 36px; height: 36px; border-radius: 50%; border: 0; background: var(--pz-card-stone); font-size: 22px; line-height: 1; cursor: pointer; color: #1a1a1a; }
+.pz-dialog__close:focus-visible { outline: 2px solid var(--pz-card-green); outline-offset: 2px; }
+.pz-fxt { margin: 20px 0 10px; padding: 20px; border-radius: 20px; background: #dbe8e8; display: flex; flex-direction: column; gap: 12px; font-size: 13px; }
+.pz-fxt__row { display: grid; grid-template-columns: 24px minmax(0, 1fr) 56px; align-items: center; gap: 10px; }
+.pz-fxt__row--head { font-weight: 700; } .pz-fxt__row--head span:last-child { text-align: right; }
+.pz-fxt__bar { height: 36px; border-radius: 999px; background: #1d5239; overflow: hidden; display: block; }
+.pz-fxt__fill { display: flex; align-items: center; justify-content: flex-end; height: 100%; padding-right: 12px; background: #4bd371; border-radius: 999px 0 0 999px; font-weight: 600; white-space: nowrap; box-sizing: border-box; min-width: max-content; }
+.pz-fxt__row b { text-align: right; }
+.pz-dialog__small { font-size: 12px !important; color: #646464 !important; }
+.pz-dialog { box-sizing: border-box; max-width: calc(100vw - 32px); max-height: calc(100vh - 48px); overflow-y: auto; margin: auto; }
+@media (max-width: 767px) { .pz-dialog { padding: 24px 20px; } .pz-dialog h2 { font-size: 24px; line-height: 28px; } .pz-fxt { padding: 14px; } .pz-fxt__row { grid-template-columns: 18px minmax(0, 1fr) 48px; } }

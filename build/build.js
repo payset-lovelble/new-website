@@ -352,18 +352,36 @@ const PLANS = [
 ];
 const RATES = [
   ['Receive', null],
-  ['Local', 'From €2', 'From €1', 'From 0.30%'],
-  ['SWIFT / TARGET2', 'From €10', 'From €5', 'From 0.50%'],
+  ['Local', '€2', '€1', '0.30%'],
+  ['SWIFT / TARGET2', '€10', '€5', '0.50%'],
   ['CHAPS', 'Free', 'Free', 'Free'],
   ['Send', null],
-  ['Local', 'From 0.40%', 'From 0.20%', 'From 0.30%'],
-  ['SWIFT / TARGET2', 'From 0.40%', 'From 0.20%', 'From 0.50%'],
-  ['CHAPS', 'From €20', 'From €10', 'From €15'],
+  ['Local', '0.40%', '0.20%', '0.30%'],
+  ['SWIFT / TARGET2', '0.40%', '0.20%', '0.50%'],
+  ['CHAPS', '€20', '€10', '€15'],
   ['FX and other', null],
-  ['FX margin', 'From 1.8%', 'From 0.9%', 'Agreed with you'],
+  ['FX margin', 'FX', 'FX', 'FX'],
   ['Urgent payments', '€40', 'Free', 'Free'],
   ['Application fee', '€500', '€1,000', '€1,500'],
 ];
+// FX margin cell: the rate plus a 'Tiered' link that opens the FX tier popup (as on payset.io/pricing).
+const FX_RATE = { Business: '1.8%', Scale: '0.9%', Private: 'Agreed with you' };
+const FxCell = (plan) => h(React.Fragment, null, FX_RATE[plan], ' ', h('a', { href: '#fx-tiers', className: 'pz-tiered', 'data-dialog': 'fx-tiers' }, 'Tiered'));
+const FX_TIERS = [['1', '0 – 300K', '0.9%', 40], ['2', '300K – 900K', '0.35%', 58], ['3', '900K – 6M', '0.3%', 76], ['4', '6M EUR +', '0.09%', 100]];
+const FxDialog = () => h('dialog', { id: 'fx-tiers', className: 'pz-dialog', 'aria-labelledby': 'fx-tiers-title' },
+  h('form', { method: 'dialog', className: 'pz-dialog__close-row' }, h('button', { className: 'pz-dialog__close', 'aria-label': 'Close' }, '×')),
+  h('h2', { id: 'fx-tiers-title' }, 'The more you convert, the lower the rate.'),
+  h('p', null, 'We reward active clients with better FX rates, while keeping pricing fair and sustainable. The more you trade, the better your FX rate becomes.'),
+  h('div', { className: 'pz-fxt' },
+    h('div', { className: 'pz-fxt__row pz-fxt__row--head' }, h('span', null, 'Tier'), h('span', null, 'Your 90-day total FX volume, EUR'), h('span', null, 'FX markup')),
+    FX_TIERS.map(([n, vol, mk, w]) => h('div', { key: n, className: 'pz-fxt__row' }, h('span', null, n + '.'),
+      h('span', { className: 'pz-fxt__bar' }, h('span', { className: 'pz-fxt__fill', style: { width: w + '%' } }, vol)), h('b', null, mk)))),
+  h('p', { className: 'pz-dialog__small' }, 'Rate may differ for higher-risk clients.'),
+  h('h3', null, 'How it works'),
+  h('p', null, 'Every time you make an FX trade, we look at how much FX you’ve traded in the last 90 days, including today’s trade, place you in a tier based on that total, and apply that tier’s markup.'),
+  h('h3', null, 'Tier lock: 30-day protection'),
+  h('p', null, 'Once you reach Tier 2 or higher, your tier is locked for 30 days. You keep the same FX pricing for the full lock period, even if your trading volume temporarily drops.'));
+const DIALOG_JS = "document.addEventListener('click',function(e){var a=e.target.closest('[data-dialog]');if(!a)return;var d=document.getElementById(a.getAttribute('data-dialog'));if(!d||!d.showModal)return;e.preventDefault();d.showModal()});document.querySelectorAll('dialog.pz-dialog').forEach(function(d){d.addEventListener('click',function(e){if(e.target===d)d.close()})});";
 const FEES = [
   ['Account', [['Additional accounts and local IBANs', 'Free'], ['Minimum balance', '3× your monthly fee'], ['Account closure', 'One monthly fee'], ['Closure within 12 months', 'The difference between 12 months of fees and fees paid'], ['Closure for breach of terms', '€500'], ['Reactivating a closed account', '€100']]],
   ['Payments', [['GBP Direct Debit mandate (set up, amend, cancel)', '€10'], ['Manual processing: incorrect details', '€100 + pass-through*'], ['Transfer enquiry or investigation (within a year)', '€150 + pass-through*'], ['SWIFT confirmation', '€50'], ['Urgent payment (Business)', '€40'], ['Cancellation before the payment order is sent', '€20'], ['Cancellation after the payment order is sent', '€150 + pass-through*'], ['Return of payment', '€50']]],
@@ -389,14 +407,15 @@ pages['pricing.html'] = Page('Pricing | Payset Private', 'Three plans priced on 
 
       h('section', { className: 'pz-card pz-card--dark pz-center' },
         h('h2', { className: 'pz-giant pz-giant--md' }, 'Indicative rates'),
-        h('p', { className: 'pz-lead' }, 'Where each plan starts. Your exact rates, including any caps, are set after account review and confirmed in writing in your proposal.'),
+        h('p', { className: 'pz-lead' }, 'The same rates for every client on a plan. Any caps on percentage fees are set after account review and confirmed in writing in your proposal.'),
         h('div', { className: 'pz-rates-wrap' },
           h('table', { className: 'pz-rates' },
             h('thead', null, h('tr', null, h('th', { scope: 'col' }, h('span', { className: 'pz-sr' }, 'Fee')), ['Business', 'Scale', 'Private'].map((n) => h('th', { key: n, scope: 'col' }, n)))),
             h('tbody', null, RATES.map((r, i) => r[1] === null
               ? h('tr', { key: i, className: 'pz-rates__group' }, h('th', { scope: 'rowgroup', colSpan: 4 }, r[0]))
-              : h('tr', { key: i }, h('th', { scope: 'row' }, r[0]), r.slice(1).map((c, j) => h('td', { key: j }, c))))))),
-        h('p', { className: 'pz-not' }, 'Crypto exchange is provided by our separately licensed group partner, not by Pay Set Limited, and is not an FCA-regulated activity.')),
+              : h('tr', { key: i }, h('th', { scope: 'row' }, r[0]), r.slice(1).map((c, j) => h('td', { key: j }, c === 'FX' ? FxCell(['Business', 'Scale', 'Private'][j]) : c))))))),
+        h('p', { className: 'pz-not' }, 'Crypto exchange is provided by our separately licensed group partner, not by Pay Set Limited, and is not an FCA-regulated activity.'),
+        h(FxDialog), h('script', { dangerouslySetInnerHTML: { __html: DIALOG_JS } })),
 
       h('section', { className: 'pz-card pz-card--stone pz-split-card pz-split-card--top' },
         h('div', { className: 'pz-split-card__text' },
