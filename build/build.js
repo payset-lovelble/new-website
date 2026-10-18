@@ -355,10 +355,12 @@ const RATES = [
   ['Local', '€2', '€1', '0.30%'],
   ['SWIFT / TARGET2', '€10', '€5', '0.50%'],
   ['CHAPS', 'Free', 'Free', 'Free'],
+  ['From another Payset customer|Instant, any volume', 'Free', 'Free', 'Free'],
   ['Send', null],
   ['Local', '0.40% (max €80)', '0.20% (max €40)', '0.30%'],
   ['SWIFT / TARGET2', '0.40% (max €290)', '0.20% (max €170)', '0.50%'],
   ['CHAPS', '€20', '€10', '€15'],
+  ['To another Payset customer|Instant, any volume', 'Free', 'Free', 'Free'],
   ['FX and other', null],
   ['FX margin', 'FX', 'FX', 'FX'],
   ['Urgent payments', '€40', 'Free', 'Free'],
@@ -411,7 +413,7 @@ pages['pricing.html'] = Page('Pricing | Payset Private', 'Three plans priced on 
             h('thead', null, h('tr', null, h('th', { scope: 'col' }, h('span', { className: 'pz-sr' }, 'Fee')), ['Business', 'Scale', 'Private'].map((n) => h('th', { key: n, scope: 'col' }, n)))),
             h('tbody', null, RATES.map((r, i) => r[1] === null
               ? h('tr', { key: i, className: 'pz-rates__group' }, h('th', { scope: 'rowgroup', colSpan: 4 }, r[0]))
-              : h('tr', { key: i }, h('th', { scope: 'row' }, r[0]), r.slice(1).map((c, j) => h('td', { key: j }, c === 'FX' ? FxCell(['Business', 'Scale', 'Private'][j]) : c))))))),
+              : h('tr', { key: i }, h('th', { scope: 'row' }, r[0].split('|')[0], r[0].includes('|') && h('small', { className: 'pz-rates__sub' }, r[0].split('|')[1])), r.slice(1).map((c, j) => h('td', { key: j }, c === 'FX' ? FxCell(['Business', 'Scale', 'Private'][j]) : c))))))),
         h('p', { className: 'pz-not' }, 'Crypto exchange is provided by our separately licensed group partner, not by Pay Set Limited, and is not an FCA-regulated activity. It is not available to clients resident in the UK.'),
         h(FxDialog), h('script', { dangerouslySetInnerHTML: { __html: DIALOG_JS } })),
 
