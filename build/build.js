@@ -273,7 +273,7 @@ pages['service.html'] = Page('The service | Payset Private', 'Accounts, FX and p
     h(Section, null,
       h('div', { className: 'ps-split', style: { alignItems: 'start' } },
         h('div', { className: 'ps-split__text' }, H2('What you won’t find here.')),
-        Rules(['Ticket numbers and chatbots.', 'A different person every time you call.', 'Accounts closed without a conversation.', 'A free tier, because the service isn’t automated.'], true))),
+        Rules(['A chatbot standing between you and a person.', 'A different person every time you call.', 'Accounts closed without a conversation.', 'A free tier, because the service isn’t automated.'], true))),
     h(CTA, { title: 'Meet your account manager.', body: 'On Scale and Private, your account manager is a named person who knows your business. Apply and a senior member of our team will call you within one business day.' })));
 
 /* ---------- Who we work with ---------- */
