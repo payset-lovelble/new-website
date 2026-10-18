@@ -10,7 +10,7 @@ const h = React.createElement;
 const OUT = process.argv[2];
 const A = (f) => '/assets/' + f;
 
-const LEGAL = 'Pay Set Limited is authorised by the Financial Conduct Authority under the Electronic Money Regulations 2011 (FRN 900920). Payset is not a bank: client funds are safeguarded and are not covered by the Financial Services Compensation Scheme. Crypto exchange services are provided by a separately licensed group partner and are not FCA-regulated activities. Registered in England and Wales, company number 11529161. 9th Floor, 9 Appold Street, London EC2A 2AP.';
+const LEGAL = 'Pay Set Limited is authorised by the Financial Conduct Authority under the Electronic Money Regulations 2011 (FRN 900920). Payset is not a bank: client funds are safeguarded and are not covered by the Financial Services Compensation Scheme. Crypto exchange services are provided by a separately licensed group partner, are not FCA-regulated activities and are not available to clients resident in the UK. Registered in England and Wales, company number 11529161. 9th Floor, 9 Appold Street, London EC2A 2AP.';
 const NAV = [
   { label: 'The service', href: '/service' },
   { label: 'Who we work with', href: '/clients' },
@@ -346,7 +346,7 @@ pages['how-it-works.html'] = Page('How it works | Payset Private', 'How joining 
 // Source: Payset pricing model (FINAL, EUR) and Pricing & Sales Guide. Published: plans, monthly fees, volume bands,
 // indicative 'from' rates and the account fee schedule. Not published: risk-based caps/minimums, Private floors, approval ladder.
 const PLANS = [
-  { name: 'Business', price: '€100', per: ' / month', band: 'Up to €100k in payments a month', note: 'Everyday cross-border business.', items: ['Shared support team', 'Accounts in your company’s name, 34 currencies', 'Local, SWIFT and CHAPS payments', 'Up to 5 debit cards', 'Crypto exchange via our licensed group partner'], cta: INVITE },
+  { name: 'Business', price: '€100', per: ' / month', band: 'Up to €100k in payments a month', note: 'Everyday cross-border business.', items: ['Shared support team', 'Accounts in your company’s name, 34 currencies', 'Local, SWIFT and CHAPS payments', 'Up to 5 debit cards', 'Crypto exchange via our licensed group partner (not for UK residents)'], cta: INVITE },
   { name: 'Scale', price: '€300', per: ' / month', band: '€100k – €250k in payments a month', note: 'Growing businesses moving real volume.', tag: 'Named account manager', items: ['A named account manager', 'Everything in Business, at better rates', 'High priority', 'Urgent payments included', 'Up to 10 debit cards', 'Preferential crypto exchange rates'], cta: INVITE, featured: true },
   { name: 'Private', price: 'Bespoke', per: '', band: '€250k+ in payments a month', note: 'High-volume businesses, priced around your flow.', tag: 'By qualification', items: ['A named account manager', 'Percentage pricing built around your volume', 'Our highest priority', 'Unlimited debit cards', 'Our best crypto exchange rates'], cta: TALK },
 ];
@@ -412,7 +412,7 @@ pages['pricing.html'] = Page('Pricing | Payset Private', 'Three plans priced on 
             h('tbody', null, RATES.map((r, i) => r[1] === null
               ? h('tr', { key: i, className: 'pz-rates__group' }, h('th', { scope: 'rowgroup', colSpan: 4 }, r[0]))
               : h('tr', { key: i }, h('th', { scope: 'row' }, r[0]), r.slice(1).map((c, j) => h('td', { key: j }, c === 'FX' ? FxCell(['Business', 'Scale', 'Private'][j]) : c))))))),
-        h('p', { className: 'pz-not' }, 'Crypto exchange is provided by our separately licensed group partner, not by Pay Set Limited, and is not an FCA-regulated activity.'),
+        h('p', { className: 'pz-not' }, 'Crypto exchange is provided by our separately licensed group partner, not by Pay Set Limited, and is not an FCA-regulated activity. It is not available to clients resident in the UK.'),
         h(FxDialog), h('script', { dangerouslySetInnerHTML: { __html: DIALOG_JS } })),
 
       h('section', { className: 'pz-card pz-card--stone pz-split-card pz-split-card--top' },
