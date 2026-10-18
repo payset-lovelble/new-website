@@ -366,7 +366,7 @@ const RATES = [
   ['Urgent payments', '€40', 'Free', 'Free'],
 ];
 // FX margin cell: the rate plus a 'Tiered' link that opens the FX tier popup (as on payset.io/pricing).
-const FX_RATE = { Business: '1.8%', Scale: '1%', Private: '0.5%' };
+const FX_RATE = { Business: 'As low as 1%', Scale: 'As low as 0.50%', Private: 'As low as 0.25%' };
 const FxCell = (plan) => h(React.Fragment, null, FX_RATE[plan], ' ', h('a', { href: '#fx-tiers', className: 'pz-tiered', 'data-dialog': 'fx-tiers' }, 'Tiered'));
 const FX_TIERS = [['1', '0 – 300K', 'Plan rate', 40], ['2', '300K – 900K', '−0.55%', 58], ['3', '900K – 6M', '−0.60%', 76], ['4', '6M EUR +', '−0.81%', 100]];
 const FxDialog = () => h('dialog', { id: 'fx-tiers', className: 'pz-dialog', 'aria-labelledby': 'fx-tiers-title' },
@@ -440,7 +440,7 @@ pages['pricing.html'] = Page('Pricing | Payset Private', 'Three plans priced on 
         h('div', { className: 'pz-split-card__text' }, h('h2', { className: 'pz-giant pz-giant--sm' }, 'Questions about pricing')),
         h('div', { className: 'ps-faq pz-faq' },
           [['Are there any fees for opening a Payset account?', 'Yes, a one-time application fee: €500 for EU and UK companies and €1,000 for companies outside the EU and UK, plus €500 for complex structures. Contact us for information about your specific circumstances.'],
-           ['What are the fees for currency exchange with Payset?', 'Your plan sets your FX margin: 1.8% on Business, 1% on Scale and 0.5% on Private, with tiered discounts as your 90-day FX volume grows. Before you complete an exchange you see a live quote, including the interbank rate and our margin, so you always know the cost.'],
+           ['What are the fees for currency exchange with Payset?', 'Your FX margin is tiered: the more you convert over 90 days, the lower it gets, to as low as 1% on Business, 0.50% on Scale and 0.25% on Private. Before you complete an exchange you see a live quote, including the interbank rate and our margin, so you always know the cost.'],
            ['Are there fees for receiving money?', 'Receiving a local payment costs €2 on Business and €1 on Scale. Payments from another Payset customer and CHAPS payments are free. Your full pricing is always available in your Payset dashboard.'],
            ['What are the fees for sending money?', 'It depends on the payment type and your plan: see the rates above. Payments to another Payset customer are free and instant. If something is unclear, contact us.'],
            ['How can I view my specific pricing plan and fees?', 'Sign in to your Payset account and go to Settings > Billing & Pricing. You will find your monthly fee, transaction costs and any additional charges.']]
