@@ -15,7 +15,8 @@
   --pz-neon: #00f572;
   --pz-black: #121314;
   --pz-card-stone: #dbd7d3;
-  --pz-card-dark: #292a2e;
+  --pz-card-dark: #163f2e; /* deep green: the dark ground, instead of charcoal */
+  --surface-inverse: #163f2e;
   --pz-card-green: #256c4a;
   --pz-tag: #e8e0d8;
   --pz-radius: 24px;

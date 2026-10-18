@@ -194,7 +194,7 @@ pages['index.html'] = Page('Payset Private | Boutique financial services',
         h(Tile, { tall: true, bg: '#CFC8C1', title: 'Debit cards for your team', body: 'Payset debit cards for the people who spend on your company’s behalf, each with its own limits and spending rules.', img: 'obj-debit-cards.webp', cards: true, tag: 'Cards', href: '/service#cards', tagKind: 'black', chat: [{ me: true, t: '11:02', text: 'Can we get a card for our new finance director? 20 000 GBP a month.' }, { t: '11:05', text: 'Ordered, with the 20 000 GBP monthly limit already set.' }] }),
         h('div', { className: 'pz-bento__col' },
           h(Tile, { bg: '#706E67', dark: true, title: 'Personal service. Institutional controls.', body: 'Decide who can create, approve and release payments, by person, entity and amount.', img: 'ui-members-crop.webp', ui: true, alt: 'Team members panel with permissions', tag: 'Controls', href: '/service#control', tagKind: 'black' }),
-          h(Tile, { bg: '#2B2728', dark: true, title: 'Statements for every entity', body: 'Statements and transaction detail per account and entity, ready for your finance team.', img: 'ui-statement-crop.webp', ui: true, alt: 'Account statement panel', tag: 'Reporting', href: '/service#payments', tagKind: 'neon' }))),
+          h(Tile, { bg: '#163F2E', dark: true, title: 'Statements for every entity', body: 'Statements and transaction detail per account and entity, ready for your finance team.', img: 'ui-statement-crop.webp', ui: true, alt: 'Account statement panel', tag: 'Reporting', href: '/service#payments', tagKind: 'neon' }))),
 
       h('section', { className: 'pz-card pz-card--dark pz-center' },
         h('h2', { className: 'pz-giant' }, 'Businesses that banks find complicated'),
@@ -352,15 +352,15 @@ const PLANS = [
 ];
 const RATES = [
   ['Receive', null],
-  ['Local', '€2', '€1', '0.30%'],
-  ['SWIFT / TARGET2', '€10', '€5', '0.50%'],
+  ['Local', 'From €2', 'From €1', 'From 0.30%'],
+  ['SWIFT / TARGET2', 'From €10', 'From €5', 'From 0.50%'],
   ['CHAPS', 'Free', 'Free', 'Free'],
   ['Send', null],
-  ['Local', '0.40% (max €80)', '0.20% (max €40)', '0.30%'],
-  ['SWIFT / TARGET2', '0.40% (max €290)', '0.20% (max €170)', '0.50%'],
-  ['CHAPS', '€20', '€10', '€15'],
+  ['Local', 'From 0.40%', 'From 0.20%', 'From 0.30%'],
+  ['SWIFT / TARGET2', 'From 0.40%', 'From 0.20%', 'From 0.50%'],
+  ['CHAPS', 'From €20', 'From €10', 'From €15'],
   ['FX and other', null],
-  ['FX margin', '1.8%', '0.9%', 'Agreed with you'],
+  ['FX margin', 'From 1.8%', 'From 0.9%', 'Agreed with you'],
   ['Urgent payments', '€40', 'Free', 'Free'],
   ['Application fee', '€500', '€1,000', '€1,500'],
 ];
@@ -389,7 +389,7 @@ pages['pricing.html'] = Page('Pricing | Payset Private', 'Three plans priced on 
 
       h('section', { className: 'pz-card pz-card--dark pz-center' },
         h('h2', { className: 'pz-giant pz-giant--md' }, 'Indicative rates'),
-        h('p', { className: 'pz-lead' }, 'What each plan starts from. Your rates are confirmed after account review.'),
+        h('p', { className: 'pz-lead' }, 'Where each plan starts. Your exact rates, including any caps, are set after account review and confirmed in writing in your proposal.'),
         h('div', { className: 'pz-rates-wrap' },
           h('table', { className: 'pz-rates' },
             h('thead', null, h('tr', null, h('th', { scope: 'col' }, h('span', { className: 'pz-sr' }, 'Fee')), ['Business', 'Scale', 'Private'].map((n) => h('th', { key: n, scope: 'col' }, n)))),
@@ -462,7 +462,7 @@ pages['introductions.html'] = Page('Introductions | Payset Private', 'The Payset
         h('div', { className: 'pz-bento__col' },
           h(Tile, { bg: '#CFC8C1', title: 'FX and payment consultants', body: 'Business FX brokers and payment introducers whose clients move money across borders every month.', img: 'obj-swap-crop.webp', tag: 'Launch track', href: '#join' }),
           h(Tile, { bg: '#BDBAB0', title: 'Formation and corporate services', body: 'Formation agents and corporate service providers. A new company needs an account on day one, and we onboard quickly.', img: 'obj-coin-holder-crop.webp', tag: 'Launch track', href: '#join' })),
-        h(Tile, { tall: true, bg: '#2B2728', dark: true, title: 'Who we partner with', body: 'Trusted professionals making warm, named introductions of clients they know. Not anonymous links, not passive traffic.', img: 'obj-user-pics-crop.webp', tag: 'Professional advisors: pilot', href: '#join', tagKind: 'neon' })),
+        h(Tile, { tall: true, bg: '#163F2E', dark: true, title: 'Who we partner with', body: 'Trusted professionals making warm, named introductions of clients they know. Not anonymous links, not passive traffic.', img: 'obj-user-pics-crop.webp', tag: 'Professional advisors: pilot', href: '#join', tagKind: 'neon' })),
 
       h('section', { className: 'pz-card pz-card--stone pz-center' },
         h('h2', { className: 'pz-giant' }, 'Your own account manager'),
