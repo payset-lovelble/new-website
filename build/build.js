@@ -347,8 +347,8 @@ pages['how-it-works.html'] = Page('How it works | Payset Private', 'How joining 
 // indicative 'from' rates and the account fee schedule. Not published: risk-based caps/minimums, Private floors, approval ladder.
 const PLANS = [
   { name: 'Business', price: '€100', per: ' / month', band: 'Up to €100k in payments a month', note: 'Everyday cross-border business.', items: ['Shared support team', 'Accounts in your company’s name, 34 currencies', 'Local, SWIFT and CHAPS payments', 'Up to 5 debit cards', 'Crypto exchange via our licensed group partner'], cta: INVITE },
-  { name: 'Scale', price: '€300', per: ' / month', band: '€100k – €250k in payments a month', note: 'Growing businesses moving real volume.', tag: 'Named account manager', items: ['A named account manager', 'Everything in Business, at better rates', 'Higher limits and priority', 'Urgent payments included', 'Up to 10 debit cards', 'Preferential crypto exchange rates'], cta: INVITE, featured: true },
-  { name: 'Private', price: 'Bespoke', per: '', band: '€250k+ in payments a month', note: 'High-volume businesses, priced around your flow.', tag: 'By qualification', items: ['A named account manager', 'Percentage pricing built around your volume', 'Our highest limits and priority', 'FX pricing agreed with our desk', 'Unlimited debit cards'], cta: TALK },
+  { name: 'Scale', price: '€300', per: ' / month', band: '€100k – €250k in payments a month', note: 'Growing businesses moving real volume.', tag: 'Named account manager', items: ['A named account manager', 'Everything in Business, at better rates', 'High priority', 'Urgent payments included', 'Up to 10 debit cards', 'Preferential crypto exchange rates'], cta: INVITE, featured: true },
+  { name: 'Private', price: 'Bespoke', per: '', band: '€250k+ in payments a month', note: 'High-volume businesses, priced around your flow.', tag: 'By qualification', items: ['A named account manager', 'Percentage pricing built around your volume', 'Our highest priority', 'Unlimited debit cards', 'Our best crypto exchange rates'], cta: TALK },
 ];
 const RATES = [
   ['Receive', null],
@@ -364,27 +364,27 @@ const RATES = [
   ['Urgent payments', '€40', 'Free', 'Free'],
 ];
 // FX margin cell: the rate plus a 'Tiered' link that opens the FX tier popup (as on payset.io/pricing).
-const FX_RATE = { Business: '1.8%', Scale: '0.9%', Private: 'Agreed with you' };
+const FX_RATE = { Business: '1.8%', Scale: '1%', Private: '0.5%' };
 const FxCell = (plan) => h(React.Fragment, null, FX_RATE[plan], ' ', h('a', { href: '#fx-tiers', className: 'pz-tiered', 'data-dialog': 'fx-tiers' }, 'Tiered'));
-const FX_TIERS = [['1', '0 – 300K', '0.9%', 40], ['2', '300K – 900K', '0.35%', 58], ['3', '900K – 6M', '0.3%', 76], ['4', '6M EUR +', '0.09%', 100]];
+const FX_TIERS = [['1', '0 – 300K', 'Plan rate', 40], ['2', '300K – 900K', '−0.55%', 58], ['3', '900K – 6M', '−0.60%', 76], ['4', '6M EUR +', '−0.81%', 100]];
 const FxDialog = () => h('dialog', { id: 'fx-tiers', className: 'pz-dialog', 'aria-labelledby': 'fx-tiers-title' },
   h('form', { method: 'dialog', className: 'pz-dialog__close-row' }, h('button', { className: 'pz-dialog__close', 'aria-label': 'Close' }, '×')),
   h('h2', { id: 'fx-tiers-title' }, 'The more you convert, the lower the rate.'),
-  h('p', null, 'We reward active clients with better FX rates, while keeping pricing fair and sustainable. The more you trade, the better your FX rate becomes.'),
+  h('p', null, 'Your plan sets your base FX margin: Business 1.8%, Scale 1%, Private 0.5%. The more you convert, the larger the discount on that margin.'),
   h('div', { className: 'pz-fxt' },
-    h('div', { className: 'pz-fxt__row pz-fxt__row--head' }, h('span', null, 'Tier'), h('span', null, 'Your 90-day total FX volume, EUR'), h('span', null, 'FX markup')),
+    h('div', { className: 'pz-fxt__row pz-fxt__row--head' }, h('span', null, 'Tier'), h('span', null, 'Your 90-day total FX volume, EUR'), h('span', null, 'Discount')),
     FX_TIERS.map(([n, vol, mk, w]) => h('div', { key: n, className: 'pz-fxt__row' }, h('span', null, n + '.'),
       h('span', { className: 'pz-fxt__bar' }, h('span', { className: 'pz-fxt__fill', style: { width: w + '%' } }, vol)), h('b', null, mk)))),
   h('p', { className: 'pz-dialog__small' }, 'Rate may differ for higher-risk clients.'),
   h('h3', null, 'How it works'),
-  h('p', null, 'Every time you make an FX trade, we look at how much FX you’ve traded in the last 90 days, including today’s trade, place you in a tier based on that total, and apply that tier’s markup.'),
+  h('p', null, 'Every time you make an FX trade, we look at how much FX you’ve traded in the last 90 days, including today’s trade, place you in a tier based on that total, and apply that tier’s discount to the whole trade.'),
   h('h3', null, 'Tier lock: 30-day protection'),
-  h('p', null, 'Once you reach Tier 2 or higher, your tier is locked for 30 days. You keep the same FX pricing for the full lock period, even if your trading volume temporarily drops.'));
+  h('p', null, 'Once you reach Tier 2 or higher, your discount is locked for 30 days, even if your trading volume temporarily drops. Reach a higher tier during the lock and a new 30-day lock starts. When the lock ends, we recalculate your 90-day volume.'));
 const DIALOG_JS = "document.addEventListener('click',function(e){var a=e.target.closest('[data-dialog]');if(!a)return;var d=document.getElementById(a.getAttribute('data-dialog'));if(!d||!d.showModal)return;e.preventDefault();d.showModal()});document.querySelectorAll('dialog.pz-dialog').forEach(function(d){d.addEventListener('click',function(e){if(e.target===d)d.close()})});";
 const FEES = [
-  ['Account', [['Application fee', 'Business €500 · Scale €1,000 · Private €1,500'], ['Additional accounts and local IBANs', 'Free'], ['Minimum balance', '3× your monthly fee'], ['Account closure', 'One monthly fee'], ['Closure within 12 months', 'The difference between 12 months of fees and fees paid'], ['Closure for breach of terms', '€500'], ['Reactivating a closed account', '€100']]],
+  ['Account', [['Application fee', '€500 for EU and UK companies, €1,000 for non-EU/UK companies. Add €500 for complex structures.'], ['Additional accounts and local IBANs', 'Free'], ['Minimum balance', '3× your monthly fee'], ['Account closure', 'One monthly fee'], ['Closure within 12 months', 'The difference between 12 months of fees and fees paid'], ['Closure for breach of terms', '€500'], ['Reactivating a closed account', '€100']]],
   ['Payments', [['GBP Direct Debit mandate (set up, amend, cancel)', '€10'], ['Manual processing: incorrect details', '€100 + pass-through*'], ['Transfer enquiry or investigation (within a year)', '€150 + pass-through*'], ['SWIFT confirmation', '€50'], ['Urgent payment (Business)', '€40'], ['Cancellation before the payment order is sent', '€20'], ['Cancellation after the payment order is sent', '€150 + pass-through*'], ['Return of payment', '€50']]],
-  ['Administration', [['Add or change a user, email or user details', '€100 per change'], ['Amend company details', '€100 per change'], ['Information request not met within 30 days', '€100 per request'], ['Bank details not provided on termination', '1% a month, minimum €500'], ['Blocking certificate (per blocking period)', '€800'], ['Account reference letter', '€50'], ['Auditor request: current client', '€400'], ['Auditor request: former client', '€550'], ['Statement for a closed account', '€230 or €10 a page, whichever is higher']]],
+  ['Administration', [['Amend company details', '€100 per change'], ['Information request not met within 30 days', '€100 per request'], ['Bank details not provided on termination', '1% a month, minimum €500'], ['Auditor request: current client', '€400'], ['Auditor request: former client', '€550'], ['Statement for a closed account', '€230 or €10 a page, whichever is higher']]],
 ];
 const PlanCard = (p) => h('article', { className: 'pz-plan' + (p.featured ? ' pz-plan--featured' : '') },
   h('div', { className: 'pz-plan__head' }, h('h3', null, p.name), p.tag && h('span', { className: 'pz-plan__tag' }, p.tag)),
