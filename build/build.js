@@ -346,9 +346,9 @@ pages['how-it-works.html'] = Page('How it works | Payset Private', 'How joining 
 // Source: Payset pricing model (FINAL, EUR) and Pricing & Sales Guide. Published: plans, monthly fees, volume bands,
 // indicative 'from' rates and the account fee schedule. Not published: risk-based caps/minimums, Private floors, approval ladder.
 const PLANS = [
-  { name: 'Business', price: '€100', per: ' / month', band: 'Up to €100k in payments a month', note: 'Everyday cross-border business.', items: ['Shared support team', 'Accounts in your company’s name, 34 currencies', 'Local, SWIFT and CHAPS payments', 'Up to 2 debit cards', 'Crypto exchange via our licensed group partner'], cta: INVITE },
+  { name: 'Business', price: '€100', per: ' / month', band: 'Up to €100k in payments a month', note: 'Everyday cross-border business.', items: ['Shared support team', 'Accounts in your company’s name, 34 currencies', 'Local, SWIFT and CHAPS payments', 'Up to 5 debit cards', 'Crypto exchange via our licensed group partner'], cta: INVITE },
   { name: 'Scale', price: '€300', per: ' / month', band: '€100k – €250k in payments a month', note: 'Growing businesses moving real volume.', tag: 'Named account manager', items: ['A named account manager', 'Everything in Business, at better rates', 'Higher limits and priority', 'Urgent payments included', 'Up to 10 debit cards', 'Preferential crypto exchange rates'], cta: INVITE, featured: true },
-  { name: 'Private', price: 'Bespoke', per: '', band: '€250k+ in payments a month', note: 'High-volume businesses, priced around your flow.', tag: 'By qualification', items: ['A named account manager', 'Percentage pricing built around your volume', 'Our highest limits and priority', 'FX pricing agreed with our desk', 'Up to 10 debit cards'], cta: TALK },
+  { name: 'Private', price: 'Bespoke', per: '', band: '€250k+ in payments a month', note: 'High-volume businesses, priced around your flow.', tag: 'By qualification', items: ['A named account manager', 'Percentage pricing built around your volume', 'Our highest limits and priority', 'FX pricing agreed with our desk', 'Unlimited debit cards'], cta: TALK },
 ];
 const RATES = [
   ['Receive', null],
@@ -398,7 +398,7 @@ pages['pricing.html'] = Page('Pricing | Payset Private', 'Three plans priced on 
   h('div', { className: 'pz' },
     h('section', { className: 'pz-hero' },
       h('h1', { className: 'pz-hero__title pz-hero__title--sm' }, 'Priced for the service, not the account.'),
-      h('h2', { className: 'pz-hero__sub' }, 'Your plan is set by the volume you move. Scale and Private include a named account manager. Transaction and FX pricing are confirmed in writing before you start.'),
+      h('h2', { className: 'pz-hero__sub' }, 'Your plan is set by the volume you move. Transaction and FX pricing are confirmed in writing before you start.'),
       h(Ctas)),
     h('div', { className: 'pz-cards' },
       h('section', { className: 'pz-card pz-card--stone pz-center' },
