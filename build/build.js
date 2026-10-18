@@ -10,7 +10,7 @@ const h = React.createElement;
 const OUT = process.argv[2];
 const A = (f) => '/assets/' + f;
 
-const LEGAL = 'Pay Set Limited is authorised by the Financial Conduct Authority under the Electronic Money Regulations 2011 (FRN 900920). Payset is not a bank: client funds are safeguarded and are not covered by the Financial Services Compensation Scheme. Registered in England and Wales, company number 11529161. 9th Floor, 9 Appold Street, London EC2A 2AP.';
+const LEGAL = 'Pay Set Limited is authorised by the Financial Conduct Authority under the Electronic Money Regulations 2011 (FRN 900920). Payset is not a bank: client funds are safeguarded and are not covered by the Financial Services Compensation Scheme. Crypto exchange services are provided by a separately licensed group partner and are not FCA-regulated activities. Registered in England and Wales, company number 11529161. 9th Floor, 9 Appold Street, London EC2A 2AP.';
 const NAV = [
   { label: 'The service', href: '/service' },
   { label: 'Who we work with', href: '/clients' },
@@ -153,7 +153,7 @@ pages['index.html'] = Page('Payset Private | Boutique financial services',
   h('div', { className: 'pz' },
     h('section', { className: 'pz-hero' },
       h('h1', { className: 'pz-hero__title' }, 'Boutique financial services'),
-      h('h2', { className: 'pz-hero__sub' }, 'Accounts in your company’s name, FX priced on your volume and a dedicated account manager, for businesses operating across jurisdictions.'),
+      h('h2', { className: 'pz-hero__sub' }, 'Accounts in your company’s name and FX priced on your volume, for businesses operating across jurisdictions. Scale and Private include a dedicated account manager.'),
       h(Ctas), h(Trustpilot)),
     h('ul', { className: 'pz-trust', 'aria-label': 'Regulation and security' },
       [['badge', 'Authorised by the FCA as an Electronic Money Institution, FRN 900920'],
@@ -344,28 +344,86 @@ pages['how-it-works.html'] = Page('How it works | Payset Private', 'How joining 
     h(CTA)));
 
 /* ---------- Pricing ---------- */
-const Plan = (name, price, band, items, brand) => h('article', { className: 'ps-plan' + (brand ? ' ps-plan--brand' : '') },
-  Over(name), h('div', { className: 'ps-price' }, price, price !== 'Bespoke' ? h('span', null, ' / month') : null),
-  h('p', { className: 'ps-strong', style: { margin: 0 } }, band),
-  h('ul', { className: 'ps-ticks' }, items.map((t) => h('li', { key: t }, t))));
-pages['pricing.html'] = Page('Pricing | Payset Private', 'Plans priced on your volume, each with a dedicated account manager.',
-  h(React.Fragment, null,
-    h(W.Hero, { eyebrow: 'Pricing', size: 'h1', title: 'Priced for the service, not the account.', lead: 'Every plan includes a dedicated account manager. Your monthly fee and FX pricing are set by your volume and corridors, and agreed in writing before you start.' }),
-    h(Section, { tone: 'subtle' },
-      h('div', { className: 'ps-grid-3' },
-        Plan('[PLAN NAME 1]', '[PRICE] EUR', '100 000 – 250 000 EUR per month', ['Dedicated account manager', 'Accounts for up to [N] entities', 'FX priced on your volume']),
-        Plan('[PLAN NAME 2]', '[PRICE] EUR', '250 000 – 1 000 000 EUR per month', ['Everything in [PLAN NAME 1]', 'Priority payment tracking and chasing', 'Rate alerts and agreed rates'], true),
-        Plan('[PLAN NAME 3]', 'Bespoke', '1 000 000 EUR+ per month', ['Everything in [PLAN NAME 2]', 'Unlimited entities', 'Pricing agreed with our FX desk'])),
-      h('p', { className: 'ps-small', style: { marginTop: '24px' } }, 'Prices shown are starting points. Your proposal confirms the exact fee, FX pricing and service level.')),
-    h(Section, null,
-      h('div', { className: 'ps-split', style: { alignItems: 'start' } },
-        h('div', { className: 'ps-split__text' }, H2('Every plan includes.')),
-        Rules([['A named account manager', 'Reachable by message, call or in person.'], ['Accounts in your company’s name', '34 currencies, SEPA, SWIFT and Faster Payments.'], ['Safeguarded funds', 'Held separately and never lent out.'], ['Controls for your team', 'Permissions, multi-signature approvals and two-factor sign-in.']]))),
-    h(Section, { tone: 'subtle' },
-      h('div', { className: 'ps-split' },
-        h('div', { className: 'ps-split__text' }, H2('Why there’s no free plan.'), Lead('The service is run by people, not automated. A fixed monthly fee means we can limit how many clients each account manager serves, and give each one the attention they pay for.')),
-        h('div', { style: { display: 'flex', justifyContent: 'center' } }, h('img', { src: A('obj-user-pics.webp'), alt: '', style: { maxWidth: '420px', width: '100%' } })))),
-    h(CTA)));
+// Source: Payset pricing model (FINAL, EUR) and Pricing & Sales Guide. Published: plans, monthly fees, volume bands,
+// indicative 'from' rates and the account fee schedule. Not published: risk-based caps/minimums, Private floors, approval ladder.
+const PLANS = [
+  { name: 'Business', price: '€100', per: ' / month', band: 'Up to €100k a month', note: 'Everyday cross-border business.', items: ['Shared support team', 'Accounts in your company’s name, 34 currencies', 'Local, SWIFT and CHAPS payments', 'Up to 2 debit cards', 'Crypto exchange via our licensed group partner'], cta: INVITE },
+  { name: 'Scale', price: '€300', per: ' / month', band: '€100k – €250k a month', note: 'Growing businesses moving real volume.', tag: 'Named account manager', items: ['A named account manager', 'Everything in Business, at better rates', 'Higher limits and priority', 'Urgent payments included', 'Up to 10 debit cards', 'Preferential crypto exchange rates'], cta: INVITE, featured: true },
+  { name: 'Private', price: 'Bespoke', per: '', band: '€250k+ a month', note: 'High-volume businesses, priced around your flow.', tag: 'By qualification', items: ['A named account manager', 'Percentage pricing built around your volume', 'Our highest limits and priority', 'FX pricing agreed with our desk', 'Up to 10 debit cards'], cta: TALK },
+];
+const RATES = [
+  ['Receive', null],
+  ['Local', '€2', '€1', '0.30%'],
+  ['SWIFT / TARGET2', '€10', '€5', '0.50%'],
+  ['CHAPS', 'Free', 'Free', 'Free'],
+  ['Send', null],
+  ['Local', '0.40% (max €80)', '0.20% (max €40)', '0.30%'],
+  ['SWIFT / TARGET2', '0.40% (max €290)', '0.20% (max €170)', '0.50%'],
+  ['CHAPS', '€20', '€10', '€15'],
+  ['FX and other', null],
+  ['FX margin', '1.8%', '0.9%', 'Agreed with you'],
+  ['Urgent payments', '€40', 'Free', 'Free'],
+  ['Application fee', '€500', '€1,000', '€1,500'],
+];
+const FEES = [
+  ['Account', [['Additional accounts and local IBANs', 'Free'], ['Minimum balance', '3× your monthly fee'], ['Account closure', 'One monthly fee'], ['Closure within 12 months', 'The difference between 12 months of fees and fees paid'], ['Closure for breach of terms', '€500'], ['Reactivating a closed account', '€100']]],
+  ['Payments', [['GBP Direct Debit mandate (set up, amend, cancel)', '€10'], ['Manual processing: incorrect details', '€100 + pass-through*'], ['Transfer enquiry or investigation (within a year)', '€150 + pass-through*'], ['SWIFT confirmation', '€50'], ['Urgent payment (Business)', '€40'], ['Cancellation before the payment order is sent', '€20'], ['Cancellation after the payment order is sent', '€150 + pass-through*'], ['Return of payment', '€50']]],
+  ['Administration', [['Add or change a user, email or user details', '€100 per change'], ['Amend company details', '€100 per change'], ['Information request not met within 30 days', '€100 per request'], ['Bank details not provided on termination', '1% a month, minimum €500'], ['Blocking certificate (per blocking period)', '€800'], ['Account reference letter', '€50'], ['Auditor request: current client', '€400'], ['Auditor request: former client', '€550'], ['Statement for a closed account', '€230 or €10 a page, whichever is higher']]],
+];
+const PlanCard = (p) => h('article', { className: 'pz-plan' + (p.featured ? ' pz-plan--featured' : '') },
+  h('div', { className: 'pz-plan__head' }, h('h3', null, p.name), p.tag && h('span', { className: 'pz-plan__tag' }, p.tag)),
+  h('p', { className: 'pz-plan__price' }, p.price, p.per && h('span', null, p.per)),
+  h('p', { className: 'pz-plan__band' }, p.band), h('p', { className: 'pz-plan__note' }, p.note),
+  h('ul', null, p.items.map((t) => h('li', { key: t }, t))),
+  Btn(p.cta.label, p.cta.href, p.featured ? 'neon' : 'black'));
+
+pages['pricing.html'] = Page('Pricing | Payset Private', 'Three plans priced on the volume you move: Business, Scale and Private.',
+  h('div', { className: 'pz' },
+    h('section', { className: 'pz-hero' },
+      h('h1', { className: 'pz-hero__title pz-hero__title--sm' }, 'Priced for the service, not the account.'),
+      h('h2', { className: 'pz-hero__sub' }, 'Your plan is set by the volume you move. Scale and Private include a named account manager. Transaction and FX pricing are confirmed in writing before you start.'),
+      h(Ctas)),
+    h('div', { className: 'pz-cards' },
+      h('section', { className: 'pz-card pz-card--stone pz-center' },
+        h('div', { className: 'pz-plans' }, PLANS.map((p) => h(PlanCard, Object.assign({ key: p.name }, p)))),
+        h('p', { className: 'pz-plans__note' }, 'Starting points. Your proposal confirms the exact monthly fee, transaction and FX pricing. Transaction pricing is finalised after account review and reflects your business profile; your plan and monthly fee do not change with it. When your volume stays above your plan’s band for two months in a row, we move you up automatically. We never move you down without asking.')),
+
+      h('section', { className: 'pz-card pz-card--dark pz-center' },
+        h('h2', { className: 'pz-giant pz-giant--md' }, 'Indicative rates'),
+        h('p', { className: 'pz-lead' }, 'What each plan starts from. Your rates are confirmed after account review.'),
+        h('div', { className: 'pz-rates-wrap' },
+          h('table', { className: 'pz-rates' },
+            h('thead', null, h('tr', null, h('th', { scope: 'col' }, h('span', { className: 'pz-sr' }, 'Fee')), ['Business', 'Scale', 'Private'].map((n) => h('th', { key: n, scope: 'col' }, n)))),
+            h('tbody', null, RATES.map((r, i) => r[1] === null
+              ? h('tr', { key: i, className: 'pz-rates__group' }, h('th', { scope: 'rowgroup', colSpan: 4 }, r[0]))
+              : h('tr', { key: i }, h('th', { scope: 'row' }, r[0]), r.slice(1).map((c, j) => h('td', { key: j }, c))))))),
+        h('p', { className: 'pz-not' }, 'Crypto exchange is provided by our separately licensed group partner, not by Pay Set Limited, and is not an FCA-regulated activity.')),
+
+      h('section', { className: 'pz-card pz-card--stone pz-split-card pz-split-card--top' },
+        h('div', { className: 'pz-split-card__text' },
+          h('h2', { className: 'pz-giant pz-giant--sm' }, 'Account and service fees'),
+          h('p', { className: 'pz-lead' }, 'The same on every plan unless shown. No surprises, all on one page.')),
+        h('div', { className: 'pz-fees' },
+          FEES.map(([group, rows]) => h('details', { key: group, className: 'pz-fees__group', open: group === 'Account' },
+            h('summary', null, group),
+            h('dl', null, rows.map(([k, v]) => h(React.Fragment, { key: k }, h('dt', null, k), h('dd', null, v)))))),
+          h('p', { className: 'ps-small', style: { marginTop: '16px' } }, '*Pass-through: where an intermediary or beneficiary bank charges an additional fee, an equal fee applies.'))),
+
+      h('section', { className: 'pz-card pz-card--stone pz-center' },
+        h('h2', { className: 'pz-giant pz-giant--md' }, 'Every plan includes'),
+        h('div', { className: 'pz-points' },
+          Point('layers', 'Accounts in your name', '34 currencies, extra accounts and local IBANs at no cost.'),
+          Point('vault', 'Safeguarded funds', 'Held separately from our own money and never lent out.'),
+          Point('key', 'Controls for your team', 'Permissions, multi-signature approvals and two-factor sign-in.'))),
+
+      h('section', { className: 'pz-card pz-card--green pz-center' },
+        h('h2', { className: 'pz-giant pz-giant--md' }, 'Why there’s no free plan'),
+        h('p', { className: 'pz-lead' }, 'Run by people, not by software. A fixed monthly fee lets us limit how many clients each account manager serves, and give each one the attention they pay for. Free accounts attract the crowd. We would rather earn your business.')),
+
+      h('section', { className: 'pz-card pz-card--stone pz-center' },
+        h('h2', { className: 'pz-giant' }, 'Not for everyone. Possibly for you.'),
+        h('p', { className: 'pz-lead' }, 'If your business moves money across borders and expects someone to pick up, apply. We review every application personally.'),
+        h(Ctas)))));
 
 /* ---------- Introductions (partner programme) ---------- */
 // Source: Payset Partner Program strategy v6 and final deck (UK pilot, July 2026).
