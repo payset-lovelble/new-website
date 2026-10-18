@@ -395,9 +395,9 @@ const PlanCard = (p) => h('article', { className: 'pz-plan' + (p.featured ? ' pz
 
 pages['pricing.html'] = Page('Pricing | Payset Private', 'Three plans priced on the volume you move: Business, Scale and Private.',
   h('div', { className: 'pz' },
-    h('section', { className: 'pz-hero pz-hero--compact' },
-      h('h1', { className: 'pz-hero__title pz-hero__title--xs' }, 'Priced for the service, not the account.'),
-      h('h2', { className: 'pz-hero__sub pz-hero__sub--sm' }, 'Your plan is set by the volume you move. Transaction and FX pricing are confirmed in writing before you start.')),
+    h('section', { className: 'pz-hero' },
+      h('h1', { className: 'pz-hero__title pz-hero__title--sm' }, 'Priced for the service, not the account.'),
+      h('h2', { className: 'pz-hero__sub' }, 'Your plan is set by the volume you move. Transaction and FX pricing are confirmed in writing before you start.')),
     h('div', { className: 'pz-cards pz-cards--tight' },
       h('section', { className: 'pz-card pz-card--stone pz-center pz-card--plans' },
         h('div', { className: 'pz-plans' }, PLANS.map((p) => h(PlanCard, Object.assign({ key: p.name }, p)))),
