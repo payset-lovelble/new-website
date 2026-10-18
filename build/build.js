@@ -362,7 +362,6 @@ const RATES = [
   ['FX and other', null],
   ['FX margin', 'FX', 'FX', 'FX'],
   ['Urgent payments', '€40', 'Free', 'Free'],
-  ['Application fee', '€500', '€1,000', '€1,500'],
 ];
 // FX margin cell: the rate plus a 'Tiered' link that opens the FX tier popup (as on payset.io/pricing).
 const FX_RATE = { Business: '1.8%', Scale: '0.9%', Private: 'Agreed with you' };
@@ -383,7 +382,7 @@ const FxDialog = () => h('dialog', { id: 'fx-tiers', className: 'pz-dialog', 'ar
   h('p', null, 'Once you reach Tier 2 or higher, your tier is locked for 30 days. You keep the same FX pricing for the full lock period, even if your trading volume temporarily drops.'));
 const DIALOG_JS = "document.addEventListener('click',function(e){var a=e.target.closest('[data-dialog]');if(!a)return;var d=document.getElementById(a.getAttribute('data-dialog'));if(!d||!d.showModal)return;e.preventDefault();d.showModal()});document.querySelectorAll('dialog.pz-dialog').forEach(function(d){d.addEventListener('click',function(e){if(e.target===d)d.close()})});";
 const FEES = [
-  ['Account', [['Additional accounts and local IBANs', 'Free'], ['Minimum balance', '3× your monthly fee'], ['Account closure', 'One monthly fee'], ['Closure within 12 months', 'The difference between 12 months of fees and fees paid'], ['Closure for breach of terms', '€500'], ['Reactivating a closed account', '€100']]],
+  ['Account', [['Application fee', 'Business €500 · Scale €1,000 · Private €1,500'], ['Additional accounts and local IBANs', 'Free'], ['Minimum balance', '3× your monthly fee'], ['Account closure', 'One monthly fee'], ['Closure within 12 months', 'The difference between 12 months of fees and fees paid'], ['Closure for breach of terms', '€500'], ['Reactivating a closed account', '€100']]],
   ['Payments', [['GBP Direct Debit mandate (set up, amend, cancel)', '€10'], ['Manual processing: incorrect details', '€100 + pass-through*'], ['Transfer enquiry or investigation (within a year)', '€150 + pass-through*'], ['SWIFT confirmation', '€50'], ['Urgent payment (Business)', '€40'], ['Cancellation before the payment order is sent', '€20'], ['Cancellation after the payment order is sent', '€150 + pass-through*'], ['Return of payment', '€50']]],
   ['Administration', [['Add or change a user, email or user details', '€100 per change'], ['Amend company details', '€100 per change'], ['Information request not met within 30 days', '€100 per request'], ['Bank details not provided on termination', '1% a month, minimum €500'], ['Blocking certificate (per blocking period)', '€800'], ['Account reference letter', '€50'], ['Auditor request: current client', '€400'], ['Auditor request: former client', '€550'], ['Statement for a closed account', '€230 or €10 a page, whichever is higher']]],
 ];
