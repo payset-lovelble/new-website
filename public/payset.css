@@ -415,3 +415,10 @@ body { background: var(--pz-ground); color: var(--pz-ink); font-family: var(--pz
 .pz-dialog { box-sizing: border-box; max-width: calc(100vw - 32px); max-height: calc(100vh - 48px); overflow-y: auto; margin: auto; }
 @media (max-width: 767px) { .pz-dialog { padding: 24px 20px; } .pz-dialog h2 { font-size: 24px; line-height: 28px; } .pz-fxt { padding: 14px; } .pz-fxt__row { grid-template-columns: 18px minmax(0, 1fr) 48px; } }
 .pz-plan__band-note { margin: -8px 0 0; font-size: 12px; line-height: 16px; opacity: .6; }
+/* Pricing: compact hero so the plans sit above the fold */
+.pz-hero--compact { padding: 32px 24px 16px; gap: 14px; }
+.pz-hero__title--xs { font-size: 56px; line-height: 56px; max-width: 900px; }
+.pz-hero__sub--sm { font-size: 18px; line-height: 26px; max-width: 640px; }
+.pz-cards--tight { margin-top: 8px; }
+.pz-card--plans { padding: 16px; }
+@media (max-width: 767px) { .pz-hero--compact { padding: 24px 20px 8px; } .pz-hero__title--xs { font-size: 36px; line-height: 38px; } .pz-hero__sub--sm { font-size: 16px; line-height: 24px; } .pz-card--plans { padding: 8px; } }

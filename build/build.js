@@ -396,12 +396,11 @@ const PlanCard = (p) => h('article', { className: 'pz-plan' + (p.featured ? ' pz
 
 pages['pricing.html'] = Page('Pricing | Payset Private', 'Three plans priced on the volume you move: Business, Scale and Private.',
   h('div', { className: 'pz' },
-    h('section', { className: 'pz-hero' },
-      h('h1', { className: 'pz-hero__title pz-hero__title--sm' }, 'Priced for the service, not the account.'),
-      h('h2', { className: 'pz-hero__sub' }, 'Your plan is set by the volume you move. Transaction and FX pricing are confirmed in writing before you start.'),
-      h(Ctas)),
-    h('div', { className: 'pz-cards' },
-      h('section', { className: 'pz-card pz-card--stone pz-center' },
+    h('section', { className: 'pz-hero pz-hero--compact' },
+      h('h1', { className: 'pz-hero__title pz-hero__title--xs' }, 'Priced for the service, not the account.'),
+      h('h2', { className: 'pz-hero__sub pz-hero__sub--sm' }, 'Your plan is set by the volume you move. Transaction and FX pricing are confirmed in writing before you start.')),
+    h('div', { className: 'pz-cards pz-cards--tight' },
+      h('section', { className: 'pz-card pz-card--stone pz-center pz-card--plans' },
         h('div', { className: 'pz-plans' }, PLANS.map((p) => h(PlanCard, Object.assign({ key: p.name }, p)))),
         h('p', { className: 'pz-plans__note' }, 'Starting points. Your proposal confirms the exact monthly fee, transaction and FX pricing. Transaction pricing is finalised after account review and reflects your business profile; your plan and monthly fee do not change with it. When your volume stays above your plan’s band for two months in a row, we move you up automatically. We never move you down without asking.')),
 
