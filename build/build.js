@@ -146,7 +146,7 @@ const Point = (icon, title, body) => h('div', { className: 'pz-point' },
 // Self-check on the home page: visitors tick the traits that describe them and see how well they match.
 // Runs in the browser only; nothing is stored or sent.
 const QUALIFIERS = ['Operate in several countries', 'Move six figures or more a month', 'Several legal entities', 'Hold several currencies', 'Pay suppliers and partners abroad', 'Need FX at scale', 'Slowed down or turned away by banks', 'Want one person who knows the business'];
-const MATCH_JS = "(function(){var root=document.getElementById('match');if(!root)return;var chips=root.querySelectorAll('.pz-chip--toggle'),pct=document.getElementById('match-pct'),bar=document.getElementById('match-bar'),res=document.getElementById('match-result'),cta=document.getElementById('match-cta'),btn=cta.querySelector('a'),C=2*Math.PI*52;bar.style.strokeDasharray=C;bar.style.strokeDashoffset=C;function update(){var n=0;chips.forEach(function(c){if(c.getAttribute('aria-pressed')==='true')n++});var p=Math.round(n/chips.length*100);pct.textContent=p;bar.style.strokeDashoffset=C*(1-p/100);if(n===0){res.textContent='Select everything that applies.';cta.hidden=true}else if(p<40){res.textContent='We may not be the right fit yet. Talk to us anyway and we will tell you honestly.';btn.textContent='Talk to us';cta.hidden=false}else if(p<75){res.textContent='This looks like a good fit. Apply and a senior member of our team will call you.';btn.textContent='Apply now';cta.hidden=false}else{res.textContent='This is exactly who we work with.';btn.textContent='Apply now';cta.hidden=false}}chips.forEach(function(c){c.addEventListener('click',function(){c.setAttribute('aria-pressed',c.getAttribute('aria-pressed')==='true'?'false':'true');update()})});update()})();";
+const MATCH_JS = "(function(){var root=document.getElementById('match');if(!root)return;var chips=root.querySelectorAll('.pz-chip--toggle'),pct=document.getElementById('match-pct'),bar=document.getElementById('match-bar'),res=document.getElementById('match-result'),cta=document.getElementById('match-cta'),btn=cta.querySelector('a'),C=2*Math.PI*52;bar.style.strokeDasharray=C;bar.style.strokeDashoffset=C;function update(){var n=0;chips.forEach(function(c){if(c.getAttribute('aria-pressed')==='true')n++});var p=Math.round(n/chips.length*100);pct.textContent=p;bar.style.strokeDashoffset=C*(1-p/100);if(n===0){res.textContent='Select everything that applies.';cta.hidden=true}else if(p<40){res.textContent='Our Business plan may suit you best for now. Talk to us and we will tell you honestly.';btn.textContent='Talk to us';cta.hidden=false}else if(p<75){res.textContent='This looks like a good fit. Apply and a senior member of our team will call you.';btn.textContent='Apply now';cta.hidden=false}else{res.textContent='This is exactly who we work with.';btn.textContent='Apply now';cta.hidden=false}}chips.forEach(function(c){c.addEventListener('click',function(){c.setAttribute('aria-pressed',c.getAttribute('aria-pressed')==='true'?'false':'true');update()})});update()})();";
 
 pages['index.html'] = Page('Payset Private | Boutique financial services',
   'Accounts, FX and cross-border payments for businesses operating across jurisdictions, with a dedicated account manager.',
@@ -182,7 +182,7 @@ pages['index.html'] = Page('Payset Private | Boutique financial services',
 
       h('section', { className: 'pz-card pz-card--stone pz-center' },
         h('h2', { className: 'pz-giant' }, 'Personal service'),
-        h('p', { className: 'pz-lead' }, 'One named account manager who knows your business, your suppliers and your deadlines. Reachable by message, call or in person, and usually the first to spot a problem.'),
+        h('p', { className: 'pz-lead' }, 'On Scale and Private, one named account manager who knows your business, your suppliers and your deadlines. Reachable by message, call or in person, and usually the first to spot a problem.'),
         h('div', { className: 'pz-support-media' }, h('div', { className: 'ps-photo' }, Img('photo-headset.webp', 'An account manager on a call at her desk'), h(Chat))),
         h('div', { className: 'pz-points' },
           Point('headset', 'Someone who picks up', 'One named person, not a ticket queue. Reachable by message, call or in person.'),
@@ -198,7 +198,7 @@ pages['index.html'] = Page('Payset Private | Boutique financial services',
 
       h('section', { className: 'pz-card pz-card--dark pz-center' },
         h('h2', { className: 'pz-giant' }, 'Businesses that banks find complicated'),
-        h('p', { className: 'pz-lead' }, 'International companies moving six figures or more each month, often through several entities and jurisdictions. If that sounds like you, we should talk.'),
+        h('p', { className: 'pz-lead' }, 'International companies working across borders, often through several entities and jurisdictions. If that sounds like you, we should talk.'),
         h('div', { className: 'pz-match', id: 'match' },
           h('div', { className: 'pz-match__ring', 'aria-hidden': 'true' },
             h('svg', { viewBox: '0 0 120 120' }, h('circle', { cx: 60, cy: 60, r: 52, className: 'pz-match__track' }), h('circle', { cx: 60, cy: 60, r: 52, className: 'pz-match__bar', id: 'match-bar' })),
@@ -274,7 +274,7 @@ pages['service.html'] = Page('The service | Payset Private', 'Accounts, FX and p
       h('div', { className: 'ps-split', style: { alignItems: 'start' } },
         h('div', { className: 'ps-split__text' }, H2('What you won’t find here.')),
         Rules(['Ticket numbers and chatbots.', 'A different person every time you call.', 'Accounts closed without a conversation.', 'A free tier, because the service isn’t automated.'], true))),
-    h(CTA, { title: 'Meet your account manager.', body: 'We work with businesses moving six figures or more each month. Apply and a senior member of our team will call you within one business day.' })));
+    h(CTA, { title: 'Meet your account manager.', body: 'On Scale and Private, your account manager is a named person who knows your business. Apply and a senior member of our team will call you within one business day.' })));
 
 /* ---------- Who we work with ---------- */
 const SEG = [
@@ -287,7 +287,7 @@ const SEG = [
 pages['clients.html'] = Page('Who we work with | Payset Private', 'The businesses Payset Private serves.',
   h(React.Fragment, null,
     h(W.Hero, { eyebrow: 'Who we work with', size: 'h1', align: 'left', title: 'Businesses that banks find complicated. We don’t.',
-      lead: 'International businesses that move six figures or more each month, often through several entities and jurisdictions. Banks see complexity. We see a client worth knowing properly.',
+      lead: 'International businesses working across borders, often through several entities and jurisdictions. Banks see complexity. We see a client worth knowing properly.',
       primaryCta: INVITE, image: A('obj-uk-lock.webp') }),
     h(Section, { tone: 'subtle' },
       h('div', { className: 'ps-links' }, SEG.map((s) => h('a', { key: s[0], className: 'ps-chip', href: '#' + s[0] }, s[1])))),
@@ -301,13 +301,12 @@ pages['clients.html'] = Page('Who we work with | Payset Private', 'The businesse
     h(Section, { id: 'not-for', tone: 'subtle' },
       h('div', { className: 'ps-split', style: { alignItems: 'start' } },
         h('div', { className: 'ps-split__text' }, H2('Who we’re not for.'), Lead('We say so on the first call, and point you somewhere better suited.'),
-          h(Chat, { label: 'Example conversation with a business that is not yet a fit', msgs: [{ me: true, t: '14:10', text: 'We move about 60 000 a month. Is that enough?' }, { t: '14:16', text: 'Not yet, and I’d rather tell you now. I can suggest a provider that suits you better today.' }, { t: '14:16', text: 'Come back as you grow. We’d be glad to talk again.' }] })),
+          h(Chat, { who: 'Payset', status: 'Online · London', label: 'Example conversation with a business that is starting out', msgs: [{ me: true, t: '14:10', text: 'We move about 60 000 a month. Is that enough?' }, { t: '14:16', text: 'Yes. Our Business plan is built for that, with our support team behind it.' }, { t: '14:16', text: 'Once you move more than €100k a month for two months, you go up to Scale and a named account manager, automatically.' }] })),
         h('div', null,
-          Rules([['Businesses moving less than six figures a month', 'The service is priced for volume. Below that it doesn’t pay for itself, for you or for us. Growing quickly? Apply anyway and say so.'],
-            ['Domestic, single-currency payments', 'Your high-street bank does this well and cheaply. We would be an expensive way to do a simple thing.'],
+          Rules([['Domestic, single-currency payments', 'Your high-street bank does this well and cheaply. We would be an expensive way to do a simple thing.'],
             ['One-off transfers', 'We build a relationship, not a transaction. For a single payment, a currency broker is the better call.'],
             ['Anyone looking for a free account', 'Someone picks up when you call. That costs money, and we charge for it.']]),
-          h('p', { className: 'ps-small', style: { marginTop: '24px' } }, 'If that’s you today, we’ll say so on the first call and suggest who to try instead. Come back as you grow.')))),
+          h('p', { className: 'ps-small', style: { marginTop: '24px' } }, 'If that’s you, we’ll say so on the first call and suggest who to try instead.')))),
     h(Section, null, h(W.CTABand, { eyebrow: 'By invitation', title: 'Sound like your business?', body: 'Tell us how you move money. A senior member of our team will call you within one business day.', ctaLabel: 'Apply now', ctaHref: APPLY_URL, tone: 'brand' }))));
 
 /* ---------- How it works ---------- */
@@ -337,7 +336,7 @@ pages['how-it-works.html'] = Page('How it works | Payset Private', 'How joining 
         h('div', { className: 'ps-split__text' }, H2('Questions.')),
         h('div', { className: 'ps-faq' },
           [['Can I open an account online?', 'No. Every client starts with a conversation, so we can confirm we’re the right fit before you share documents.'],
-           ['What if we move less than six figures a month?', 'Apply anyway if you’re growing quickly. If we’re not the right fit, we’ll tell you on the call.'],
+           ['What if we move less than €100k a month?', 'Our Business plan is built for that, with our support team behind it. When you move more than €100k a month for two months in a row, you go up to Scale and a named account manager automatically.'],
            ['Do you work with groups with many entities?', 'Yes. Each entity gets its own accounts, all under one account manager.'],
            ['Is Payset a bank?', 'No. Payset is an Electronic Money Institution authorised by the FCA. Client funds are safeguarded, held separately from our own and never lent out.']]
             .map(([q, a]) => h('details', { key: q }, h('summary', null, q), Body(a)))))),
@@ -491,7 +490,7 @@ pages['introductions.html'] = Page('Introductions | Payset Private', 'The Payset
           h('h2', { className: 'pz-giant pz-giant--sm' }, 'The standards we hold partners to'),
           h('p', { className: 'pz-lead' }, 'Published up front, so you know what we expect before you sign anything.'),
           Rules([['Warm, named introductions', 'People you know and can vouch for. No lists, no paid traffic.'],
-            ['Clients that fit', 'International businesses moving six figures or more each month, often through several entities.'],
+            ['Clients that fit', 'International businesses that move money across borders every month, often through several entities.'],
             ['Introductions that activate', 'Most of the clients you introduce go on to transact. We review it with you, so any problem surfaces early.']])),
         h(Chat, { label: 'Example conversation between an introducer and their account manager', msgs: [
           { me: true, t: '15:02', text: 'A client of mine is opening a UK company for their Cyprus group. Good fit?' },
