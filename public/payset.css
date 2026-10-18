@@ -414,3 +414,4 @@ body { background: var(--pz-ground); color: var(--pz-ink); font-family: var(--pz
 .pz-dialog__small { font-size: 12px !important; color: #646464 !important; }
 .pz-dialog { box-sizing: border-box; max-width: calc(100vw - 32px); max-height: calc(100vh - 48px); overflow-y: auto; margin: auto; }
 @media (max-width: 767px) { .pz-dialog { padding: 24px 20px; } .pz-dialog h2 { font-size: 24px; line-height: 28px; } .pz-fxt { padding: 14px; } .pz-fxt__row { grid-template-columns: 18px minmax(0, 1fr) 48px; } }
+.pz-plan__band-note { margin: -8px 0 0; font-size: 12px; line-height: 16px; opacity: .6; }

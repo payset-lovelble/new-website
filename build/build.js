@@ -346,9 +346,9 @@ pages['how-it-works.html'] = Page('How it works | Payset Private', 'How joining 
 // Source: Payset pricing model (FINAL, EUR) and Pricing & Sales Guide. Published: plans, monthly fees, volume bands,
 // indicative 'from' rates and the account fee schedule. Not published: risk-based caps/minimums, Private floors, approval ladder.
 const PLANS = [
-  { name: 'Business', price: '€100', per: ' / month', band: 'Up to €100k a month', note: 'Everyday cross-border business.', items: ['Shared support team', 'Accounts in your company’s name, 34 currencies', 'Local, SWIFT and CHAPS payments', 'Up to 2 debit cards', 'Crypto exchange via our licensed group partner'], cta: INVITE },
-  { name: 'Scale', price: '€300', per: ' / month', band: '€100k – €250k a month', note: 'Growing businesses moving real volume.', tag: 'Named account manager', items: ['A named account manager', 'Everything in Business, at better rates', 'Higher limits and priority', 'Urgent payments included', 'Up to 10 debit cards', 'Preferential crypto exchange rates'], cta: INVITE, featured: true },
-  { name: 'Private', price: 'Bespoke', per: '', band: '€250k+ a month', note: 'High-volume businesses, priced around your flow.', tag: 'By qualification', items: ['A named account manager', 'Percentage pricing built around your volume', 'Our highest limits and priority', 'FX pricing agreed with our desk', 'Up to 10 debit cards'], cta: TALK },
+  { name: 'Business', price: '€100', per: ' / month', band: 'Up to €100k in payments a month', note: 'Everyday cross-border business.', items: ['Shared support team', 'Accounts in your company’s name, 34 currencies', 'Local, SWIFT and CHAPS payments', 'Up to 2 debit cards', 'Crypto exchange via our licensed group partner'], cta: INVITE },
+  { name: 'Scale', price: '€300', per: ' / month', band: '€100k – €250k in payments a month', note: 'Growing businesses moving real volume.', tag: 'Named account manager', items: ['A named account manager', 'Everything in Business, at better rates', 'Higher limits and priority', 'Urgent payments included', 'Up to 10 debit cards', 'Preferential crypto exchange rates'], cta: INVITE, featured: true },
+  { name: 'Private', price: 'Bespoke', per: '', band: '€250k+ in payments a month', note: 'High-volume businesses, priced around your flow.', tag: 'By qualification', items: ['A named account manager', 'Percentage pricing built around your volume', 'Our highest limits and priority', 'FX pricing agreed with our desk', 'Up to 10 debit cards'], cta: TALK },
 ];
 const RATES = [
   ['Receive', null],
@@ -390,7 +390,7 @@ const FEES = [
 const PlanCard = (p) => h('article', { className: 'pz-plan' + (p.featured ? ' pz-plan--featured' : '') },
   h('div', { className: 'pz-plan__head' }, h('h3', null, p.name), p.tag && h('span', { className: 'pz-plan__tag' }, p.tag)),
   h('p', { className: 'pz-plan__price' }, p.price, p.per && h('span', null, p.per)),
-  h('p', { className: 'pz-plan__band' }, p.band), h('p', { className: 'pz-plan__note' }, p.note),
+  h('p', { className: 'pz-plan__band' }, p.band), h('p', { className: 'pz-plan__band-note' }, 'Sent and received, combined'), h('p', { className: 'pz-plan__note' }, p.note),
   h('ul', null, p.items.map((t) => h('li', { key: t }, t))),
   Btn(p.cta.label, p.cta.href, p.featured ? 'neon' : 'black'));
 
