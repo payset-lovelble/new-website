@@ -168,7 +168,7 @@ pages['index.html'] = Page('Payset Private | Boutique financial services',
         h('img', { className: 'pz-photo-card__m', src: A('photo-man-phone-m.webp'), alt: '' }),
         h('div', { className: 'pz-photo-card__text' },
           h('h2', null, 'Every payment followed through to arrival.'),
-          h('p', null, 'Large and time-critical payments are tracked by your account manager until they land.', h('span', { className: 'pz-hide-m' }, ' Hold, send and receive 34 currencies across 180+ countries.'))),
+          h('p', null, 'Large and time-critical payments are tracked by your account manager until they land.', h('span', { className: 'pz-hide-m' }, ' Hold, send and receive 35 currencies across 180+ countries.'))),
         h('ul', { className: 'pz-glass', 'aria-label': 'Example payments' },
           [['Supplier payment, Shenzhen', 'Tracked by your account manager', '1 800 000 USD'], ['Client receipt, Cyprus entity', 'Received', '250 000 EUR'], ['Payroll, UK entity', 'Sent', '84 500 GBP']].map(([n, s, v]) =>
             h('li', { key: n }, h('span', null, h('b', null, n), h('small', null, s)), h('strong', null, v)))),
@@ -177,7 +177,7 @@ pages['index.html'] = Page('Payset Private | Boutique financial services',
       h('div', { className: 'pz-bento' },
         h('div', { className: 'pz-bento__col' },
           h(Tile, { bg: '#CFC8C1', title: 'FX priced on your volume', body: '38 FX pairs, around the clock. No public rate card: pricing is agreed in advance around how much you move.', img: 'obj-swap-crop.webp', tag: 'Currency exchange', href: '/service#fx' }),
-          h(Tile, { bg: '#9B9C9D', title: 'Accounts in your company’s name', body: 'Hold, send and receive 34 currencies for your group and every entity in it.', img: 'obj-globe-crop.webp', tag: 'Multi-currency accounts', href: '/service#accounts', tagKind: 'black' })),
+          h(Tile, { bg: '#9B9C9D', title: 'Accounts in your company’s name', body: 'Hold, send and receive 35 currencies for your group and every entity in it.', img: 'obj-globe-crop.webp', tag: 'Multi-currency accounts', href: '/service#accounts', tagKind: 'black' })),
         h(Tile, { tall: true, dark: true, bg: '#706E67', title: 'Every rail your business needs', body: 'SEPA, SEPA Instant, SWIFT and Faster Payments, with status from signature to arrival.', img: 'ui-transaction-status-crop.webp', ui: true, alt: 'Transaction status panel showing a payment signed and sent', tag: 'Payments', href: '/service#payments', tagKind: 'neon' })),
 
       h('section', { className: 'pz-card pz-card--stone pz-center' },
@@ -246,7 +246,7 @@ pages['service.html'] = Page('The service | Payset Private', 'Accounts, FX and p
     h(Section, { id: 'accounts' },
       Head('Accounts', 'Every entity. Every currency. One relationship.', 'Accounts in your company’s name, for each entity in your group, wherever it’s incorporated.'),
       h('div', { className: 'ps-grid-3' },
-        h(W.FeatureCard, { image: A('obj-globe.webp'), title: '34 currencies', body: 'Hold balances without converting until you choose to, with IBANs and local details in your company’s name.' }),
+        h(W.FeatureCard, { image: A('obj-globe.webp'), title: '35 currencies', body: 'Hold balances without converting until you choose to, with IBANs and local details in your company’s name.' }),
         h(W.FeatureCard, { tone: 'brand', image: A('obj-user-pics.webp'), title: 'Multi-entity groups', body: 'Holding companies and subsidiaries under one login and one account manager.' }),
         h(W.FeatureCard, { image: A('obj-magnifier.webp'), title: 'Onboarding led by people', body: 'Complex structures welcome. We ask the right questions once and explain every request.' }))),
     h(Section, { id: 'fx' },
@@ -347,10 +347,18 @@ pages['how-it-works.html'] = Page('How it works | Payset Private', 'How joining 
 // Source: Payset pricing model (FINAL, EUR) and Pricing & Sales Guide. Published: plans, monthly fees, volume bands,
 // indicative 'from' rates and the account fee schedule. Not published: risk-based caps/minimums, Private floors, approval ladder.
 const PLANS = [
-  { name: 'Business', price: '€100', per: ' / month', band: 'Up to €100k in payments a month', note: 'Everyday cross-border business.', items: ['Shared support team', 'Accounts in your company’s name, 34 currencies', 'Local, SWIFT and CHAPS payments', 'Up to 5 debit cards', 'Crypto exchange via our licensed group partner (not for UK residents)'], cta: INVITE },
-  { name: 'Scale', price: '€300', per: ' / month', band: '€100k – €250k in payments a month', note: 'Growing businesses moving real volume.', tag: 'Named account manager', items: ['A named account manager', 'Everything in Business, at better rates', 'High priority', 'Urgent payments included', 'Up to 10 debit cards', 'Preferential crypto exchange rates'], cta: INVITE, featured: true },
-  { name: 'Private', price: 'Bespoke', per: '', band: '€250k+ in payments a month', note: 'High-volume businesses, priced around your flow.', tag: 'By qualification', items: ['A named account manager', 'Percentage pricing built around your volume', 'Our highest priority', 'Unlimited debit cards', 'Our best crypto exchange rates'], cta: TALK },
+  { name: 'Business', price: '€100', per: ' / month', band: 'Up to €100k in payments a month', note: 'Suitable for UK and EU-based businesses with up to 5 beneficial owners and monthly transaction volumes below €100k.', items: ['Shared support team', 'Up to 2 users', 'CUR', 'Local, SWIFT and CHAPS payments', 'Mass payments', 'Up to 5 debit cards', 'Crypto exchange via our licensed group partner (not for UK residents)'], cta: INVITE },
+  { name: 'Scale', price: '€300', per: ' / month', band: '€100k – €250k in payments a month', note: 'Growing businesses moving real volume.', tag: 'Named account manager', items: ['Everything in Business, 50% off transaction fees', 'A named account manager (phone, WhatsApp, Telegram, in person)', 'High priority', 'Urgent payments included', 'Up to 10 debit cards', 'Preferential crypto exchange rates'], cta: INVITE, featured: true },
+  { name: 'Private', price: 'Bespoke', per: '', band: '€250k+ in payments a month', note: 'High-volume businesses, priced around your flow.', tag: 'By qualification', items: ['Everything in Business and Scale', 'Percentage pricing built around your volume', 'Our highest priority', 'Unlimited debit cards', 'Our best crypto exchange rates'], cta: TALK },
 ];
+// 35 account currencies, as listed on payset.io/pricing (HRK replaced by USD: Croatia uses EUR since 2023; KEN corrected to KES).
+const CURRENCIES = ['Australian Dollar (AUD)', 'Bahraini Dinar (BHD)', 'Bulgarian Lev (BGN)', 'Canadian Dollar (CAD)', 'Chinese Yuan (CNY)', 'Czech Koruna (CZK)', 'Danish Krone (DKK)', 'Euro (EUR)', 'Hong Kong Dollar (HKD)', 'Hungarian Forint (HUF)', 'Indian Rupee (INR)', 'Indonesian Rupiah (IDR)', 'Israeli Shekel (ILS)', 'Japanese Yen (JPY)', 'Kenyan Shilling (KES)', 'Kuwaiti Dinar (KWD)', 'Malaysian Ringgit (MYR)', 'Mexican Peso (MXN)', 'New Zealand Dollar (NZD)', 'Norwegian Krone (NOK)', 'Omani Rial (OMR)', 'Philippine Peso (PHP)', 'Polish Zloty (PLN)', 'Qatari Riyal (QAR)', 'Romanian Leu (RON)', 'Saudi Riyal (SAR)', 'Singapore Dollar (SGD)', 'Swedish Krona (SEK)', 'Swiss Franc (CHF)', 'Thai Baht (THB)', 'Turkish Lira (TRY)', 'UAE Dirham (AED)', 'Ugandan Shilling (UGX)', 'UK Sterling (GBP)', 'US Dollar (USD)'];
+const CurItem = () => h(React.Fragment, null, 'Accounts in your company’s name, 35 currencies: EUR, USD, GBP, AUD, CAD, CZK, DKK & ', h('a', { href: '#currencies', className: 'pz-tiered', 'data-dialog': 'currencies' }, 'many more'));
+const CurDialog = () => h('dialog', { id: 'currencies', className: 'pz-dialog', 'aria-labelledby': 'currencies-title' },
+  h('form', { method: 'dialog', className: 'pz-dialog__close-row' }, h('button', { className: 'pz-dialog__close', 'aria-label': 'Close' }, '×')),
+  h('h2', { id: 'currencies-title' }, 'Account details in 35 currencies'),
+  h('p', null, 'Receive, hold and exchange in every currency below, in your company’s name.'),
+  h('ul', { className: 'pz-cur' }, CURRENCIES.map((c) => h('li', { key: c }, c))));
 const RATES = [
   ['Receive', null],
   ['Local', '€2', '€1', '0.30%'],
@@ -402,7 +410,7 @@ const PlanCard = (p) => h('article', { className: 'pz-plan' + (p.featured ? ' pz
   h('div', { className: 'pz-plan__head' }, h('h3', null, p.name), p.tag && h('span', { className: 'pz-plan__tag' }, p.tag)),
   h('p', { className: 'pz-plan__price' }, p.price, p.per && h('span', null, p.per)),
   h('p', { className: 'pz-plan__band' }, p.band), h('p', { className: 'pz-plan__band-note' }, 'Sent and received, combined'), h('p', { className: 'pz-plan__note' }, p.note),
-  h('ul', null, p.items.map((t) => h('li', { key: t }, t))),
+  h('ul', null, p.items.map((t) => h('li', { key: t }, t === 'CUR' ? h(CurItem) : t))),
   Btn(p.cta.label, p.cta.href, p.featured ? 'neon' : 'black'));
 
 pages['pricing.html'] = Page('Pricing | Payset Private', 'Three plans priced on the volume you move: Business, Scale and Private.',
@@ -425,7 +433,7 @@ pages['pricing.html'] = Page('Pricing | Payset Private', 'Three plans priced on 
               ? h('tr', { key: i, className: 'pz-rates__group' }, h('th', { scope: 'rowgroup', colSpan: 4 }, r[0]))
               : h('tr', { key: i }, h('th', { scope: 'row' }, r[0].split('|')[0], r[0].includes('|') && h('small', { className: 'pz-rates__sub' }, r[0].split('|')[1])), r.slice(1).map((c, j) => h('td', { key: j }, c === 'FX' ? FxCell(['Business', 'Scale', 'Private'][j]) : c))))))),
         h('p', { className: 'pz-not' }, 'Crypto exchange is provided by our separately licensed group partner, not by Pay Set Limited, and is not an FCA-regulated activity. It is not available to clients resident in the UK.'),
-        h(FxDialog), h('script', { dangerouslySetInnerHTML: { __html: DIALOG_JS } })),
+        h(FxDialog), h(CurDialog), h('script', { dangerouslySetInnerHTML: { __html: DIALOG_JS } })),
 
       h('section', { className: 'pz-card pz-card--stone pz-split-card pz-split-card--top' },
         h('div', { className: 'pz-split-card__text' },
@@ -461,7 +469,7 @@ pages['pricing.html'] = Page('Pricing | Payset Private', 'Three plans priced on 
       h('section', { className: 'pz-card pz-card--stone pz-center' },
         h('h2', { className: 'pz-giant pz-giant--md' }, 'Every plan includes'),
         h('div', { className: 'pz-points' },
-          Point('layers', 'Accounts in your name', '34 currencies, extra accounts and local IBANs at no cost.'),
+          Point('layers', 'Accounts in your name', '35 currencies, extra accounts and local IBANs at no cost.'),
           Point('vault', 'Safeguarded funds', 'Held separately from our own money and never lent out.'),
           Point('key', 'Controls for your team', 'Permissions, multi-signature approvals and two-factor sign-in.'))),
 
@@ -557,7 +565,7 @@ pages['about.html'] = Page('About | Payset Private', 'Payset is an FCA-authorise
   h(React.Fragment, null,
     h(W.Hero, { eyebrow: 'About', size: 'h1', align: 'left', title: 'A small institution, on purpose.', lead: 'Payset is a London-based Electronic Money Institution authorised by the FCA. We serve a select group of businesses operating across jurisdictions, and keep that group small so every client is known by name.', primaryCta: INVITE, image: A('obj-lock.webp') }),
     h(Section, { tone: 'subtle' },
-      Facts([['FRN 900920', 'FCA-authorised Electronic Money Institution'], ['4', 'countries: UK, Portugal, Israel, Romania'], ['~70', 'people across payments, FX, compliance and product'], ['34', 'currencies, 180+ countries reached']])),
+      Facts([['FRN 900920', 'FCA-authorised Electronic Money Institution'], ['4', 'countries: UK, Portugal, Israel, Romania'], ['~70', 'people across payments, FX, compliance and product'], ['35', 'currencies, 180+ countries reached']])),
     h(Section, null,
       h('div', { className: 'ps-split' },
         h('div', { className: 'ps-split__text' }, Over('What we believe'), H2('Money should move with someone watching it.'),
