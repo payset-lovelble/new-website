@@ -51,7 +51,7 @@ const parties = new Table({
 const box = (label, checked) => [new CheckBox({ checked: !!checked, checkedState: { value: '2612', font: 'Segoe UI Symbol' }, uncheckedState: { value: '2610', font: 'Segoe UI Symbol' } }), t(' ' + label + '      ')];
 const optRow = (k, opts) => p([t(k + '  ', { color: MUTED, size: 18 }), ...opts.flatMap(([l, c]) => box(l, c))], { after: 40 });
 const options = [
-  optRow('Company location', [['EU / UK: €500 setup fee'], ['Non-EU/UK: €1,000 setup fee']]),
+  optRow('Company location', [['EU / UK: €500 setup fee'], ['Non-EU/UK: €1,000 setup fee (Scale or Private only)']]),
   optRow('Complex structure', [['No'], ['Yes: +€500']]),
   optRow('Plan', [['Business €100/mo'], ['Scale €300/mo'], ['Private €1,500/mo']]),
 ];
@@ -69,7 +69,7 @@ const items = new Table({
   width: { size: W, type: WidthType.DXA }, columnWidths: COLS,
   rows: [
     new TableRow({ tableHeader: true, children: [head('DESCRIPTION', 0), head('QTY', 1, true), head('UNIT PRICE', 2, true), head('AMOUNT', 3, true)] }),
-    row([desc('Setup fee', 'One-time. €500 for an EU/UK company, €1,000 for a non-EU/UK company.'), '1', '€[500.00]', '€[500.00]']),
+    row([desc('Setup fee', 'One-time. €500 for an EU/UK company, €1,000 for a non-EU/UK company (Scale and Private only).'), '1', '€[500.00]', '€[500.00]']),
     row([desc('Complex structure', 'One-time, only if ticked above. Otherwise enter 0.'), '[0]', '€500.00', '€[0.00]']),
     row([desc('Monthly plan fee: [Business]', 'First three months, paid in advance: [Month 1] to [Month 3]. Business €100, Scale €300, Private €1,500.'), '3', '€[100.00]', '€[300.00]'], { last: true }),
   ],

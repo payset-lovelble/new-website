@@ -27,6 +27,7 @@ Reference files (repo `payset-lovelble/new-website`, branch `claude/zealous-thom
 ## Pricing rules (EUR)
 
 - Setup fee: **€500** EU/UK company, **€1,000** non-EU/UK company.
+- **Business is for UK and EU companies only.** A non-EU/UK company must be on Scale or Private: block that combination in the manager's selection.
 - Complex structure: **+€500** one-time, only if selected (otherwise drop the line or show qty 0).
 - Monthly plan fee × 3: Business **€100** (€300), Scale **€300** (€900), Private **€1,500** (€4,500).
 - VAT: **Exempt**. Total = subtotal.
@@ -39,7 +40,7 @@ Reference files (repo `payset-lovelble/new-website`, branch `claude/zealous-thom
 3. SETUP OPTIONS (shows the manager's selections): Company location, Complex structure, Plan.
 4. Intro: "Thank you for choosing Payset. Your application is approved. To open your account, please pay the setup fee and your first three months of plan fees below."
 5. Line items (Description / Qty / Unit price / Amount):
-   - Setup fee: "One-time. €500 for an EU/UK company, €1,000 for a non-EU/UK company."
+   - Setup fee: "One-time. €500 for an EU/UK company, €1,000 for a non-EU/UK company (Scale and Private only)."
    - Complex structure (if selected): "One-time." 1 × €500.
    - Monthly plan fee: {Plan}: "First three months, paid in advance: {Month 1} to {Month 3}." 3 × fee.
    - Subtotal, VAT "Exempt", **Total due**.
