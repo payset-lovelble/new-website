@@ -421,7 +421,7 @@ pages['pricing.html'] = Page('Pricing | Payset Private', 'Three plans priced on 
     h('div', { className: 'pz-cards pz-cards--tight' },
       h('section', { className: 'pz-card pz-card--stone pz-center pz-card--plans' },
         h('div', { className: 'pz-plans' }, PLANS.map((p) => h(PlanCard, Object.assign({ key: p.name }, p)))),
-        h('p', { className: 'pz-plans__note' }, 'Starting points. Your exact fees are confirmed in writing before you open.')),
+        h('p', { className: 'pz-plans__note' }, 'Starting points. Your exact fees are confirmed in writing during onboarding.')),
 
       h('section', { className: 'pz-card pz-card--dark pz-center' },
         h('h2', { className: 'pz-giant pz-giant--md' }, 'Indicative rates'),
