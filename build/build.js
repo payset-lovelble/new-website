@@ -85,7 +85,7 @@ function Page(title, desc, body) {
       tagline: 'Boutique financial services, by invitation.',
       columns: [
         { title: 'Payset Private', links: NAV.slice(0, 4) },
-        { title: 'Company', links: [{ label: 'About', href: '/about' }, { label: 'Introductions', href: '/introductions' }, { label: 'Careers', href: '#' }, { label: 'Contact', href: '/about#contact' }] },
+        { title: 'Company', links: [{ label: 'About', href: '/about' }, { label: 'Introductions', href: '/introductions' }, { label: 'Careers', href: '#' }, { label: 'Contact', href: '/contact' }] },
         { title: 'Legal', links: [{ label: 'Safeguarding', href: '/about#safeguarding' }, { label: 'Terms', href: '#' }, { label: 'Privacy', href: '#' }, { label: 'Cookies', href: '#' }] },
       ],
       legal: LEGAL,
@@ -478,7 +478,7 @@ pages['pricing.html'] = Page('Pricing | Payset Private', 'Three plans priced on 
 // Source: Payset Partner Program strategy v6 and final deck (UK pilot, July 2026).
 // The commission model is a recommendation pending unit-economics sign-off: the page shows only the
 // public framing the strategy allows (10% base, up to 20%, a bonus, the standards, the self-serve fee).
-const PARTNER_CONTACT = { label: 'Talk to our partnerships team', href: '/about#contact' };
+const PARTNER_CONTACT = { label: 'Talk to our partnerships team', href: '/contact' };
 const Term = (figure, label) => h('div', { className: 'pz-term' }, h('span', { className: 'pz-term__figure' }, figure), h('p', null, label));
 pages['introductions.html'] = Page('Introductions | Payset Private', 'The Payset introducer programme for advisors, FX consultants and formation agents: published terms, recurring commission and your own account manager.',
   h('div', { className: 'pz' },
