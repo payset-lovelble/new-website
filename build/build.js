@@ -421,7 +421,7 @@ pages['pricing.html'] = Page('Pricing | Payset Private', 'Three plans priced on 
     h('div', { className: 'pz-cards pz-cards--tight' },
       h('section', { className: 'pz-card pz-card--stone pz-center pz-card--plans' },
         h('div', { className: 'pz-plans' }, PLANS.map((p) => h(PlanCard, Object.assign({ key: p.name }, p)))),
-        h('p', { className: 'pz-plans__note' }, 'Starting points. Your proposal confirms the exact monthly fee, transaction and FX pricing. Transaction pricing is finalised after account review and reflects your business profile; your plan and monthly fee do not change with it. When your volume stays above your plan’s band for two months in a row, we move you up automatically. We never move you down without asking.')),
+        h('p', { className: 'pz-plans__note' }, 'Starting points. Your exact fees are confirmed in writing before you open.')),
 
       h('section', { className: 'pz-card pz-card--dark pz-center' },
         h('h2', { className: 'pz-giant pz-giant--md' }, 'Indicative rates'),
@@ -453,6 +453,8 @@ pages['pricing.html'] = Page('Pricing | Payset Private', 'Three plans priced on 
            ['What are the fees for currency exchange with Payset?', 'Your FX margin is tiered: the more you convert over 90 days, the lower it gets, to as low as 1% on Business, 0.50% on Scale and 0.25% on Private. Before you complete an exchange you see a live quote, including the interbank rate and our margin, so you always know the cost.'],
            ['Are there fees for receiving money?', 'Receiving a local payment costs €2 on Business and €1 on Scale. Payments from another Payset customer and CHAPS payments are free. Your full pricing is always available in your Payset dashboard.'],
            ['What are the fees for sending money?', 'It depends on the payment type and your plan: see the rates above. Payments to another Payset customer are free and instant. If something is unclear, contact us.'],
+           ['Can my transaction pricing change after I join?', 'Your transaction pricing is finalised after we review your account and reflects your business profile. Your plan and monthly fee do not change with it.'],
+           ['What happens if my volume changes?', 'When your volume stays above your plan’s band for two months in a row, we move you up automatically. We never move you down without asking.'],
            ['How can I view my specific pricing plan and fees?', 'Sign in to your Payset account and go to Settings > Billing & Pricing. You will find your monthly fee, transaction costs and any additional charges.']]
             .map(([q, a]) => h('details', { key: q }, h('summary', null, q), Body(a))))),
 
