@@ -368,7 +368,7 @@ const RATES = [
   ['From another Payset customer|Instant, any volume', 'Free', 'Free', 'Free'],
   ['Send', null],
   ['Local', '0.40% (max €80)', '0.20% (max €40)', '0.30%'],
-  ['SWIFT / TARGET2', '0.40% (max €290)', '0.20% (max €170)', '0.50%'],
+  ['SWIFT / TARGET2', '0.40% (max €290)', '0.25% (max €170)', '0.50%'],
   ['CHAPS', '€20', '€10', '€15'],
   ['To another Payset customer|Instant, any volume', 'Free', 'Free', 'Free'],
   ['FX and other', null],
