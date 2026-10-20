@@ -20,7 +20,8 @@ const NAV = [
 ];
 const APPLY_URL = 'https://apply.payset.io/';
 const INVITE = { label: 'Apply now', href: APPLY_URL };
-const TALK = { label: 'Talk to us', href: APPLY_URL };
+const CONTACT_URL = 'https://apply.payset.io/contact';
+const TALK = { label: 'Talk to us', href: CONTACT_URL };
 
 const Container = (p) => h('div', { className: 'pw-container' }, p.children);
 const Section = (p) => h('section', { id: p.id, className: 'pw-root ps-section' + (p.tone ? ' ps-section--' + p.tone : '') }, h(Container, null, p.children));
@@ -47,7 +48,7 @@ const CTA = (props) => h('section', { className: 'pw-root ps-section ps-section-
     eyebrow: 'By invitation',
     title: 'Not for everyone. Possibly for you.',
     body: 'If your business moves money across borders and expects someone to pick up, apply. We review every application personally.',
-    ctaLabel: 'Apply now', ctaHref: APPLY_URL, secondaryLabel: 'Talk to us', secondaryHref: APPLY_URL,
+    ctaLabel: 'Apply now', ctaHref: APPLY_URL, secondaryLabel: 'Talk to us', secondaryHref: CONTACT_URL,
   }, props))));
 
 // Example conversations with an account manager, styled like a messaging app. Illustrations, not real clients.
@@ -85,7 +86,7 @@ function Page(title, desc, body) {
       tagline: 'Boutique financial services, by invitation.',
       columns: [
         { title: 'Payset Private', links: NAV.slice(0, 4) },
-        { title: 'Company', links: [{ label: 'About', href: '/about' }, { label: 'Introductions', href: '/introductions' }, { label: 'Careers', href: '#' }, { label: 'Contact', href: '/about#contact' }] },
+        { title: 'Company', links: [{ label: 'About', href: '/about' }, { label: 'Introductions', href: '/introductions' }, { label: 'Careers', href: '#' }, { label: 'Contact', href: CONTACT_URL }] },
         { title: 'Legal', links: [{ label: 'Safeguarding', href: '/about#safeguarding' }, { label: 'Terms', href: '#' }, { label: 'Privacy', href: '#' }, { label: 'Cookies', href: '#' }] },
       ],
       legal: LEGAL,
@@ -146,7 +147,7 @@ const Point = (icon, title, body) => h('div', { className: 'pz-point' },
 // Self-check on the home page: visitors tick the traits that describe them and see how well they match.
 // Runs in the browser only; nothing is stored or sent.
 const QUALIFIERS = ['Operate in several countries', 'Move six figures or more a month', 'Several legal entities', 'Hold several currencies', 'Pay suppliers and partners abroad', 'Need FX at scale', 'Slowed down or turned away by banks', 'Want one person who knows the business'];
-const MATCH_JS = "(function(){var root=document.getElementById('match');if(!root)return;var chips=root.querySelectorAll('.pz-chip--toggle'),pct=document.getElementById('match-pct'),bar=document.getElementById('match-bar'),res=document.getElementById('match-result'),cta=document.getElementById('match-cta'),btn=cta.querySelector('a'),C=2*Math.PI*52;bar.style.strokeDasharray=C;bar.style.strokeDashoffset=C;function update(){var n=0;chips.forEach(function(c){if(c.getAttribute('aria-pressed')==='true')n++});var p=Math.round(n/chips.length*100);pct.textContent=p;bar.style.strokeDashoffset=C*(1-p/100);if(n===0){res.textContent='Select everything that applies.';cta.hidden=true}else if(p<40){res.textContent='Our Business plan may suit you best for now. Talk to us and we will tell you honestly.';btn.textContent='Talk to us';cta.hidden=false}else if(p<75){res.textContent='This looks like a good fit. Apply and a senior member of our team will call you.';btn.textContent='Apply now';cta.hidden=false}else{res.textContent='This is exactly who we work with.';btn.textContent='Apply now';cta.hidden=false}}chips.forEach(function(c){c.addEventListener('click',function(){c.setAttribute('aria-pressed',c.getAttribute('aria-pressed')==='true'?'false':'true');update()})});update()})();";
+const MATCH_JS = "(function(){var root=document.getElementById('match');if(!root)return;var chips=root.querySelectorAll('.pz-chip--toggle'),pct=document.getElementById('match-pct'),bar=document.getElementById('match-bar'),res=document.getElementById('match-result'),cta=document.getElementById('match-cta'),btn=cta.querySelector('a'),C=2*Math.PI*52;bar.style.strokeDasharray=C;bar.style.strokeDashoffset=C;function update(){var n=0;chips.forEach(function(c){if(c.getAttribute('aria-pressed')==='true')n++});var p=Math.round(n/chips.length*100);pct.textContent=p;bar.style.strokeDashoffset=C*(1-p/100);if(n===0){res.textContent='Select everything that applies.';cta.hidden=true}else if(p<40){res.textContent='Our Business plan may suit you best for now. Talk to us and we will tell you honestly.';btn.textContent='Talk to us';btn.href='https://apply.payset.io/contact';cta.hidden=false}else if(p<75){res.textContent='This looks like a good fit. Apply and a senior member of our team will call you.';btn.textContent='Apply now';btn.href='https://apply.payset.io/';cta.hidden=false}else{res.textContent='This is exactly who we work with.';btn.textContent='Apply now';btn.href='https://apply.payset.io/';cta.hidden=false}}chips.forEach(function(c){c.addEventListener('click',function(){c.setAttribute('aria-pressed',c.getAttribute('aria-pressed')==='true'?'false':'true');update()})});update()})();";
 
 pages['index.html'] = Page('Payset Private | Boutique financial services',
   'Accounts, FX and cross-border payments for businesses operating across jurisdictions, with a dedicated account manager.',
@@ -488,7 +489,7 @@ pages['pricing.html'] = Page('Pricing | Payset Private', 'Three plans priced on 
 // Source: Payset Partner Program strategy v6 and final deck (UK pilot, July 2026).
 // The commission model is a recommendation pending unit-economics sign-off: the page shows only the
 // public framing the strategy allows (10% base, up to 20%, a bonus, the standards, the self-serve fee).
-const PARTNER_CONTACT = { label: 'Talk to our partnerships team', href: '/about#contact' };
+const PARTNER_CONTACT = { label: 'Talk to our partnerships team', href: CONTACT_URL };
 const Term = (figure, label) => h('div', { className: 'pz-term' }, h('span', { className: 'pz-term__figure' }, figure), h('p', null, label));
 pages['introductions.html'] = Page('Introductions | Payset Private', 'The Payset introducer programme for advisors, FX consultants and formation agents: published terms, recurring commission and your own account manager.',
   h('div', { className: 'pz' },
