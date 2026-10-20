@@ -376,13 +376,13 @@ const RATES = [
   ['Urgent payments', '€40', 'Free', 'Free'],
 ];
 // FX margin cell: the rate plus a 'Tiered' link that opens the FX tier popup (as on payset.io/pricing).
-const FX_RATE = { Business: 'As low as 1%', Scale: 'As low as 0.9%', Private: 'As low as 0.25%' };
+const FX_RATE = { Business: 'As low as 1%', Scale: 'As low as 0.5%', Private: 'As low as 0.25%' };
 const FxCell = (plan) => h(React.Fragment, null, FX_RATE[plan], ' ', h('a', { href: '#fx-tiers', className: 'pz-tiered', 'data-dialog': 'fx-tiers' }, 'Tiered'));
 const FX_TIERS = [['1', '0 – 300K', 'Plan rate', 40], ['2', '300K – 900K', '−0.55%', 58], ['3', '900K – 6M', '−0.60%', 76], ['4', '6M EUR +', '−0.81%', 100]];
 const FxDialog = () => h('dialog', { id: 'fx-tiers', className: 'pz-dialog', 'aria-labelledby': 'fx-tiers-title' },
   h('form', { method: 'dialog', className: 'pz-dialog__close-row' }, h('button', { className: 'pz-dialog__close', 'aria-label': 'Close' }, '×')),
   h('h2', { id: 'fx-tiers-title' }, 'The more you convert, the lower the rate.'),
-  h('p', null, 'Your plan sets your base FX margin: Business 1.8%, Scale 1%, Private 0.5%. The more you convert, the larger the discount on that margin.'),
+  h('p', null, 'Your plan sets your base FX margin: Business 1.8%, Scale 0.9%, Private 0.5%. The more you convert, the larger the discount on that margin.'),
   h('div', { className: 'pz-fxt' },
     h('div', { className: 'pz-fxt__row pz-fxt__row--head' }, h('span', null, 'Tier'), h('span', null, 'Your 90-day total FX volume, EUR'), h('span', null, 'Discount')),
     FX_TIERS.map(([n, vol, mk, w]) => h('div', { key: n, className: 'pz-fxt__row' }, h('span', null, n + '.'),
@@ -451,7 +451,7 @@ pages['pricing.html'] = Page('Pricing | Payset Private', 'Three plans priced on 
         h('div', { className: 'ps-faq pz-faq' },
           [['Are there any fees for opening a Payset account?', 'Yes, a one-time setup fee: €500 for EU and UK companies and €1,000 for companies outside the EU and UK, plus €500 for complex structures. The Business plan is for UK and EU companies only; companies outside the UK and EU join on the Scale or Private plan. Contact us for information about your specific circumstances.'],
            ['When do I pay the setup fee?', 'After we approve your application and before you get access to your account. We issue your account details, and you pay the setup fee plus your first three months of fees into them by bank transfer. You can also pay in crypto through our separately licensed group partner, which is not available to clients resident in the UK.'],
-           ['What are the fees for currency exchange with Payset?', 'Your FX margin is tiered: the more you convert over 90 days, the lower it gets, to as low as 1% on Business, 0.9% on Scale and 0.25% on Private. Before you complete an exchange you see a live quote, including the interbank rate and our margin, so you always know the cost.'],
+           ['What are the fees for currency exchange with Payset?', 'Your FX margin is tiered: the more you convert over 90 days, the lower it gets, to as low as 1% on Business, 0.5% on Scale and 0.25% on Private. Before you complete an exchange you see a live quote, including the interbank rate and our margin, so you always know the cost.'],
            ['Are there fees for receiving money?', 'Receiving a local payment costs €2 on Business and €1 on Scale. Payments from another Payset customer and CHAPS payments are free. Your full pricing is always available in your Payset dashboard.'],
            ['What are the fees for sending money?', 'It depends on the payment type and your plan: see the rates above. Payments to another Payset customer are free and instant. If something is unclear, contact us.'],
            ['Can my transaction pricing change after I join?', 'Your transaction pricing is finalised after we review your account and reflects your business profile. Your plan and monthly fee do not change with it.'],
