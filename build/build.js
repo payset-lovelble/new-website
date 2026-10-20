@@ -86,7 +86,7 @@ function Page(title, desc, body) {
       tagline: 'Boutique financial services, by invitation.',
       columns: [
         { title: 'Payset Private', links: NAV.slice(0, 4) },
-        { title: 'Company', links: [{ label: 'About', href: '/about' }, { label: 'Introductions', href: '/introductions' }, { label: 'Careers', href: '#' }, { label: 'Contact', href: CONTACT_URL }, { label: 'WhatsApp', href: 'https://wa.me/447700144429' }] },
+        { title: 'Company', links: [{ label: 'About', href: '/about' }, { label: 'Introductions', href: '/introductions' }, { label: 'Careers', href: '#' }, { label: 'Contact', href: CONTACT_URL }, { label: 'WhatsApp', href: 'https://wa.me/447700144429' }, { label: 'Telegram', href: 'https://t.me/Payset_Limited_Bot' }] },
         { title: 'Legal', links: [{ label: 'Safeguarding', href: '/about#safeguarding' }, { label: 'Terms', href: '#' }, { label: 'Privacy', href: '#' }, { label: 'Cookies', href: '#' }] },
       ],
       legal: LEGAL,
