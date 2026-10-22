@@ -86,7 +86,7 @@ function Page(title, desc, body) {
       tagline: 'Boutique financial services, by invitation.',
       columns: [
         { title: 'Payset Private', links: NAV.slice(0, 4) },
-        { title: 'Company', links: [{ label: 'About', href: '/about' }, { label: 'Introductions', href: '/introductions' }, { label: 'Careers', href: '#' }, { label: 'Contact', href: CONTACT_URL }] },
+        { title: 'Company', links: [{ label: 'About', href: '/about' }, { label: 'Introductions', href: '/introductions' }, { label: 'Careers', href: '#' }, { label: 'Contact', href: CONTACT_URL }, { label: 'WhatsApp', href: 'https://wa.me/447700144429' }, { label: 'Telegram', href: 'https://t.me/Payset_Limited_Bot' }] },
         { title: 'Legal', links: [{ label: 'Safeguarding', href: '/about#safeguarding' }, { label: 'Terms', href: '#' }, { label: 'Privacy', href: '#' }, { label: 'Cookies', href: '#' }] },
       ],
       legal: LEGAL,
@@ -364,11 +364,11 @@ const RATES = [
   ['Receive', null],
   ['Local', '€2', '€1', '0.30%'],
   ['SWIFT / TARGET2', '€10', '€5', '0.50%'],
-  ['CHAPS', 'Free', 'Free', 'Free'],
+  ['CHAPS', '€10', '€5', '€2'],
   ['From another Payset customer|Instant, any volume', 'Free', 'Free', 'Free'],
   ['Send', null],
   ['Local', '0.40% (max €80)', '0.20% (max €40)', '0.30%'],
-  ['SWIFT / TARGET2', '0.40% (max €290)', '0.25% (max €170)', '0.50%'],
+  ['SWIFT / TARGET2', '0.50% (max €290)', '0.25% (max €170)', '0.50%'],
   ['CHAPS', '€20', '€10', '€15'],
   ['To another Payset customer|Instant, any volume', 'Free', 'Free', 'Free'],
   ['FX and other', null],
@@ -394,7 +394,7 @@ const FxDialog = () => h('dialog', { id: 'fx-tiers', className: 'pz-dialog', 'ar
   h('p', null, 'Once you reach Tier 2 or higher, your discount is locked for 30 days, even if your trading volume temporarily drops. Reach a higher tier during the lock and a new 30-day lock starts. When the lock ends, we recalculate your 90-day volume.'));
 const DIALOG_JS = "document.addEventListener('click',function(e){var a=e.target.closest('[data-dialog]');if(!a)return;var d=document.getElementById(a.getAttribute('data-dialog'));if(!d||!d.showModal)return;e.preventDefault();d.showModal()});document.querySelectorAll('dialog.pz-dialog').forEach(function(d){d.addEventListener('click',function(e){if(e.target===d)d.close()})});";
 const FEES = [
-  ['Account', [['Setup fee', '€500 for EU and UK companies, €1,000 for non-EU/UK companies (Scale and Private only). Add €500 for complex structures.'], ['Opening payment, before access', 'Setup fee plus your first 3 months of fees'], ['Additional accounts and local IBANs', 'Free'], ['Minimum balance', '3× your monthly fee'], ['Account closure', 'One monthly fee'], ['Closure within 12 months', 'The difference between 12 months of fees and fees paid'], ['Closure for breach of terms', '€500'], ['Reactivating a closed account', '€100']]],
+  ['Account', [['Setup fee', '€480 for EU and UK companies, €960 for non-EU/UK companies (Scale and Private only). Add €480 for complex structures.'], ['Opening payment, before access', 'Setup fee plus your first 3 months of fees'], ['Additional accounts and local IBANs', 'Free'], ['Minimum balance', '3× your monthly fee'], ['Account closure', 'One monthly fee'], ['Closure within 12 months', 'The difference between 12 months of fees and fees paid'], ['Closure for breach of terms', '€500'], ['Reactivating a closed account', '€100']]],
   ['Payments', [['GBP Direct Debit mandate (set up, amend, cancel)', '€10'], ['Manual processing: incorrect details', '€100 + pass-through*'], ['Transfer enquiry or investigation (within a year)', '€150 + pass-through*'], ['SWIFT confirmation', '€50'], ['Urgent payment (Business)', '€40'], ['Cancellation before the payment order is sent', '€20'], ['Cancellation after the payment order is sent', '€150 + pass-through*'], ['Return of payment', '€50']]],
   ['Administration', [['Amend company details', '€100 per change'], ['Information request not met within 30 days', '€100 per request'], ['Bank details not provided on termination', '1% a month, minimum €500'], ['Auditor request: current client', '€400'], ['Auditor request: former client', '€550'], ['Statement for a closed account', '€230 or €10 a page, whichever is higher']]],
 ];
@@ -449,10 +449,10 @@ pages['pricing.html'] = Page('Pricing | Payset Private', 'Three plans priced on 
       h('section', { className: 'pz-card pz-card--stone pz-split-card pz-split-card--top' },
         h('div', { className: 'pz-split-card__text' }, h('h2', { className: 'pz-giant pz-giant--sm' }, 'Questions about pricing')),
         h('div', { className: 'ps-faq pz-faq' },
-          [['Are there any fees for opening a Payset account?', 'Yes, a one-time setup fee: €500 for EU and UK companies and €1,000 for companies outside the EU and UK, plus €500 for complex structures. The Business plan is for UK and EU companies only; companies outside the UK and EU join on the Scale or Private plan. Contact us for information about your specific circumstances.'],
+          [['Are there any fees for opening a Payset account?', 'Yes, a one-time setup fee: €480 for EU and UK companies and €960 for companies outside the EU and UK, plus €480 for complex structures. The Business plan is for UK and EU companies only; companies outside the UK and EU join on the Scale or Private plan. Contact us for information about your specific circumstances.'],
            ['When do I pay the setup fee?', 'After we approve your application and before you get access to your account. We issue your account details, and you pay the setup fee plus your first three months of fees into them by bank transfer. You can also pay in crypto through our separately licensed group partner, which is not available to clients resident in the UK.'],
            ['What are the fees for currency exchange with Payset?', 'Your FX margin is tiered: the more you convert over 90 days, the lower it gets, to as low as 1% on Business, 0.5% on Scale and 0.25% on Private. Before you complete an exchange you see a live quote, including the interbank rate and our margin, so you always know the cost.'],
-           ['Are there fees for receiving money?', 'Receiving a local payment costs €2 on Business and €1 on Scale. Payments from another Payset customer and CHAPS payments are free. Your full pricing is always available in your Payset dashboard.'],
+           ['Are there fees for receiving money?', 'Receiving a local payment costs €2 on Business and €1 on Scale, and a CHAPS payment €10 on Business, €5 on Scale and €2 on Private. Payments from another Payset customer are free. Your full pricing is always available in your Payset dashboard.'],
            ['What are the fees for sending money?', 'It depends on the payment type and your plan: see the rates above. Payments to another Payset customer are free and instant. If something is unclear, contact us.'],
            ['Can my transaction pricing change after I join?', 'Your transaction pricing is finalised after we review your account and reflects your business profile. Your plan and monthly fee do not change with it.'],
            ['What happens if my volume changes?', 'When your volume stays above your plan’s band for two months in a row, we move you up automatically. We never move you down without asking.'],
