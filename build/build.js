@@ -417,7 +417,7 @@ const PlanCard = (p) => h('article', { className: 'pz-plan' + (p.featured ? ' pz
 pages['pricing.html'] = Page('Pricing | Payset Private', 'Three plans priced on the volume you move: Business, Scale and Private.',
   h('div', { className: 'pz' },
     h('section', { className: 'pz-hero' },
-      h('h1', { className: 'pz-hero__title pz-hero__title--sm' }, 'Priced on volume, backed by people.'),
+      h('h1', { className: 'pz-hero__title pz-hero__title--sm' }, 'Plans for every business size.'),
       h('h2', { className: 'pz-hero__sub' }, 'Your plan is set by the volume you move. Transaction and FX pricing are confirmed in writing before you start.')),
     h('div', { className: 'pz-cards pz-cards--tight' },
       h('section', { className: 'pz-card pz-card--stone pz-center pz-card--plans' },
